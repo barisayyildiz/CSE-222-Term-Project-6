@@ -2,7 +2,7 @@ package com.users;
 
 import com.obj.*;
 
-public class HeadPhysician extends User implements HealthEmployee
+public class HeadPhysician extends Doctor
 {
 
 	Ministry ministry;
@@ -24,9 +24,30 @@ public class HeadPhysician extends User implements HealthEmployee
 		return;
 	}
 
+
+	@Override
 	public void vaccinate(){
 		return;
 	}
+
+	// ==== Doctor class ından gelen metodlar
+
+	public void addPatient(){
+		return;
+	}
+
+	public void removePatient(){
+		return;
+	}
+
+	public void getPatientData(){
+		return;
+	}
+
+	public void giveMedicine(){
+		return;
+	}
+
 
 	
 }

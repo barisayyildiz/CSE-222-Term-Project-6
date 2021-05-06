@@ -14,7 +14,5 @@ public class Main
 		System.out.println(arr.size());
 		System.out.println(ministery.getHospitals().size());
 
-
-
 	}
 }

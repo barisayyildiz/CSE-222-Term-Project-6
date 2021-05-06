@@ -4,9 +4,6 @@ import com.obj.*;
 
 public class HeadPhysician extends Doctor
 {
-
-	Ministry ministry;
-
 	public HeadPhysician(){
 		super();
 		// eklemeler yapılacak

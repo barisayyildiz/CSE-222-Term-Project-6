@@ -17,21 +17,19 @@ public class Ministry {
 	private TreeSet<Patient> patients;
 	
 
-	// sistemde kayıtlı tüm sağlık çalışanları
-	// sistemde kayıtlı tüm hastalar
-	
-	// sağlık çalışanları -> ArrayList
-	// aşı, class -> arraylist
-	// hastalar -> BST
-	// aşışama sırası -> Priority Queue
+	public Ministry(Minister minister){
+		// constructor yazılacak, txt okunacak...
+		this.minister = minister;
 
-	public Ministry(){
-		// constructor yazılacak, txt okunacak
 		this.hospitals = new ArrayList<Hospital>();
 		this.healthEmployees = new ArrayList<HealthEmployee>();
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccinationOrder = new PriorityQueue<Integer>();
 		this.patients = new TreeSet<Patient>();
+	}
+
+	public Minister getMinister(){
+		return this.minister;
 	}
 
 	public ArrayList<Hospital> getHospitals(){

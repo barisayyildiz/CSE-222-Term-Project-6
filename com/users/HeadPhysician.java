@@ -9,6 +9,7 @@ public class HeadPhysician extends Doctor
 		// eklemeler yapılacak
 	}
 
+	// düz string yollayabilir, sağlık bakanına
 	public void demandVaccine(){
 		return;
 	}

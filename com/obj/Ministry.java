@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.TreeSet;
 
+// File Handling
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import com.users.*;
 
 public class Ministry {
@@ -26,6 +31,55 @@ public class Ministry {
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccinationOrder = new PriorityQueue<Integer>();
 		this.patients = new TreeSet<Patient>();
+
+		// Reading patients.txt
+		try {
+			Scanner scanner = new Scanner(new File("./database/patients.txt"));
+			scanner.nextLine(); // read first line
+
+			while (scanner.hasNextLine()) {
+				String temp = scanner.nextLine();
+				String arr[] = temp.split(",");
+				
+				// sırasıyla
+				// tckno,first_name,last_name,password,age,is_covid,is_sick,is_smoking,is_vaccinated
+				this.patients.add(new Patient(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4]), Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]), Boolean.valueOf(arr[8])  ));
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		// Reading healthemployees.txt
+		try {
+			Scanner scanner = new Scanner(new File("./database/healthemployees.txt"));
+			scanner.nextLine(); // read first line
+
+			while (scanner.hasNextLine()) {
+				String temp = scanner.nextLine();
+				String arr[] = temp.split(",");
+				
+				// sırasıyla
+				// tckno,first_name,last_name,password,age,job
+				switch(arr[5])
+				{
+					case "0":
+						this.healthEmployees.add(new HeadPhysician(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4])));
+						break;
+					case "1":
+						this.healthEmployees.add(new Doctor(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4])));
+						break;
+					case "2":
+						this.healthEmployees.add(new Nurse(arr[0], arr[1], arr[2], arr[3], Integer.parseInt(arr[4])));
+						break;
+				}
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
 	}
 
 	public Minister getMinister(){

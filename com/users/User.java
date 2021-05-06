@@ -2,6 +2,8 @@ package com.users;
 
 class User
 {
+	private Ministry ministry;
+
 	private String firstName;
 	private String lastName;
 	private String tckno;

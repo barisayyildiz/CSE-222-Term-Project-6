@@ -4,8 +4,6 @@ import com.obj.*;
 
 public class Minister extends User {
 
-	private Ministry ministry;
-
 	public Minister(Ministry ministry){
 		this.ministry = ministry;
 		// super(); // parametreler eklenerek super metodu çalışıtırılacak

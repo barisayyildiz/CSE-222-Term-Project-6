@@ -4,8 +4,6 @@ import com.obj.*;
 
 public class Doctor extends User implements HealthEmployee
 {
-	Ministry ministry;
-
 	public Doctor(){
 		// ctor yazılacak
 		super();

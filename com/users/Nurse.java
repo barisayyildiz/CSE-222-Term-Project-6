@@ -4,8 +4,6 @@ import com.obj.*;
 
 public class Nurse extends User implements HealthEmployee
 {
-	Ministry ministry;
-
 	public Nurse(){
 		super();
 		// ...

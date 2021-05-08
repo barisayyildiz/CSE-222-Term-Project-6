@@ -21,5 +21,18 @@ public class Patient extends User {
 		return;
 	}
 
+	@Override // get personal information
+	public String toString(){
+		return "";
+	}
+
+	public void demandCovidTest(){
+		return;
+	}
+	
+	public void setCovidInfo(boolean isCovid){
+		this.isCovid = isCovid;
+	}
+
 	
 }

@@ -9,16 +9,20 @@ public class Hospital {
 
 	private Ministry ministry;
 
+	private HeadPhysician headPhysician;
+
 	private int numOfBeds;
 	private int numOfTests;
+	// aşı tipleri ve sayılarını içeren 2d bir array yazılacak
 
 
-	public Hospital(Ministry ministry){
+	public Hospital(HeadPhysician headPhysician, Ministry ministry){
 		// constructor yazılacak
 		this.id = this.hashCode();
 		this.ministry = ministry;
 		this.numOfBeds = 100;
 		this.numOfTests = 1000;
+		this.headPhysician = headPhysician;
 
 	}
 

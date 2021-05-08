@@ -111,4 +111,8 @@ public class Ministry {
 		return;
 	}
 
+	public static Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isSmoking, boolean isVaccinated, boolean isCovid, boolean isSick){
+		return new Patient();
+	}
+
 }

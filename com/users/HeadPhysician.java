@@ -4,6 +4,8 @@ import com.obj.*;
 
 public class HeadPhysician extends Doctor
 {
+	private Hospital hospitalId;
+
 	public HeadPhysician(){
 		super();
 		// eklemeler yapılacak
@@ -18,34 +20,37 @@ public class HeadPhysician extends Doctor
 		return;
 	}
 
-	public void getHospitalData(){
-		return;
+	public String getHospitalData(){
+		return "";
+	}
+
+	public void sendNotification(String str){
+		return; // bakana gider
 	}
 
 
 	@Override
-	public void vaccinate(){
-		return;
+	public boolean vaccinate(String tckno){
+		return true;
 	}
 
-	// ==== Doctor class ından gelen metodlar
+	// // ==== Doctor class ından gelen metodlar
 
-	public void addPatient(){
-		return;
-	}
+	// public void addPatient(){
+	// 	return;
+	// }
 
-	public void removePatient(){
-		return;
-	}
+	// public void removePatient(){
+	// 	return;
+	// }
 
-	public void getPatientData(){
-		return;
-	}
+	// public void getPatientData(){
+	// 	return;
+	// }
 
-	public void giveMedicine(){
-		return;
-	}
-
+	// public void giveMedicine(){
+	// 	return;
+	// }
 
 	
 }

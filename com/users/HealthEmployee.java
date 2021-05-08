@@ -2,6 +2,6 @@ package com.users;
 
 public interface HealthEmployee {
 
-	public void vaccinate();
+	public boolean vaccinate(String tckno);
 	
 }

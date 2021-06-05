@@ -12,9 +12,9 @@ public class Minister extends User {
 
 	private Stack<String> notifications; // queue de kullanabiliriz
 
-	public Minister(Ministry ministry){
+	public Minister(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
+		super(firstName, lastName, tckno, password, age);  // parametreler eklenerek super metodu çalışıtırılacak
 		this.ministry = ministry;
-		// super(); // parametreler eklenerek super metodu çalışıtırılacak
 	}
 
 	public void addHospitals(){
@@ -22,46 +22,54 @@ public class Minister extends User {
 	}
 
 	public void removeHospital(int hospitalId){
-		return;
+		this.ministry.getHospitals().remove(hospitalId);
 	}
 
-	public void supplyVaccine(VaccineType type, int num){
-		return;
+	public void supplyVaccine(int hospitalId, VaccineType type, int num){
+		ArrayList<Vaccine> vaccines = this.ministry.getHospitals().get(hospitalId).getVaccines();
+		for(int i=0; i<vaccines.size(); i++){
+			if(vaccines.get(i).getType() == type){
+				vaccines.get(i).setNumber(vaccines.get(i).getNumber() + num);
+				break;
+			}
+		}
 	}
 
-	public void supplyTest(){
+	public void supplyTest(int hospitalId, int num){
+		this.ministry.getHospitals().get(hospitalId).addTests(num);
 		return;
 	}
 
 	public String getHospitalInformation(int hospitalId){
-		return "";
+		return this.ministry.getHospitals().get(hospitalId).toString();
 	}
 
 	public void getDailyStatistics(){
-		return; // output.txt 'ye günlük veriler yazılacak
+		return this.ministry.getDailyStatistics();
 	}
 
 	public String getLastMail(){
-		return ""; // en son gelen maili pop eder
+		return this.notifications.pop();
 	}
 
 	public boolean addDoctor(String firstName, String lastName, String tckno, String password, int age){
+		this.ministry.getHealthEmployees().add(new Doctor(firstName, lastName, tckno, password, age));
 		return true;
 	}
 
 	public boolean removeDoctor(String tckno){
+		this.ministry.getHealthEmployees().remove(tckno);
 		return true;
 	}
 
 	public boolean addNurse(String firstName, String lastName, String tckno, String password, int age){
+		this.ministry.getHealthEmployees().add(new Nurse(firstName, lastName, tckno, password, age));
 		return true;
 	}
 
 	public boolean removeNurse(String tckno){
+		this.ministry.getHealthEmployees().remove(tckno);
 		return true;
 	}
-
-	
-
 	
 }

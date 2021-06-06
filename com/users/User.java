@@ -18,5 +18,21 @@ class User
 	public boolean login(String tckno, String password){
 		return true;
 	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public String getTckNo() {
+		return tckno;
+	}
+	public int getAge() {
+		return age;
+	}
+	
 
 }

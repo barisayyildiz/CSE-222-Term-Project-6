@@ -33,6 +33,9 @@ public class Patient extends User {
 	public void setCovidInfo(boolean isCovid){
 		this.isCovid = isCovid;
 	}
+	public void setVaccinated(boolean isVaccinated){
+		this.isVaccinated=isVaccinated;
+	}
 
 	
 }

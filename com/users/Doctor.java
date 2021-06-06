@@ -13,7 +13,7 @@ public class Doctor extends User implements HealthEmployee
 	}
 
 	@Override
-	public boolean vaccinate(String tckno){
+	public boolean vaccinate(){
 		return true;
 	}
 

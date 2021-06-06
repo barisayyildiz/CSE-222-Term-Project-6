@@ -35,6 +35,11 @@ public class Minister extends User {
 		}
 	}
 
+	public void addNotification(String notification){
+		
+		notification.push(notification);	
+	}
+
 	public void supplyTest(int hospitalId, int num){
 		this.ministry.getHospitals().get(hospitalId).addTests(num);
 		return;

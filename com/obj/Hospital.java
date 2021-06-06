@@ -50,6 +50,17 @@ public class Hospital {
 		return this.vaccines;
 	}
 
+	public ArrayList<Vaccine> getVaccines(){
+		return vaccines;
+	}
+	
+	public void setNumOfTests(int numOfTests){
+		this.numOfTests = numOfTests;
+	}
+	public int getID(){
+		return id;
+	}
+
 	@Override
 	public String toString(){
 		String str = "";

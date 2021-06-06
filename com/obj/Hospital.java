@@ -41,6 +41,36 @@ public class Hospital {
 	public int numOfTests(){
 		return this.numOfTests;
 	}
+
+	public void addTests(int num){
+		this.numOfTests += num;
+	}
+
+	public ArrayList<Vaccine> getVaccines(){
+		return this.vaccines;
+	}
+
+	public ArrayList<Vaccine> getVaccines(){
+		return vaccines;
+	}
+	
+	public void setNumOfTests(int numOfTests){
+		this.numOfTests = numOfTests;
+	}
+	public int getID(){
+		return id;
+	}
+
+	@Override
+	public String toString(){
+		String str = "";
+
+		str += "Head Physician : " + this.headPhysician.toString() + "\n";
+		str += "Number of beds : " + this.numOfBeds + "\n";
+		str += "Number of tests : " + this.numOfTests;
+
+		return str;
+	}
 	
 }
 

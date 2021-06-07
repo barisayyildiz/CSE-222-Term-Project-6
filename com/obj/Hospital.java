@@ -49,10 +49,6 @@ public class Hospital {
 	public ArrayList<Vaccine> getVaccines(){
 		return this.vaccines;
 	}
-
-	public ArrayList<Vaccine> getVaccines(){
-		return vaccines;
-	}
 	
 	public void setNumOfTests(int numOfTests){
 		this.numOfTests = numOfTests;

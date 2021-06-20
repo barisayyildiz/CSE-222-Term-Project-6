@@ -70,6 +70,8 @@ public class Main
 		Scanner obj=new Scanner(System.in);
 		int choos= obj.nextInt();
 		boolean exit=true;
+		String firstName,lastName, password,tc;
+		int age;
 		while(exit) {
 			switch (choos) {
 				case 1:
@@ -102,19 +104,58 @@ public class Main
 					minister.supplyVaccine(hosptid,tip,vaccnum);
 					break;
 				case 5:
-					String firstName,lastName, password;
-					int age;
 					System.out.println("firstName=");
 					firstName=obj.nextLine();
 					System.out.println("lastName=");
 					lastName=obj.nextLine();
 					System.out.println("tckno=");
-					String tc=obj.nextLine();
+					tc=obj.nextLine();
 					System.out.println("password=");
 					password=obj.nextLine();
 					System.out.println("age=");
 					age=obj.nextInt();
-					minister.addDoctor(new)
+					minister.addDoctor(firstName,lastName,tc,password,age);
+					break;
+				case 6:
+					System.out.println("tckno=");
+					tc=obj.nextLine();
+					minister.removeDoctor(tc);
+					break;
+				case 7:
+					System.out.println(minister.ministry.getHospitals());
+					int num=obj.nextInt();
+					minister.removeDoctor(num);
+					break;
+				case 8:
+					System.out.println("firstName=");
+					firstName=obj.nextLine();
+					System.out.println("lastName=");
+					lastName=obj.nextLine();
+					System.out.println("tckno=");
+					tc=obj.nextLine();
+					System.out.println("password=");
+					password=obj.nextLine();
+					System.out.println("age=");
+					age=obj.nextInt();
+					minister.addNurse(firstName,lastName,tc,password,age);
+
+					break;
+				case 9:
+					System.out.println("tckno=");
+					tc=obj.nextLine();
+					minister.removeNurse(tc);
+					break;
+				case 10:
+					System.out.println(minister.ministry.getHospitals());
+					System.out.println("HASTANE SEÇ");
+					int num2=obj.nextInt();
+					System.out.println("AŞI SAYISI");
+					int num3=obj.nextInt();
+					minister.supplyTest(num2,num3);
+					break;
+				case 0:
+					System.out.println("EXIT...");
+					exit=false;
 					break;
 
 				default:

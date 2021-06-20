@@ -1,6 +1,8 @@
 package com.users;
 
-public class Patient extends User {
+import java.util.Random;
+
+public class Patient extends User implements Comparable<Patient> {
 	
 	private boolean isSmoking;
 	private boolean isVaccinated;
@@ -11,11 +13,18 @@ public class Patient extends User {
 
 	public Patient(String firstName, String lastName, String tckno, String password, int age){
 		super(firstName,lastName,tckno,password,age);
+		score=getAge();
 	}
 
 	public void getInQueue(){
 
-		return;
+		if(isSmoking)
+			score-=10;
+		if(isSick)
+			score+=50;
+		if(isCovid)
+			score-=100;
+		ministry.vaccinationOrderAdd(this);
 	}
 
 	public void displayData(){
@@ -78,4 +87,13 @@ public class Patient extends User {
 		this.state=state;
 	}
 
+	@Override
+	public int compareTo(Patient o) {
+		if(score>o.score)
+			return 1;
+		else if(score==o.score)
+			return 0;
+		else
+			return -1;
+	}
 }

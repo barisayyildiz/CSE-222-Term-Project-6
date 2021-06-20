@@ -1,4 +1,4 @@
-package com.data_structures;
+package com.data_structures.trees;
 
 /**
  * An implementation of the B-tree. A B-tree is a

@@ -12,17 +12,19 @@ public class Hospital {
 
 	private int numOfBeds;
 	private int numOfTests;
+	private String city;
 	// aşı tipleri ve sayılarını içeren 2d bir array yazılacak
 
 	private ArrayList<Vaccine> vaccines;
 
 
-	public Hospital(HeadPhysician headPhysician, Ministry ministry){
+	public Hospital(HeadPhysician headPhysician, Ministry ministry, String city){
 		this.id = this.hashCode();
 		this.ministry = ministry;
 		this.numOfBeds = 100;
 		this.numOfTests = 1000;
 		this.headPhysician = headPhysician;
+		this.city = city;
 		
 		// aşılar eklendi
 		this.vaccines = new ArrayList<Vaccine>();
@@ -63,7 +65,8 @@ public class Hospital {
 
 		str += "Head Physician : " + this.headPhysician.toString() + "\n";
 		str += "Number of beds : " + this.numOfBeds + "\n";
-		str += "Number of tests : " + this.numOfTests;
+		str += "Number of tests : " + this.numOfTests + "\n";
+		str += "City : " + this.city;
 
 		return str;
 	}

@@ -1,4 +1,4 @@
-package com;
+package com.data_structures.trees;
 
 /** This class extends the BinarySearchTree by adding the rotate
  *  operations. Rotation will change the balance of a search

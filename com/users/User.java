@@ -9,14 +9,20 @@ class User
 	private String tckno;
 	private String password;
 	private int age;
-	// enum -> user type
 
 	public User(String firstName, String lastName, String tckno, String password, int age){
-		// constructor yazılacak
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.tckno = tckno;
+		this.password=password;
+		this.age = age;
 	}
 
 	public boolean login(String tckno, String password){
-		return true;
+		if(this.tckno == tckno && this.password = password){
+			return true;
+		}
+		return false;
 	}
 	public String getFirstName() {
 		return firstName;

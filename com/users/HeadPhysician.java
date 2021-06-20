@@ -4,15 +4,11 @@ import com.obj.*;
 
 public class HeadPhysician extends Doctor{
 
-    private Ministry ministry;
     private Minister minister;
     private Hospital hospital;
 
-    public HeadPhysician(){
-        super();
-    }
-
-    public HeadPhysician(Hospital hospital, Ministry ministry, Minister minister){
+    public HeadPhysician(String firstName, String lastName, String tckno, String password, int age, Hospital hospital, Ministry ministry, Minister minister){
+        super(firstName, lastName, tckno, password, age,ministry);
         this.ministry = ministry;
         this.hospital = hospital;
         this.minister = minister;
@@ -23,12 +19,12 @@ public class HeadPhysician extends Doctor{
 
         if(ministry.getVaccinationOrder().poll() != null)
             return true;
-        
+
         return false;
     }
 
     void addHospitals(HeadPhysician headPhysician){
-        
+
         ministry.getHospitals().add(new Hospital(headPhysician,ministry));
     }
 
@@ -58,23 +54,23 @@ public class HeadPhysician extends Doctor{
         hospital.setNumOfTests(hospital.numOfTests() + 100);
     }
 
-	public void demandVaccine(VaccineType type, int num){
-		
+    public void demandVaccine(VaccineType type, int num){
+
         minister.supplyVaccine(type, num);
-	}
+    }
 
-	public void sendNotification(String str){
-		
+    public void sendNotification(String str){
+
         minister.addNotification(str);
-	}
+    }
 
-	public String getHospitalData(){
+    public String getHospitalData(){
 
         String vaccineInfo = "";
 
         for(Vaccine vaccine : hospital.getVaccines())
             vaccineInfo += vaccine.getType() + "-> " + vaccine.getNumber() + "\n";
 
-		return "Number of beds: " + hospital.numOfBeds() + "\n" + "Number of tests: " + hospital.numOfTests() + "\n" + "Vaccines:\n" + vaccineInfo;
-	}
+        return "Number of beds: " + hospital.numOfBeds() + "\n" + "Number of tests: " + hospital.numOfTests() + "\n" + "Vaccines:\n" + vaccineInfo;
+    }
 }

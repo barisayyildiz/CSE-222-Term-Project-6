@@ -1,12 +1,11 @@
 package com.obj;
-
 import java.util.*;
 
 // File Handling
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import com.AVLTree;
+import com.data_structures.trees.AVLTree;
 import com.users.*;
 
 public class Ministry {
@@ -106,7 +105,6 @@ public class Ministry {
 		hospitals.remove(id);
 	}
 
-	// Employeelere hastane nasıl atanacak?
 	public void addHealthEmployee(String firstName, String lastName, String tckno, String password, int age){
 		for(int i = 0; i < healthEmployees.size(); i++){
 			HealthEmployee currentEmployee = healthEmployees.get(i);
@@ -181,7 +179,7 @@ public class Ministry {
 			}
 		}
 	}
-	public void addVaccinationOrder(Patient patient){
+	public void vaccinationOrderAdd(Patient patient){
 		vaccinationOrder.add(patient);
 	}
 

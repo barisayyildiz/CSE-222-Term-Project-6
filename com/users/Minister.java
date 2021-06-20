@@ -8,13 +8,11 @@ public class Minister extends User {
 
 	// bildirim alma özelliği gelecek (hoca stack veri yapısı kullanılmasını istiyor, burada kullanabilirsek güzel olur)
 
-	private Ministry ministry;
 
 	private Stack<String> notifications; // queue de kullanabiliriz
 
 	public Minister(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
-		super(firstName, lastName, tckno, password, age);  // parametreler eklenerek super metodu çalışıtırılacak
-		this.ministry = ministry;
+		super(firstName, lastName, tckno, password, age,ministry);  // parametreler eklenerek super metodu çalışıtırılacak
 	}
 
 	public void addHospitals(){
@@ -45,7 +43,7 @@ public class Minister extends User {
 	}
 
 	public void getDailyStatistics(){
-		return this.ministry.getDailyStatistics();
+		 this.ministry.getDailyStatistics();
 	}
 
 	public String getLastMail(){
@@ -71,5 +69,8 @@ public class Minister extends User {
 		this.ministry.getHealthEmployees().remove(tckno);
 		return true;
 	}
-	
+
+	public Ministry getMinistry() {
+		return ministry;
+	}
 }

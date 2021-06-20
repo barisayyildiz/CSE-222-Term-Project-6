@@ -1,8 +1,10 @@
 package com.users;
 
+import com.obj.Ministry;
+
 class User
 {
-	private Ministry ministry;
+	protected Ministry ministry;
 
 	private String firstName;
 	private String lastName;
@@ -10,12 +12,13 @@ class User
 	private String password;
 	private int age;
 
-	public User(String firstName, String lastName, String tckno, String password, int age){
+	public User(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.tckno = tckno;
 		this.password=password;
 		this.age = age;
+		this.ministry=ministry;
 	}
 
 	public boolean login(String tckno, String password){

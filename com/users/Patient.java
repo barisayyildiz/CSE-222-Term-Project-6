@@ -1,5 +1,7 @@
 package com.users;
 
+import com.obj.Ministry;
+
 import java.util.Random;
 
 public class Patient extends User implements Comparable<Patient> {
@@ -11,8 +13,8 @@ public class Patient extends User implements Comparable<Patient> {
 	private int score;
 	private boolean state; // 0 -> evde, 1 -> hastanede (covid + ise)
 
-	public Patient(String firstName, String lastName, String tckno, String password, int age){
-		super(firstName,lastName,tckno,password,age);
+	public Patient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
+		super(firstName,lastName,tckno,password,age,ministry);
 		score=getAge();
 	}
 

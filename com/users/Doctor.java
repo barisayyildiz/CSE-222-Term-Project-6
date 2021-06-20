@@ -4,13 +4,12 @@ import com.obj.*;
 
 public class Doctor extends User implements HealthEmployee
 {
-	private Ministry ministry;
-	private Hospital hospitalId;
-	
-	public Doctor(String firstName, String lastName, String tckno, String password, int age){
-		super(firstName, lastName, tckno, password, age);
-		ministry = new Ministry(null);
-		hospitalId=new Hospital(null, ministry);
+
+	private Hospital hospital;
+
+	public Doctor(String firstName, String lastName, String tckno, String password, int age,Ministry ministry,Hospital hospital){
+		super(firstName, lastName, tckno, password, age,ministry);
+		this.hospital=hospital;
 	}
 
 	@Override

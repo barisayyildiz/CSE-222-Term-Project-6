@@ -2,15 +2,14 @@ package com.users;
 
 import com.obj.*;
 
+import java.util.Random;
+
 public class Nurse extends User implements HealthEmployee
 {
-	private Ministry ministry;
 	private Hospital hospitalId;
 
-	public Nurse(String firstName, String lastName, String tckno, String password, int age){
-		super(firstName, lastName, tckno, password, age);
-		ministry = new Ministry(null);
-		ministry = new Ministry(null);
+	public Nurse(String firstName, String lastName, String tckno, String password, int age,Ministry ministry){
+		super(firstName, lastName, tckno, password, age,ministry);
 		hospitalId = new Hospital(null,ministry);
 	}
 	

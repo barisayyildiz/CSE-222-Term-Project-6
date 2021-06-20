@@ -1,4 +1,4 @@
-package com;
+package com.data_structures;
 
 /** A class to hold a pair of references
  *  @author Koffman and Wolfgang

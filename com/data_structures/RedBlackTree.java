@@ -1,4 +1,4 @@
-package com;
+package com.data_structures;
 
 /** RedBlackTree.java
  *  Implements a Red-Black binary search tree

@@ -1,4 +1,4 @@
-package com;
+package com.data_structures;
 
 import java.util.*;
 

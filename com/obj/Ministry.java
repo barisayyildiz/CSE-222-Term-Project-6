@@ -57,8 +57,9 @@ public class Ministry {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
 
-				String key = generateKey(8);
-				this.hospitals.put(key, new Hospital(null, this, arr[1], key));
+				// String key = generateKey(8);
+				// System.out.println("key -- > " + arr[0]);
+				this.hospitals.put(arr[0], new Hospital(null, this, arr[1], arr[0]));
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -79,7 +80,10 @@ public class Ministry {
 				{
 					case "0":
 						// creates new head physician
-						HeadPhysician hPhysician = new HeadPhysician(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this)
+						
+						// System.out.println("key : " + arr[6]);
+						// System.out.println("hospital : " + this.hospitals.get("smywmdmn"));
+						HeadPhysician hPhysician = new HeadPhysician(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this);
 						this.hospitals.get(arr[6]).setHeadPhysician(hPhysician);
 						this.healthEmployees.add(hPhysician);
 						break;
@@ -98,7 +102,7 @@ public class Ministry {
 			e.printStackTrace();
 		}
 
-		mergeSortHealthEmployees(healthEmployees, 0, healthEmployees.size() - 1);
+		// mergeSortHealthEmployees(healthEmployees, 0, healthEmployees.size() - 1);
 	}
 
 	// Functions
@@ -349,7 +353,7 @@ public class Ministry {
 
 	public User loginHealthEmployee(String tckno, String password){
 
-		if(this.minister.getTckNo() == tckno && this.minister.getPassword() == password)	return this.minister;
+		if(this.minister.getTckNo().equals(tckno) && this.minister.getPassword().equals(password))	return this.minister;
 
 		Iterator<User> iter = this.healthEmployees.iterator();
 		while(iter.hasNext()){

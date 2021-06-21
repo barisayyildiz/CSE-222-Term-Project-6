@@ -35,7 +35,7 @@ public class Main
 		
 		while(true){
 			type = scanner.next();
-			if(!type.equals("1") || type.equals("2")){
+			if(!type.equals("1") && !type.equals("2")){
 				System.out.println("Try again...");
 				continue;
 			}
@@ -43,6 +43,7 @@ public class Main
 		}
 
 		if(type.compareTo("1") == 0){
+			scanner.nextLine();
 			while(true){
 				System.out.print("\nTCKNO : ");
 				tckno = scanner.nextLine();
@@ -50,42 +51,41 @@ public class Main
 				password = scanner.nextLine();
 	
 				User user = ministry.loginHealthEmployee(tckno, password);
-	
-				minister = (Minister)user;
-				nurse = (Nurse)user;
-				doctor = (Doctor)user;
-				headPhysician = (HeadPhysician)user;
-				if(minister != null){
-					System.out.println("you are a minister");
+				
+				if(user instanceof Minister){
+					minister = (Minister)user;
 					ministerPage(minister);
 					break;
-				}else if(nurse != null){
-					System.out.println("you are a nurse");
+				}else if(user instanceof Nurse){
+					nurse = (Nurse)user;
 					nursePage(nurse);
 					break;
-				}else if(doctor != null){
-					System.out.println("you are a doctor");
+				}else if(user instanceof Doctor){
+					doctor = (Doctor)user;
 					doctorPage(doctor);
 					break;
-				}else if(headPhysician != null){
-					System.out.println("you are a headphysician");
+				}else if(user instanceof HeadPhysician){
+					headPhysician = (HeadPhysician)user;
 					headPhysicanPage(headPhysician);
 					break;
 				}else{
-					System.out.println("User not found...");
+					System.out.println("user not found...");
 					continue;
 				}
+
+				
 			}
 		}else if(type.compareTo("2") == 0){
+			scanner.nextLine();
 			while(true){
 				System.out.print("\nTCKNO : ");
 				tckno = scanner.nextLine();
 				System.out.print("Password : ");
 				password = scanner.nextLine();
 	
-				User user = ministry.loginHealthEmployee(tckno, password);
-				Patient patient = (Patient)user;
-				if(patient != null){
+				User user = ministry.loginPatient(tckno, password);
+				if(user instanceof Patient){
+					Patient patient = (Patient)user;
 					System.out.println("You are a patient");
 					patientPage(patient);
 					break;
@@ -93,6 +93,8 @@ public class Main
 					System.out.println("Patient not found");
 					continue;
 				}
+				
+				
 			}
 		}
 

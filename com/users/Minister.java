@@ -47,7 +47,7 @@ public class Minister extends User {
 	}
 
 	public void getDailyStatistics(){
-		 this.ministry.getDailyStatistics();
+		//  this.ministry.getDailyStatistics();
 	}
 
 	public String getLastMail(){
@@ -56,19 +56,20 @@ public class Minister extends User {
 
 	public boolean addDoctor(String firstName, String lastName, String tckno, String password, int age){
 		// this.ministry.getHealthEmployees().add(new Doctor(firstName, lastName, tckno, password, age));
-		return this.ministry.addDoctor(firstName, lastName, tckno, password, age);
-		// return true;
+		// return this.ministry.addDoctor(firstName, lastName, tckno, password, age);
+		return true;
 	}
 
 	public boolean removeDoctor(String tckno){
-		this.ministry.getHealthEmployees().remove(tckno);
+		// this.ministry.getHealthEmployees().remove(tckno);
 		return true;
 	}
 
 	public boolean addNurse(String firstName, String lastName, String tckno, String password, int age){
 		// this.ministry.getHealthEmployees().add(new Nurse(firstName, lastName, tckno, password, age));
 		// return true;
-		return this.ministry.addNurse(firstName, lastName, tckno, password, age);
+		// return this.ministry.addNurse(firstName, lastName, tckno, password, age);
+		return true;
 	}
 
 	public boolean removeNurse(String tckno){

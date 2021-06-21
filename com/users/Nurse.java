@@ -12,7 +12,7 @@ public class Nurse extends User implements HealthEmployee
 	public Nurse(String firstName, String lastName, String tckno, String password, int age, Hospital hospital, Ministry ministry){
 		super(firstName, lastName, tckno, password, age, ministry);
 		this.hospital = hospital;
-		hospitalId = new Hospital(null,ministry);
+		// hospitalId = new Hospital(null,ministry);
 	}
 	
 	public void test(Patient obj){

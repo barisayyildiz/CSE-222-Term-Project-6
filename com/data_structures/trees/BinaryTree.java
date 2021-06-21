@@ -10,7 +10,7 @@ public class BinaryTree < E >
     implements Serializable {
 
   /** Class to encapsulate a tree node. */
-  protected static class Node < E >
+  public static class Node < E >
       implements Serializable {
     // Data Fields
     /** The information stored in this node. */
@@ -35,6 +35,17 @@ public class BinaryTree < E >
       right = null;
     }
 
+    public E getData(){
+      return data;
+    }
+
+    public Node<E> getLeft() {
+      return left;
+    }
+
+    public Node<E> getRight() {
+      return right;
+    }
     // Methods
     /** Return a string representation of the node.
         @return A string representation of the data fields
@@ -87,6 +98,10 @@ public class BinaryTree < E >
     else {
       return null;
     }
+  }
+
+  public Node<E> getNode() {
+    return root;
   }
 
   /** Return the right sub-tree

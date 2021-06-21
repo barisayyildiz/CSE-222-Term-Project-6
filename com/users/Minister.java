@@ -51,13 +51,13 @@ public class Minister extends User {
 	}
 
 	public void getDailyStatistics(){
-		//  this.ministry.getDailyStatistics();
+		 this.ministry.getDailyStatistics();
 	}
 
 	public String getLastMail(){
 		System.out.println(this.notifications.size());
-		if(this.notifications.size() != 0)	return this.notifications.pop();
-		return "";
+		if(this.notifications.size() > 0)	return this.notifications.pop();
+		return "You have 0 new mail";
 	}
 
 	public boolean addDoctor(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){

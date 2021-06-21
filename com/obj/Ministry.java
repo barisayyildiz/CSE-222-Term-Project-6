@@ -5,7 +5,8 @@ import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import com.data_structures.trees.AVLTree;
+// import com.data_structures.trees.AVLTree;
+import com.data_structures.trees.*;
 import com.users.*;
 
 public class Ministry {
@@ -41,7 +42,7 @@ public class Ministry {
 				String arr[] = temp.split(",");
 
 				// first_name, last_name, tckno, password, age, ministry
-				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this));
+				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this, Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]), Boolean.valueOf(arr[8]) ) );
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -106,28 +107,6 @@ public class Ministry {
 	}
 
 	// Functions
-
-	public void addHospital(){
-		/*
-		int maxAgeIndex = 0;
-
-		for(int i = 0; i < healthEmployees.size(); i++){
-			if(healthEmployees.get(i) instanceof Doctor){
-				if(i == 0){
-					maxAgeIndex = i;
-				}
-				else if(((Doctor) healthEmployees.get(i)).getAge() > ){
-					healthEmployees.remove(i);
-					return;
-				}
-			}
-		}
-
-		Hospital newHospital = new Hospital(,this);
-		hospitals.put(newHospital.getId(), newHospital);
-		*/
-	}
-
 	public boolean addHospital(String city){
 		Doctor doctor = null;
 		int maxIndex = -1;
@@ -186,44 +165,33 @@ public boolean removeHealthEmployee(String tckno){
 	return false;
 }
 
-	// public void addHealthEmployee(String firstName, String lastName, String tckno, String password, int age, int type){
-	// 	for(int i = 0; i < healthEmployees.size(); i++){
-	// 		User currentEmployee = healthEmployees.get(i);
-	// 		String existingTckno = "";
+public void getDailyStatistics(){
+	BinaryTree.Node<Patient> node = patients.getNode();
 
-	// 		if(currentEmployee instanceof Doctor) {
-	// 			existingTckno = ((Doctor) currentEmployee).getTckNo();
-	// 		}
-	// 		else if(currentEmployee instanceof Nurse) {
-	// 			existingTckno = ((Nurse) currentEmployee).getTckNo();
-	// 		}
+	int[] arr = new int[2];
 
-	// 		if(tckno.equals(existingTckno) == true){
-	// 			return;
-	// 		}
-	// 	}
+	if(stringDailyStatistics(node, arr) != null) {
+			System.out.println("Covid Patients:      " + arr[0]);
+			System.out.println("Vaccinated Patients: " + arr[1]);
+	}
+}
 
-	// 	healthEmployees.add(new Doctor(firstName, lastName, tckno, password, age));
-	// 	instertionSortHealthEmployees(healthEmployees);
-	// }
-	// public void removeHealthEmployee(String tckno){
-	// 	for(int i = 0; i < healthEmployees.size(); i++){
-	// 		HealthEmployee currentEmployee = healthEmployees.get(i);
-	// 		String existingTckno = new String();
+private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
+	if(node == null)
+			return null;
 
-	// 		if(currentEmployee instanceof Doctor) {
-	// 			existingTckno = ((Doctor) currentEmployee).getTckNo();
-	// 		}
-	// 		else if(currentEmployee instanceof Nurse) {
-	// 			existingTckno = ((Nurse) currentEmployee).getTckNo();
-	// 		}
+	if(node.getData().get_isCovid()) {
+			arr[0]++;
+	}
+	if(node.getData().get_isVaccinated()) {
+			arr[1]++;
+	}
 
-	// 		if(tckno.equals(existingTckno) == true){
-	// 			healthEmployees.remove(i);
-	// 			return;
-	// 		}
-	// 	}
-	// }
+	stringDailyStatistics(node.getLeft(), arr);
+	stringDailyStatistics(node.getRight(), arr);
+
+	return arr;
+}
 
 	public void addVaccine(int vacNumber, VaccineType vacType) {
 		for (int i = 0; i < vaccines.size(); i++) {

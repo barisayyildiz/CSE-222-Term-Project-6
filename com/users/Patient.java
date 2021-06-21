@@ -13,9 +13,13 @@ public class Patient extends User implements Comparable<Patient> {
 	private int score;
 	private boolean state; // 0 -> evde, 1 -> hastanede (covid + ise)
 
-	public Patient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
+	public Patient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated){
 		super(firstName,lastName,tckno,password,age,ministry);
 		score=getAge();
+		this.isCovid = isCovid;
+		this.isSick = isSick;
+		this.isSmoking = isSmoking;
+		this.isVaccinated = isVaccinated;
 	}
 
 	public void getInQueue(){

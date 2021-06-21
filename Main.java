@@ -122,6 +122,7 @@ public class Main
 			System.out.println("8 - Add nurse");
 			System.out.println("9 - Remove nurse");
 			System.out.println("10 - Supply test to hospital");
+			System.out.println("11 - Show last notification");
 			System.out.println("0 - Exit");
 			choos= obj.nextInt();
 			
@@ -217,6 +218,9 @@ public class Main
 					System.out.println("AŞI SAYISI");
 					int num3=obj.nextInt();
 					minister.supplyTest(num2,num3);
+					break;
+				case 11:
+					System.out.println(minister.getLastMail());
 					break;
 				case 0:
 					System.out.println("EXIT...");
@@ -318,7 +322,7 @@ public class Main
 					password=obj.nextLine();
 					System.out.println("age=");
 					age=obj.nextInt();
-					doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry()));
+					// doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry()));
 					break;
 				case 2:
 					System.out.println("Patient tc");

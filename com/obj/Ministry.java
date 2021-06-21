@@ -347,5 +347,15 @@ public class Ministry {
 		return null;
 	}
 
+	public static String generateKey(int num){
+		Random random = new Random();
+
+		String str = "abcdefghijklmnoprstuvyzABCDEFGIJKLMNOPRSTUVYZ0123456789xqXq";
+		String generated = "";
+
+		for(int i=0; i<num; i++)	generated += random.nextInt(str.length());
+		return generated;
+	}
+
 
 }

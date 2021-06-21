@@ -25,7 +25,7 @@ public class HeadPhysician extends Doctor{
 
     void addHospitals(HeadPhysician headPhysician){
 
-        ministry.getHospitals().add(new Hospital(headPhysician,ministry));
+        ministry.getHospitals().add(new Hospital(headPhysician,ministry, Ministry.generateKey(8)));
     }
 
     void removeHospital(int hospitalId){

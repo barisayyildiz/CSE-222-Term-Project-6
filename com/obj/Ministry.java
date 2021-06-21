@@ -128,13 +128,30 @@ public class Ministry {
 		*/
 	}
 
-	public void removeHospital(int id){
+	public boolean addHospital(String city){
+		Doctor doctor = null;
+		int maxIndex = -1;
+		for(int i=0; i<this.healthEmployees.size(); i++){
+			if(this.healthEmployees.get(i) instanceof Doctor){
+				maxIndex = i;
+				doctor = (Doctor)this.healthEmployees.get(i);
+				break;
+			}
+		}
+		if(maxIndex != -1){
+			this.healthEmployees.set(maxIndex, new HeadPhysician(doctor.getFirstName(), doctor.getLastName(), doctor.getTckNo(), doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this));
+			return true;
+		}
+		return false;
+	}
+
+	public void removeHospital(String id){
 		hospitals.remove(id);
 	}
 
 	public void addHealthEmployee(String firstName, String lastName, String tckno, String password, int age){
 		for(int i = 0; i < healthEmployees.size(); i++){
-			HealthEmployee currentEmployee = healthEmployees.get(i);
+			User currentEmployee = healthEmployees.get(i);
 			String existingTckno = "";
 
 			if(currentEmployee instanceof Doctor) {
@@ -214,7 +231,7 @@ public class Ministry {
 		return this.minister;
 	}
 
-	public HashMap<Integer, Hospital> getHospitals(){
+	public HashMap<String, Hospital> getHospitals(){
 		return this.hospitals;
 	}
 

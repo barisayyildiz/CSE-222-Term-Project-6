@@ -16,7 +16,7 @@ public class Main
 
 	public static void menu(){
 
-		Ministry ministry = new Ministry(new Minister("john", "doe", "01234567890", "asdqwe", 55));
+		Ministry ministry = new Ministry(new Minister("john", "doe", "", "", 55));
 
 		System.out.println("Welcome to the COVID Management System\n");
 		String tckno, password;
@@ -102,49 +102,6 @@ public class Main
 
 	}
 
-
-	// public static void menu(){
-	// 	System.out.println("NE İSTİYOSUN");
-	// 	String tckno,password;
-	// 	Scanner obj=new Scanner(System.in);
-	// 	System.out.println("NESİN SEN\nHEADPYSICIAN\nDOCTOR\nNURSE\nPATIENT");
-	// 	String type=obj.nextLine();
-	// 	while(true){
-	// 		if (!(type.equals("HEADPYSICIAN") || type.equals("DOCTOR") || type.equals("NURSE") || type.equals("PATIENT")))
-	// 			System.out.println("tekrar dene");
-	// 		else
-	// 			break;
-	// 	}
-	// 	user_type tip;
-	// 	tip=user_type.valueOf(type);
-
-	// 	switch (tip){
-	// 		case HEADPYSICIAN:
-	// 			/*login kısmı*/
-	// 			headPhysicanPage();
-	// 		case DOCTOR:
-	// 			/*login kısmı*/
-	// 			doctorPage();
-	// 			break;
-
-	// 		case NURSE:
-	// 			/*login ksımı*/
-	// 			nursePage();
-	// 			break;
-
-	// 		case PATIENT:
-	// 			/*login kısmı*/
-	// 			patientPage();
-	// 			break;
-	// 		case MINISTER:
-	// 			/*login kısmı*/
-	// 			ministerPage();
-	// 			break;
-	// 	}
-
-
-	// }
-
 	
 	public static void ministerPage(Minister minister){
 		System.out.println("Welcom to Minister Page");
@@ -169,7 +126,7 @@ public class Main
 				case 1:
 					System.out.println(minister.getMinistry().getHospitals());
 					System.out.println("Hospital ID");
-					System.out.println(minister.getHospitalInformation(obj.nextInt()));
+					System.out.println(minister.getHospitalInformation(obj.next()));
 					break;
 				case 2:
 					minister.getDailyStatistics();
@@ -192,7 +149,7 @@ public class Main
 					System.out.println("aşı sayısı");
 					int vaccnum=obj.nextInt();
 					System.out.println("enter hospital id");
-					int hosptid=obj.nextInt();
+					String hosptid=obj.next();
 					minister.supplyVaccine(hosptid,tip,vaccnum);
 					break;
 				case 5:
@@ -215,7 +172,7 @@ public class Main
 					break;
 				case 7:
 					System.out.println(minister.getMinistry().getHospitals());
-					int num=obj.nextInt();
+					String num=obj.next();
 					minister.removeHospital(num);
 					break;
 				case 8:
@@ -240,7 +197,7 @@ public class Main
 				case 10:
 					System.out.println(minister.getMinistry().getHospitals());
 					System.out.println("HASTANE SEÇ");
-					int num2=obj.nextInt();
+					String num2=obj.next();
 					System.out.println("AŞI SAYISI");
 					int num3=obj.nextInt();
 					minister.supplyTest(num2,num3);

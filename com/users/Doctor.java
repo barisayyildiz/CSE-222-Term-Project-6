@@ -12,6 +12,10 @@ public class Doctor extends User implements HealthEmployee
 		this.hospital=hospital;
 	}
 
+	public Hospital getHospital(){
+		return this.hospital;
+	}
+
 	@Override
 	public boolean vaccinate(String tckno){
 		for(Patient searchedPaitent : ministry.getPatients()) {

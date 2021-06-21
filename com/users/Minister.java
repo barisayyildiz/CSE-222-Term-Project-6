@@ -13,21 +13,23 @@ public class Minister extends User {
 
 	public Minister(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
 		super(firstName, lastName, tckno, password, age, ministry);  // parametreler eklenerek super metodu çalışıtırılacak
+		this.notifications = new Stack<String>();
 	}
 
 	public Minister(String firstName, String lastName, String tckno, String password, int age){
 		super(firstName, lastName, tckno, password, age);  // parametreler eklenerek super metodu çalışıtırılacak
+		this.notifications = new Stack<String>();
 	}
 
 	public void addHospitals(){
 		return;
 	}
 
-	public void removeHospital(int hospitalId){
+	public void removeHospital(String hospitalId){
 		this.ministry.getHospitals().remove(hospitalId);
 	}
 
-	public void supplyVaccine(int hospitalId, VaccineType type, int num){
+	public void supplyVaccine(String hospitalId, VaccineType type, int num){
 		ArrayList<Vaccine> vaccines = this.ministry.getHospitals().get(hospitalId).getVaccines();
 		for(int i=0; i<vaccines.size(); i++){
 			if(vaccines.get(i).getType() == type){
@@ -37,13 +39,15 @@ public class Minister extends User {
 		}
 	}
 
-	public void supplyTest(int hospitalId, int num){
+	public void supplyTest(String hospitalId, int num){
 		this.ministry.getHospitals().get(hospitalId).addTests(num);
 		return;
 	}
 
-	public String getHospitalInformation(int hospitalId){
-		return this.ministry.getHospitals().get(hospitalId).toString();
+	public String getHospitalInformation(String hospitalId){
+		Hospital hospital = this.ministry.getHospitals().get(hospitalId);
+		if(hospital != null)	return hospital.toString();
+		return "";
 	}
 
 	public void getDailyStatistics(){
@@ -51,7 +55,9 @@ public class Minister extends User {
 	}
 
 	public String getLastMail(){
-		return this.notifications.pop();
+		System.out.println(this.notifications.size());
+		if(this.notifications.size() != 0)	return this.notifications.pop();
+		return "";
 	}
 
 	public boolean addDoctor(String firstName, String lastName, String tckno, String password, int age){

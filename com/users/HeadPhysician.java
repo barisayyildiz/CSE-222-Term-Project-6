@@ -17,17 +17,17 @@ public class HeadPhysician extends Doctor{
 			return false;
 	}
 
-	void addHospitals(HeadPhysician headPhysician){
+	// void addHospitals(HeadPhysician headPhysician){
 
-			ministry.getHospitals().add(new Hospital(headPhysician,ministry, Ministry.generateKey(8)));
-	}
+	// 		ministry.getHospitals().add(new Hospital(headPhysician,ministry, Ministry.generateKey(8)));
+	// }
 
-	void removeHospital(int hospitalId){
+	// void removeHospital(int hospitalId){
 
-			for(int i=0;i<ministry.getHospitals().size();i++)
-					if(hospitalId == ministry.getHospitals().get(i).getID())
-							ministry.getHospitals().remove(i);
-	}
+	// 		for(int i=0;i<ministry.getHospitals().size();i++)
+	// 				if(hospitalId == ministry.getHospitals().get(i).getID())
+	// 						ministry.getHospitals().remove(i);
+	// }
 
 	int supplyVaccine(VaccineType type, int num){
 

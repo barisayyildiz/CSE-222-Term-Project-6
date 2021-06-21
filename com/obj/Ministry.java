@@ -13,7 +13,7 @@ public class Ministry {
 
 	private Minister minister;
 
-	private HashMap<Integer, Hospital> hospitals;
+	private HashMap<String, Hospital> hospitals;
 	private ArrayList<User> healthEmployees;
 	private ArrayList<Vaccine> vaccines;
 	private PriorityQueue<Patient> vaccinationOrder;
@@ -25,7 +25,7 @@ public class Ministry {
 		this.minister = minister;
 		this.minister.setMinistry(this);
 
-		this.hospitals = new HashMap<Integer, Hospital>();
+		this.hospitals = new HashMap<String, Hospital>();
 		this.healthEmployees = new ArrayList<User>();
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccinationOrder = new PriorityQueue<Patient>();
@@ -48,6 +48,23 @@ public class Ministry {
 			e.printStackTrace();
 		}
 
+		// Reading hospitals.txt
+		try{
+			Scanner scanner = new Scanner(new File("./database/hospitals.txt"));
+			scanner.nextLine(); // read first line
+
+			while(scanner.hasNextLine()){
+				String temp = scanner.nextLine();
+				String arr[] = temp.split(",");
+
+				String key = generateKey(8);
+				this.hospitals.put(key, new Hospital(null, this, arr[1], key));
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 		// Reading healthemployees.txt
 		try {
 			Scanner scanner = new Scanner(new File("./database/healthemployees.txt"));
@@ -61,13 +78,18 @@ public class Ministry {
 				switch(arr[5])
 				{
 					case "0":
-						this.healthEmployees.add(new HeadPhysician(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4])));
+						// creates new head physician
+						HeadPhysician hPhysician = new HeadPhysician(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this)
+						this.hospitals.get(arr[6]).setHeadPhysician(hPhysician);
+						this.healthEmployees.add(hPhysician);
 						break;
 					case "1":
-						this.healthEmployees.add(new Doctor(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4])));
+					// creates new doctor
+						this.healthEmployees.add(new Doctor(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this));
 						break;
 					case "2":
-						this.healthEmployees.add(new Nurse(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4])));
+					// creates new nurse
+						this.healthEmployees.add(new Nurse(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this));
 						break;
 				}
 			}

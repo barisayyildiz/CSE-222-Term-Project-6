@@ -7,9 +7,11 @@ import java.util.Random;
 public class Nurse extends User implements HealthEmployee
 {
 	private Hospital hospitalId;
+	private Hospital hospital;
 
-	public Nurse(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
+	public Nurse(String firstName, String lastName, String tckno, String password, int age, Hospital hospital, Ministry ministry){
 		super(firstName, lastName, tckno, password, age, ministry);
+		this.hospital = hospital;
 		hospitalId = new Hospital(null,ministry);
 	}
 	

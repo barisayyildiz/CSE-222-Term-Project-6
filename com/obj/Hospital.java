@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Hospital {
 
 	// hashcode
-	private int id;
+	private String id;
 	private Ministry ministry;
 	private HeadPhysician headPhysician;
 
@@ -18,8 +18,8 @@ public class Hospital {
 	private ArrayList<Vaccine> vaccines;
 
 
-	public Hospital(HeadPhysician headPhysician, Ministry ministry, String city){
-		this.id = this.hashCode();
+	public Hospital(HeadPhysician headPhysician, Ministry ministry, String city, String id){
+		this.id = id;
 		this.ministry = ministry;
 		this.numOfBeds = 100;
 		this.numOfTests = 1000;
@@ -55,8 +55,12 @@ public class Hospital {
 	public void setNumOfTests(int numOfTests){
 		this.numOfTests = numOfTests;
 	}
-	public int getID(){
+	public String getID(){
 		return id;
+	}
+
+	public void setHeadPhysician(HeadPhysician hPhysician){
+		this.headPhysician = hPhysician;
 	}
 
 	@Override

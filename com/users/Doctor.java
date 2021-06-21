@@ -5,9 +5,9 @@ import com.obj.*;
 public class Doctor extends User implements HealthEmployee
 {
 
-	private Hospital hospital;
+	protected Hospital hospital;
 
-	public Doctor(String firstName, String lastName, String tckno, String password, int age, Ministry ministry,Hospital hospital){
+	public Doctor(String firstName, String lastName, String tckno, String password, int age, Hospital hospital, Ministry ministry){
 		super(firstName, lastName, tckno, password, age,ministry);
 		this.hospital=hospital;
 	}

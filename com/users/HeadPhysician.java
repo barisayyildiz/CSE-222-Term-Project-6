@@ -4,12 +4,8 @@ import com.obj.*;
 
 public class HeadPhysician extends Doctor{
 
-	private Hospital hospital;
-
-	public HeadPhysician(String firstName, String lastName, String tckno, String password, int age, Hospital hospital, Ministry ministry, Minister minister){
-		super(firstName, lastName, tckno, password, age, ministry, hospital);
-		this.ministry = ministry;
-		this.hospital = hospital;
+	public HeadPhysician(String firstName, String lastName, String tckno, String password, int age, Hospital hospital, Ministry ministry){
+		super(firstName, lastName, tckno, password, age, hospital, ministry);
 	}
 
 	@Override

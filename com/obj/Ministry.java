@@ -146,7 +146,7 @@ public class Ministry {
 	}
 
 	public void removeHospital(String id){
-		hospitals.remove(id);
+		this.hospitals.remove(id);
 	}
 
 	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){
@@ -173,16 +173,17 @@ public class Ministry {
 		// instertionSortHealthEmployees(healthEmployees);
 }
 
-public void removeHealthEmployee(String tckno){
-		for(int i = 0; i < healthEmployees.size(); i++){
-				User currentEmployee = healthEmployees.get(i);
-				String existingTckno = currentEmployee.getTckNo();
+public boolean removeHealthEmployee(String tckno){
+	for(int i = 0; i < healthEmployees.size(); i++){
+		User currentEmployee = healthEmployees.get(i);
+		String existingTckno = currentEmployee.getTckNo();
 
-				if(tckno.equals(existingTckno) == true){
-						healthEmployees.remove(i);
-						return;
-				}
+		if(tckno.equals(existingTckno) == true){
+			healthEmployees.remove(i);
+			return true;
 		}
+	}
+	return false;
 }
 
 	// public void addHealthEmployee(String firstName, String lastName, String tckno, String password, int age, int type){

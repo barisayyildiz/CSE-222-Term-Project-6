@@ -175,12 +175,15 @@ public class Main
 					minister.addDoctor(firstName,lastName,tc,password,age,hospId,1);
 					break;
 				case 6:
-					System.out.println("tckno=");
+					obj.nextLine();
+					System.out.print("tckno= ");
 					tc=obj.nextLine();
 					minister.removeDoctor(tc);
 					break;
 				case 7:
+					obj.nextLine();
 					System.out.println(minister.getMinistry().getHospitals());
+					System.out.print("Hospital id : ");
 					String num=obj.next();
 					minister.removeHospital(num);
 					break;
@@ -202,7 +205,8 @@ public class Main
 
 					break;
 				case 9:
-					System.out.println("tckno=");
+					obj.nextLine();
+					System.out.print("tckno=");
 					tc=obj.nextLine();
 					minister.removeNurse(tc);
 					break;

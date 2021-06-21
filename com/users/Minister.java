@@ -26,7 +26,7 @@ public class Minister extends User {
 	}
 
 	public void removeHospital(String hospitalId){
-		this.ministry.getHospitals().remove(hospitalId);
+		this.ministry.removeHospital(hospitalId);
 	}
 
 	public void supplyVaccine(String hospitalId, VaccineType type, int num){
@@ -68,7 +68,8 @@ public class Minister extends User {
 
 	public boolean removeDoctor(String tckno){
 		// this.ministry.getHealthEmployees().remove(tckno);
-		return true;
+		return this.ministry.removeHealthEmployee(tckno);
+		// return true;
 	}
 
 	public boolean addNurse(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){
@@ -79,8 +80,9 @@ public class Minister extends User {
 	}
 
 	public boolean removeNurse(String tckno){
-		this.ministry.getHealthEmployees().remove(tckno);
-		return true;
+		// this.ministry.getHealthEmployees().remove(tckno);
+		return this.ministry.removeHealthEmployee(tckno);
+		// return true;
 	}
 
 	public Ministry getMinistry() {

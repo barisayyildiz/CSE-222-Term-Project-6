@@ -104,24 +104,27 @@ public class Main
 
 	
 	public static void ministerPage(Minister minister){
-		System.out.println("Welcom to Minister Page");
-		System.out.println("1 - Get hospital information");
-		System.out.println("2 - Update announce daily statistics");
-		System.out.println("3 - Add hospital");
-		System.out.println("4 - Supply vaccines hospital");
-		System.out.println("5 - Add doctor");
-		System.out.println("6 - Remove doctor");
-		System.out.println("7 - Remove hospital");
-		System.out.println("8 - Add nurse");
-		System.out.println("9 - Remove nurse");
-		System.out.println("10 - Supply test to hospital");
-		System.out.println("0 - Exit");
+		
 		Scanner obj=new Scanner(System.in);
-		int choos= obj.nextInt();
-		boolean exit=true;
-		String firstName,lastName, password,tc;
+		int choos;
+		String firstName,lastName, password,tc, hospId;
 		int age;
+		boolean exit=true;
 		while(exit) {
+			System.out.println("Welcome to Minister Page");
+			System.out.println("1 - Get hospital information");
+			System.out.println("2 - Update announce daily statistics");
+			System.out.println("3 - Add hospital");
+			System.out.println("4 - Supply vaccines hospital");
+			System.out.println("5 - Add doctor");
+			System.out.println("6 - Remove doctor");
+			System.out.println("7 - Remove hospital");
+			System.out.println("8 - Add nurse");
+			System.out.println("9 - Remove nurse");
+			System.out.println("10 - Supply test to hospital");
+			System.out.println("0 - Exit");
+			choos= obj.nextInt();
+			
 			switch (choos) {
 				case 1:
 					System.out.println(minister.getMinistry().getHospitals());
@@ -135,35 +138,41 @@ public class Main
 					/*yapılacak*/
 					break;
 				case 4:
-					System.out.println("PLEASE SELECT VACCINE TYPE\nSINOVAC,\nBIOENTECH\nASTRAZENECA\nSPUTNIK\nKAYSERI");
 					String type;
+					obj.nextLine();
 					while(true){
+						System.out.println("PLEASE SELECT VACCINE TYPE\nSINOVAC,\nBIOENTECH\nASTRAZENECA\nSPUTNIK\nKAYSERI");
 						type=obj.nextLine();
-						if (!(type.equals("SINOVAC") || type.equals("BIOENTECH") || type.equals("SPUTNIK") || type.equals("ASTRAZENECA")|| type.equals("KAYSERI")))
+						if (!type.equals("SINOVAC") && !type.equals("BIOENTECH") && !type.equals("SPUTNIK") && !type.equals("ASTRAZENECA") && !type.equals("KAYSERI")){
 							System.out.println("tekrar dene");
-						else
-							break;
+							continue;
+						}
+						break;
 					}
 					VaccineType tip;
 					tip=VaccineType.valueOf(type);
-					System.out.println("aşı sayısı");
+					System.out.print("Amount : ");
 					int vaccnum=obj.nextInt();
-					System.out.println("enter hospital id");
+					System.out.print("Enter hospital id : ");
 					String hosptid=obj.next();
 					minister.supplyVaccine(hosptid,tip,vaccnum);
 					break;
 				case 5:
-					System.out.println("firstName=");
+				obj.nextLine();
+					System.out.print("firstName=");
 					firstName=obj.nextLine();
-					System.out.println("lastName=");
+					System.out.print("lastName=");
 					lastName=obj.nextLine();
-					System.out.println("tckno=");
+					System.out.print("tckno=");
 					tc=obj.nextLine();
-					System.out.println("password=");
+					System.out.print("password=");
 					password=obj.nextLine();
-					System.out.println("age=");
+					System.out.print("age=");
 					age=obj.nextInt();
-					minister.addDoctor(firstName,lastName,tc,password,age);
+					
+					System.out.print("hospital id : ");
+					hospId = obj.nextLine();
+					minister.addDoctor(firstName,lastName,tc,password,age,hospId,1);
 					break;
 				case 6:
 					System.out.println("tckno=");
@@ -176,17 +185,20 @@ public class Main
 					minister.removeHospital(num);
 					break;
 				case 8:
-					System.out.println("firstName=");
+				obj.nextLine();
+					System.out.print("firstName=");
 					firstName=obj.nextLine();
-					System.out.println("lastName=");
+					System.out.print("lastName=");
 					lastName=obj.nextLine();
-					System.out.println("tckno=");
+					System.out.print("tckno=");
 					tc=obj.nextLine();
-					System.out.println("password=");
+					System.out.print("password=");
 					password=obj.nextLine();
-					System.out.println("age=");
+					System.out.print("age=");
 					age=obj.nextInt();
-					minister.addNurse(firstName,lastName,tc,password,age);
+					System.out.print("hospital id : ");
+					hospId = obj.nextLine();
+					minister.addNurse(firstName,lastName,tc,password,age,hospId,2);
 
 					break;
 				case 9:

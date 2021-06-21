@@ -149,44 +149,80 @@ public class Ministry {
 		hospitals.remove(id);
 	}
 
-	public void addHealthEmployee(String firstName, String lastName, String tckno, String password, int age){
+	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){
 		for(int i = 0; i < healthEmployees.size(); i++){
 			User currentEmployee = healthEmployees.get(i);
 			String existingTckno = "";
 
-			if(currentEmployee instanceof Doctor) {
-				existingTckno = ((Doctor) currentEmployee).getTckNo();
-			}
-			else if(currentEmployee instanceof Nurse) {
-				existingTckno = ((Nurse) currentEmployee).getTckNo();
-			}
+			existingTckno = currentEmployee.getTckNo();
 
 			if(tckno.equals(existingTckno) == true){
-				return;
+				return false;
 			}
 		}
 
-		healthEmployees.add(new Doctor(firstName, lastName, tckno, password, age));
-		instertionSortHealthEmployees(healthEmployees);
-	}
-	public void removeHealthEmployee(String tckno){
+		Hospital hospital = this.hospitals.get(hospitalId);
+		if(hospital == null)	return false;
+
+		if(type == 1)
+			healthEmployees.add(new Doctor(firstName, lastName, tckno, password, age, hospital, this));
+		else if(type == 2)
+			healthEmployees.add(new Nurse(firstName, lastName, tckno, password, age, hospital, this));
+
+		return true;
+		// instertionSortHealthEmployees(healthEmployees);
+}
+
+public void removeHealthEmployee(String tckno){
 		for(int i = 0; i < healthEmployees.size(); i++){
-			HealthEmployee currentEmployee = healthEmployees.get(i);
-			String existingTckno = new String();
+				User currentEmployee = healthEmployees.get(i);
+				String existingTckno = currentEmployee.getTckNo();
 
-			if(currentEmployee instanceof Doctor) {
-				existingTckno = ((Doctor) currentEmployee).getTckNo();
-			}
-			else if(currentEmployee instanceof Nurse) {
-				existingTckno = ((Nurse) currentEmployee).getTckNo();
-			}
-
-			if(tckno.equals(existingTckno) == true){
-				healthEmployees.remove(i);
-				return;
-			}
+				if(tckno.equals(existingTckno) == true){
+						healthEmployees.remove(i);
+						return;
+				}
 		}
-	}
+}
+
+	// public void addHealthEmployee(String firstName, String lastName, String tckno, String password, int age, int type){
+	// 	for(int i = 0; i < healthEmployees.size(); i++){
+	// 		User currentEmployee = healthEmployees.get(i);
+	// 		String existingTckno = "";
+
+	// 		if(currentEmployee instanceof Doctor) {
+	// 			existingTckno = ((Doctor) currentEmployee).getTckNo();
+	// 		}
+	// 		else if(currentEmployee instanceof Nurse) {
+	// 			existingTckno = ((Nurse) currentEmployee).getTckNo();
+	// 		}
+
+	// 		if(tckno.equals(existingTckno) == true){
+	// 			return;
+	// 		}
+	// 	}
+
+	// 	healthEmployees.add(new Doctor(firstName, lastName, tckno, password, age));
+	// 	instertionSortHealthEmployees(healthEmployees);
+	// }
+	// public void removeHealthEmployee(String tckno){
+	// 	for(int i = 0; i < healthEmployees.size(); i++){
+	// 		HealthEmployee currentEmployee = healthEmployees.get(i);
+	// 		String existingTckno = new String();
+
+	// 		if(currentEmployee instanceof Doctor) {
+	// 			existingTckno = ((Doctor) currentEmployee).getTckNo();
+	// 		}
+	// 		else if(currentEmployee instanceof Nurse) {
+	// 			existingTckno = ((Nurse) currentEmployee).getTckNo();
+	// 		}
+
+	// 		if(tckno.equals(existingTckno) == true){
+	// 			healthEmployees.remove(i);
+	// 			return;
+	// 		}
+	// 	}
+	// }
 
 	public void addVaccine(int vacNumber, VaccineType vacType) {
 		for (int i = 0; i < vaccines.size(); i++) {

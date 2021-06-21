@@ -60,10 +60,10 @@ public class Minister extends User {
 		return "";
 	}
 
-	public boolean addDoctor(String firstName, String lastName, String tckno, String password, int age){
+	public boolean addDoctor(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){
 		// this.ministry.getHealthEmployees().add(new Doctor(firstName, lastName, tckno, password, age));
-		// return this.ministry.addDoctor(firstName, lastName, tckno, password, age);
-		return true;
+		return this.ministry.addHealthEmployee(firstName, lastName, tckno, password, age, hospitalId, type);
+		// return true;
 	}
 
 	public boolean removeDoctor(String tckno){
@@ -71,11 +71,11 @@ public class Minister extends User {
 		return true;
 	}
 
-	public boolean addNurse(String firstName, String lastName, String tckno, String password, int age){
+	public boolean addNurse(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){
 		// this.ministry.getHealthEmployees().add(new Nurse(firstName, lastName, tckno, password, age));
 		// return true;
-		// return this.ministry.addNurse(firstName, lastName, tckno, password, age);
-		return true;
+		return this.ministry.addHealthEmployee(firstName, lastName, tckno, password, age, hospitalId, type);
+		// return true;
 	}
 
 	public boolean removeNurse(String tckno){

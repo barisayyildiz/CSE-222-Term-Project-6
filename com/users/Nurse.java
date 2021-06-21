@@ -8,8 +8,8 @@ public class Nurse extends User implements HealthEmployee
 {
 	private Hospital hospitalId;
 
-	public Nurse(String firstName, String lastName, String tckno, String password, int age,Ministry ministry){
-		super(firstName, lastName, tckno, password, age,ministry);
+	public Nurse(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
+		super(firstName, lastName, tckno, password, age, ministry);
 		hospitalId = new Hospital(null,ministry);
 	}
 	

@@ -7,7 +7,7 @@ public class Doctor extends User implements HealthEmployee
 
 	private Hospital hospital;
 
-	public Doctor(String firstName, String lastName, String tckno, String password, int age,Ministry ministry,Hospital hospital){
+	public Doctor(String firstName, String lastName, String tckno, String password, int age, Ministry ministry,Hospital hospital){
 		super(firstName, lastName, tckno, password, age,ministry);
 		this.hospital=hospital;
 	}
@@ -16,7 +16,7 @@ public class Doctor extends User implements HealthEmployee
 	public boolean vaccinate(String tckno){
 		for(Patient searchedPaitent : ministry.getPatients()) {
 			if(searchedPaitent.getTckNo().equals(tckno)) {
-				searchedPaitent.setVaccinated(true);
+				searchedPaitent.setIsVaccinated(true);
 				return true;
 			}
 		}	

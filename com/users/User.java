@@ -2,7 +2,7 @@ package com.users;
 
 import com.obj.Ministry;
 
-class User
+public class User
 {
 	protected Ministry ministry;
 
@@ -21,8 +21,16 @@ class User
 		this.ministry=ministry;
 	}
 
+	public User(String firstName, String lastName, String tckno, String password, int age){
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.tckno = tckno;
+		this.password=password;
+		this.age = age;
+	}
+
 	public boolean login(String tckno, String password){
-		if(this.tckno == tckno && this.password = password){
+		if(this.tckno == tckno && this.password.equals(password)){
 			return true;
 		}
 		return false;
@@ -41,6 +49,14 @@ class User
 	}
 	public int getAge() {
 		return age;
+	}
+
+	public Ministry getMinistry(){
+		return this.ministry;
+	}
+
+	public void setMinistry(Ministry ministry){
+		this.ministry = ministry;
 	}
 	
 

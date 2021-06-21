@@ -14,18 +14,19 @@ public class Ministry {
 	private Minister minister;
 
 	private HashMap<Integer, Hospital> hospitals;
-	private ArrayList<HealthEmployee> healthEmployees;
+	private ArrayList<User> healthEmployees;
 	private ArrayList<Vaccine> vaccines;
 	private PriorityQueue<Patient> vaccinationOrder;
-	private TreeSet<Patient> patients;
+	private AVLTree<Patient> patients;
 
 	// Constructors
 
 	public Ministry(Minister minister){
 		this.minister = minister;
+		this.minister.setMinistry(this);
 
 		this.hospitals = new HashMap<Integer, Hospital>();
-		this.healthEmployees = new ArrayList<HealthEmployee>();
+		this.healthEmployees = new ArrayList<User>();
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccinationOrder = new PriorityQueue<Patient>();
 		this.patients = new AVLTree<Patient>();
@@ -39,8 +40,8 @@ public class Ministry {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
 
-				// first_name, last_name, tckno, password, age
-				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4])));
+				// first_name, last_name, tckno, password, age, ministry
+				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this));
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -323,4 +324,28 @@ public class Ministry {
 			}
 		}
 	}
+
+	public User loginHealthEmployee(String tckno, String password){
+
+		if(this.minister.getTckNo() == tckno && this.minister.getPassword() == password)	return this.minister;
+
+		Iterator<User> iter = this.healthEmployees.iterator();
+		while(iter.hasNext()){
+			User hEmployee = iter.next();
+			if(hEmployee.getTckNo().equals(tckno) && hEmployee.getPassword().equals(password))	return hEmployee;
+		}
+		return null;
+	}
+
+	public User loginPatient(String tckno, String password){
+		Iterator<Patient> iter = this.patients.iterator();
+		Patient patient;
+		while(iter.hasNext()){
+			patient = iter.next();
+			if(patient.getPassword().equals(password) && patient.getTckNo().equals(tckno))	return patient;
+		}
+		return null;
+	}
+
+
 }

@@ -8,7 +8,7 @@ public class HeadPhysician extends Doctor{
     private Hospital hospital;
 
     public HeadPhysician(String firstName, String lastName, String tckno, String password, int age, Hospital hospital, Ministry ministry, Minister minister){
-        super(firstName, lastName, tckno, password, age,ministry);
+        super(firstName, lastName, tckno, password, age, ministry);
         this.ministry = ministry;
         this.hospital = hospital;
         this.minister = minister;

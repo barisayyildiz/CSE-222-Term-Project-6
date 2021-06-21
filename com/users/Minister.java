@@ -12,7 +12,11 @@ public class Minister extends User {
 	private Stack<String> notifications; // queue de kullanabiliriz
 
 	public Minister(String firstName, String lastName, String tckno, String password, int age, Ministry ministry){
-		super(firstName, lastName, tckno, password, age,ministry);  // parametreler eklenerek super metodu çalışıtırılacak
+		super(firstName, lastName, tckno, password, age, ministry);  // parametreler eklenerek super metodu çalışıtırılacak
+	}
+
+	public Minister(String firstName, String lastName, String tckno, String password, int age){
+		super(firstName, lastName, tckno, password, age);  // parametreler eklenerek super metodu çalışıtırılacak
 	}
 
 	public void addHospitals(){
@@ -51,8 +55,9 @@ public class Minister extends User {
 	}
 
 	public boolean addDoctor(String firstName, String lastName, String tckno, String password, int age){
-		this.ministry.getHealthEmployees().add(new Doctor(firstName, lastName, tckno, password, age));
-		return true;
+		// this.ministry.getHealthEmployees().add(new Doctor(firstName, lastName, tckno, password, age));
+		return this.ministry.addDoctor(firstName, lastName, tckno, password, age);
+		// return true;
 	}
 
 	public boolean removeDoctor(String tckno){
@@ -61,8 +66,9 @@ public class Minister extends User {
 	}
 
 	public boolean addNurse(String firstName, String lastName, String tckno, String password, int age){
-		this.ministry.getHealthEmployees().add(new Nurse(firstName, lastName, tckno, password, age));
-		return true;
+		// this.ministry.getHealthEmployees().add(new Nurse(firstName, lastName, tckno, password, age));
+		// return true;
+		return this.ministry.addNurse(firstName, lastName, tckno, password, age);
 	}
 
 	public boolean removeNurse(String tckno){

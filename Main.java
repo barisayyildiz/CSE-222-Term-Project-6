@@ -1,11 +1,11 @@
 
-package com.users;
-import com.obj.VaccineType;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Iterator;
+import com.obj.*;
+import com.users.*;
+import com.data_structures.graphs.*;
+import com.data_structures.trees.*;
 import java.util.Scanner;
+
+
 public class Main
 {
 	public static void main(String args[]){
@@ -13,47 +13,137 @@ public class Main
 
 
 	}
+
 	public static void menu(){
-		System.out.println("NE İSTİYOSUN");
-		String tckno,password;
-		Scanner obj=new Scanner(System.in);
-		System.out.println("NESİN SEN\nHEADPYSICIAN\nDOCTOR\nNURSE\nPATIENT");
-		String type=obj.nextLine();
+
+		Ministry ministry = new Ministry(new Minister("john", "doe", "01234567890", "asdqwe", 55));
+
+		System.out.println("Welcome to the COVID Management System\n");
+		String tckno, password;
+		String type;
+		Scanner scanner = new Scanner(System.in);
+
+		Minister minister;
+		Nurse nurse;
+		Doctor doctor;
+		HeadPhysician headPhysician;
+
+
+		System.out.println("Choose user type : ");
+		System.out.println("1. Health Employee");
+		System.out.println("2. Patient");
+		
 		while(true){
-			if (!(type.equals("HEADPYSICIAN") || type.equals("DOCTOR") || type.equals("NURSE") || type.equals("PATIENT")))
-				System.out.println("tekrar dene");
-			else
-				break;
-		}
-		user_type tip;
-		tip=user_type.valueOf(type);
-
-		switch (tip){
-			case HEADPYSICIAN:
-				/*login kısmı*/
-				headPhysicanPage();
-			case DOCTOR:
-				/*login kısmı*/
-				doctorPage();
-				break;
-
-			case NURSE:
-				/*login ksımı*/
-				nursePage();
-				break;
-
-			case PATIENT:
-				/*login kısmı*/
-				patientPage();
-				break;
-			case MINISTER:
-				/*login kısmı*/
-				ministerPage();
-				break;
+			type = scanner.next();
+			if(!type.equals("1") || type.equals("2")){
+				System.out.println("Try again...");
+				continue;
+			}
+			break;			
 		}
 
+		if(type.compareTo("1") == 0){
+			while(true){
+				System.out.print("\nTCKNO : ");
+				tckno = scanner.nextLine();
+				System.out.print("Password : ");
+				password = scanner.nextLine();
+	
+				User user = ministry.loginHealthEmployee(tckno, password);
+	
+				minister = (Minister)user;
+				nurse = (Nurse)user;
+				doctor = (Doctor)user;
+				headPhysician = (HeadPhysician)user;
+				if(minister != null){
+					System.out.println("you are a minister");
+					ministerPage(minister);
+					break;
+				}else if(nurse != null){
+					System.out.println("you are a nurse");
+					nursePage(nurse);
+					break;
+				}else if(doctor != null){
+					System.out.println("you are a doctor");
+					doctorPage(doctor);
+					break;
+				}else if(headPhysician != null){
+					System.out.println("you are a headphysician");
+					headPhysicanPage(headPhysician);
+					break;
+				}else{
+					System.out.println("User not found...");
+					continue;
+				}
+			}
+		}else if(type.compareTo("2") == 0){
+			while(true){
+				System.out.print("\nTCKNO : ");
+				tckno = scanner.nextLine();
+				System.out.print("Password : ");
+				password = scanner.nextLine();
+	
+				User user = ministry.loginHealthEmployee(tckno, password);
+				Patient patient = (Patient)user;
+				if(patient != null){
+					System.out.println("You are a patient");
+					patientPage(patient);
+					break;
+				}else{
+					System.out.println("Patient not found");
+					continue;
+				}
+			}
+		}
+
+		scanner.close();
 
 	}
+
+
+	// public static void menu(){
+	// 	System.out.println("NE İSTİYOSUN");
+	// 	String tckno,password;
+	// 	Scanner obj=new Scanner(System.in);
+	// 	System.out.println("NESİN SEN\nHEADPYSICIAN\nDOCTOR\nNURSE\nPATIENT");
+	// 	String type=obj.nextLine();
+	// 	while(true){
+	// 		if (!(type.equals("HEADPYSICIAN") || type.equals("DOCTOR") || type.equals("NURSE") || type.equals("PATIENT")))
+	// 			System.out.println("tekrar dene");
+	// 		else
+	// 			break;
+	// 	}
+	// 	user_type tip;
+	// 	tip=user_type.valueOf(type);
+
+	// 	switch (tip){
+	// 		case HEADPYSICIAN:
+	// 			/*login kısmı*/
+	// 			headPhysicanPage();
+	// 		case DOCTOR:
+	// 			/*login kısmı*/
+	// 			doctorPage();
+	// 			break;
+
+	// 		case NURSE:
+	// 			/*login ksımı*/
+	// 			nursePage();
+	// 			break;
+
+	// 		case PATIENT:
+	// 			/*login kısmı*/
+	// 			patientPage();
+	// 			break;
+	// 		case MINISTER:
+	// 			/*login kısmı*/
+	// 			ministerPage();
+	// 			break;
+	// 	}
+
+
+	// }
+
+	
 	public static void ministerPage(Minister minister){
 		System.out.println("Welcom to Minister Page");
 		System.out.println("1 - Get hospital information");
@@ -77,7 +167,7 @@ public class Main
 				case 1:
 					System.out.println(minister.getMinistry().getHospitals());
 					System.out.println("Hospital ID");
-					minister.getHospitalInformation(obj.nextInt());
+					System.out.println(minister.getHospitalInformation(obj.nextInt()));
 					break;
 				case 2:
 					minister.getDailyStatistics();
@@ -122,9 +212,9 @@ public class Main
 					minister.removeDoctor(tc);
 					break;
 				case 7:
-					System.out.println(minister.ministry.getHospitals());
+					System.out.println(minister.getMinistry().getHospitals());
 					int num=obj.nextInt();
-					minister.removeDoctor(num);
+					minister.removeHospital(num);
 					break;
 				case 8:
 					System.out.println("firstName=");
@@ -146,7 +236,7 @@ public class Main
 					minister.removeNurse(tc);
 					break;
 				case 10:
-					System.out.println(minister.ministry.getHospitals());
+					System.out.println(minister.getMinistry().getHospitals());
 					System.out.println("HASTANE SEÇ");
 					int num2=obj.nextInt();
 					System.out.println("AŞI SAYISI");
@@ -163,6 +253,9 @@ public class Main
 			}
 
 
+		}
+
+		obj.close();
 	}
 
 	public static void headPhysicanPage(HeadPhysician headphysician){
@@ -220,6 +313,8 @@ public class Main
 			}
 		}
 
+		obj.close();
+
 
 	}
 	public static void doctorPage(Doctor doctor){
@@ -248,7 +343,7 @@ public class Main
 					password=obj.nextLine();
 					System.out.println("age=");
 					age=obj.nextInt();
-					doctor.addPatient(new Patient(firstName,lastName,tc, password,age));
+					doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry()));
 					break;
 				case 2:
 					System.out.println("Patient tc");
@@ -275,6 +370,8 @@ public class Main
 					System.out.println("ERROR");
 			}
 		}
+
+		obj.close();
 
 	}
 
@@ -309,6 +406,7 @@ public class Main
 					System.out.println("ERROR");
 			}
 		}
+		obj.close();
 	}
 
 	public static void patientPage(Patient patient){
@@ -335,6 +433,7 @@ public class Main
 					System.out.println("ERROR");
 			}
 		}
+		obj.close();
 	}
 
 }

@@ -79,4 +79,8 @@ public class Minister extends User {
 	public Ministry getMinistry() {
 		return ministry;
 	}
+
+	public void addNotification(String str){
+		this.notifications.push(str);
+	}
 }

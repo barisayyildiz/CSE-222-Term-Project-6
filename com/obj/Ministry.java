@@ -103,7 +103,7 @@ public class Ministry {
 			e.printStackTrace();
 		}
 
-		// mergeSortHealthEmployees(healthEmployees, 0, healthEmployees.size() - 1);
+		mergeSortHealthEmployees(healthEmployees, 0, healthEmployees.size() - 1);
 	}
 
 	// Functions
@@ -149,7 +149,7 @@ public class Ministry {
 			healthEmployees.add(new Nurse(firstName, lastName, tckno, password, age, hospital, this));
 
 		return true;
-		// instertionSortHealthEmployees(healthEmployees);
+		instertionSortHealthEmployees(healthEmployees);
 }
 
 public boolean removeHealthEmployee(String tckno){
@@ -203,24 +203,21 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		vaccines.add(new Vaccine(vacNumber, vacType));
 	}
 
-	public Patient register(String firstName, String lastName, String tckno, String password, int age){
-		Set<Patient> set = patients;
-
+	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated){
+		
 		for(Patient patient : patients){
 			if(tckno.equals(patient.getTckNo()) == true){
 				return null;
 			}
 		}
 
-		Patient newPatient = new Patient(firstName, lastName, tckno, password, age);
+		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking, isVaccinated);
 		patients.add(newPatient);
 
 		return newPatient;
 	}
 
 	public void removePatient(String tckno){
-		Set<Patient> set = patients;
-
 		for(Patient patient : patients){
 			if(patient.getTckNo().equals(tckno) == true){
 				patients.remove(patient);
@@ -240,7 +237,7 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		return this.hospitals;
 	}
 
-	public ArrayList<HealthEmployee> getHealthEmployees(){
+	public ArrayList<User> getHealthEmployees(){
 		return this.healthEmployees;
 	}
 
@@ -252,7 +249,7 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		return this.vaccinationOrder;
 	}
 
-	public TreeSet<Patient> getPatients(){
+	public AVLTree<Patient> getPatients(){
 		return this.patients;
 	}
 
@@ -262,9 +259,9 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 	}
 
 	// Used after every insertion since the employee array list is already sorted.
-	private void instertionSortHealthEmployees(ArrayList<HealthEmployee> list) {
+	private void instertionSortHealthEmployees(ArrayList<User> list) {
 		for(int i = 1; i < list.size(); i++) {
-			HealthEmployee currentEmployee = list.get(i);
+			User currentEmployee = list.get(i);
 			int finalIndex = i;
 
 			int ageCurrent = 0;
@@ -297,7 +294,7 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 	}
 
 	// Used one time when the employees are read from the file
-	private void mergeSortHealthEmployees(ArrayList<HealthEmployee> list, int leftIndex, int rightIndex) {
+	private void mergeSortHealthEmployees(ArrayList<User> list, int leftIndex, int rightIndex) {
 		if(leftIndex >= rightIndex) {
 			return;
 		}
@@ -308,15 +305,15 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		merge(list, leftIndex, midIndex, rightIndex);
 	}
 
-	private void merge(ArrayList<HealthEmployee> list, int leftIndex, int midIndex, int rightIndex)
+	private void merge(ArrayList<User> list, int leftIndex, int midIndex, int rightIndex)
 	{
 		// Left and right array sizes
 		int leftSize = midIndex - leftIndex + 1;
 		int rightSize = rightIndex - midIndex;
 
 		// Temp subarrays
-		ArrayList<HealthEmployee> leftList = new ArrayList<HealthEmployee>(leftSize);
-		ArrayList<HealthEmployee> rightList = new ArrayList<HealthEmployee>(rightSize);
+		ArrayList<User> leftList = new ArrayList<User>(leftSize);
+		ArrayList<User> rightList = new ArrayList<User>(rightSize);
 
 		// Copy data from the main list to the subarrays
 		for (int i = 0; i < leftList.size(); i++)

@@ -42,7 +42,7 @@ public class Ministry {
 				String arr[] = temp.split(",");
 
 				// first_name, last_name, tckno, password, age, ministry
-				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this, Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]), Boolean.valueOf(arr[8]) ) );
+				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this, Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]), Boolean.valueOf(arr[8]), arr[9]));
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -203,7 +203,7 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		vaccines.add(new Vaccine(vacNumber, vacType));
 	}
 
-	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated){
+	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated, String city){
 		
 		for(Patient patient : patients){
 			if(tckno.equals(patient.getTckNo()) == true){
@@ -211,7 +211,7 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 			}
 		}
 
-		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking, isVaccinated);
+		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking, isVaccinated, city);
 		patients.add(newPatient);
 
 		return newPatient;

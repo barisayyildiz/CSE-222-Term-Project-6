@@ -1,4 +1,4 @@
-tckno,first_name,last_name,password,age,is_covid,is_sick,is_smoking,is_vaccinated,Giresun
+tckno,first_name,last_name,password,age,is_covid,is_sick,is_smoking,is_vaccinated,city
 21059983784,Michell,Lawton,XdGzKS,86,false,true,false,false,Trabzon
 94006495493,Kahlil,Goodings,rb5uaxEbavy,46,false,false,false,false,Kırklareli
 84225149291,Hedi,Atmore,BlZuEq3,75,false,false,true,false,Ardahan

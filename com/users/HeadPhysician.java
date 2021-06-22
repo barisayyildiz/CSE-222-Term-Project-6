@@ -10,24 +10,11 @@ public class HeadPhysician extends Doctor{
 
 	@Override
 	public boolean vaccinate(){
+		if(ministry.getVaccinationOrder().poll() != null)
+			return true;
 
-			if(ministry.getVaccinationOrder().poll() != null)
-					return true;
-
-			return false;
+		return false;
 	}
-
-	// void addHospitals(HeadPhysician headPhysician){
-
-	// 		ministry.getHospitals().add(new Hospital(headPhysician,ministry, Ministry.generateKey(8)));
-	// }
-
-	// void removeHospital(int hospitalId){
-
-	// 		for(int i=0;i<ministry.getHospitals().size();i++)
-	// 				if(hospitalId == ministry.getHospitals().get(i).getID())
-	// 						ministry.getHospitals().remove(i);
-	// }
 
 	int supplyVaccine(VaccineType type, int num){
 
@@ -52,7 +39,6 @@ public class HeadPhysician extends Doctor{
 
 		String str = String.valueOf(num) + " of " + String.valueOf(type) + " needed\n";
 		this.ministry.getMinister().addNotification(str);
-			// minister.supplyVaccine(type, num);
 	}
 
 	public void sendNotification(String str){
@@ -63,11 +49,5 @@ public class HeadPhysician extends Doctor{
 
 		return this.hospital.toString();
 
-			// String vaccineInfo = "";
-
-			// for(Vaccine vaccine : hospital.getVaccines())
-			// 		vaccineInfo += vaccine.getType() + "-> " + vaccine.getNumber() + "\n";
-
-			// return "Number of beds: " + hospital.numOfBeds() + "\n" + "Number of tests: " + hospital.numOfTests() + "\n" + "Vaccines:\n" + vaccineInfo;
 	}
 }

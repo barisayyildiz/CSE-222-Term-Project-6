@@ -347,8 +347,9 @@ public class Main
 					System.out.print("isVaccinated : ");
 					temp = obj.next();
 					isVaccinated = Boolean.valueOf(temp);
-
-					doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid, isSick, isSmoking, isVaccinated));
+					System.out.println("City : ");
+					temp = obj.next();
+					doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid, isSick, isSmoking, isVaccinated, temp));
 					break;
 				case 2:
 					System.out.print("Patient tc : ");

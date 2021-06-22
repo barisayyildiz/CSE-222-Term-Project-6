@@ -15,17 +15,9 @@ public class Nurse extends User implements HealthEmployee
 		// hospitalId = new Hospital(null,ministry);
 	}
 	
-	public void test(Patient obj){
-
+	private boolean test(){
 		Random rand = new Random();
-
-		if( rand.nextBoolean() ) {
-			obj.setCovidInfo(true);
-		}
-		else
-			obj.setCovidInfo(false);
-		
-		return;
+		return rand.nextBoolean();
 	}
 
 	@Override
@@ -38,10 +30,10 @@ public class Nurse extends User implements HealthEmployee
 		return false;
 	}
 
-	public void setCovidInfo(String tckno, boolean isCovid){
+	public void setCovidInfo(String tckno){
 		for(Patient searchedPaitent : ministry.getPatients()) {
 			if(searchedPaitent.getTckNo().equals(tckno)) {
-				searchedPaitent.setCovidInfo(isCovid);
+				searchedPaitent.setCovid(this.test());
 			}
 		}
 		return;

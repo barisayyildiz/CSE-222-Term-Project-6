@@ -393,22 +393,25 @@ public class Main
 	}
 
 	public static void nursePage(Nurse nurse){
-		System.out.println("Welcome to Nurse Page");
-		System.out.println("1 - Mark the test information");
-		System.out.println("2 - Input that patient is vaccinated");
-		System.out.println("0 - Exit");
+		
 		Scanner obj=new Scanner(System.in);
+		int choos;
 		String tc=null;
-		int choos= obj.nextInt();
 		boolean exit=true;
 		while(exit) {
+
+			System.out.println("Welcome to Nurse Page");
+			System.out.println("1 - Mark the test information");
+			System.out.println("2 - Input that patient is vaccinated");
+			System.out.println("0 - Exit");
+
+			choos = obj.nextInt();
+
 			switch (choos) {
 				case 1:
-					System.out.println("Patient tc");
-					tc=obj.nextLine();
-					System.out.println("Patient isCovid");
-					Boolean isCovid=obj.nextBoolean();
-					nurse.setCovidInfo(tc,isCovid);
+					System.out.print("Patient tc : ");
+					tc=obj.next();
+					nurse.setCovidInfo(tc);
 					break;
 				case 2:
 					if(nurse.vaccinate()){

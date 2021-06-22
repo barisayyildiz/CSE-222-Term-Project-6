@@ -70,6 +70,10 @@ public class Hospital {
 		return this.vaccinationOrder;
 	}
 
+	public String getCity(){
+		return this.city;
+	}
+
 	@Override
 	public String toString(){
 		String str = "", vaccineInfo = "";

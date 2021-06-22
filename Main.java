@@ -297,46 +297,74 @@ public class Main
 
 	}
 	public static void doctorPage(Doctor doctor){
-		System.out.println("Welcome to Doctor Page");
-		System.out.println("1 - Add patient");
-		System.out.println("2 - Remove patient");
-		System.out.println("3 - Get patient Data");
-		System.out.println("4 - Input that patient is vaccinated");
-		System.out.println("0 - Exit");
-		String tc=null;
+		
+		String tc=null, temp;
+		boolean isCovid, isSick, isSmoking, isVaccinated;
 		Scanner obj=new Scanner(System.in);
-		int choos= obj.nextInt();
+		int choos; 
 		boolean exit=true;
 		while(exit) {
+
+			System.out.println("Welcome to Doctor Page");
+			System.out.println("1 - Add patient");
+			System.out.println("2 - Remove patient");
+			System.out.println("3 - Get patient Data");
+			System.out.println("4 - Input that patient is vaccinated");
+			System.out.println("0 - Exit");
+			choos = obj.nextInt();
+
 			switch (choos) {
 				case 1:
+					obj.nextLine();
 					String firstName,lastName, password;
 					int age;
-					System.out.println("firstName=");
+					System.out.print("firstName= ");
 					firstName=obj.nextLine();
-					System.out.println("lastName=");
+					System.out.print("lastName= ");
 					lastName=obj.nextLine();
-					System.out.println("tckno=");
+					System.out.print("tckno= ");
 					tc=obj.nextLine();
-					System.out.println("password=");
+					System.out.print("password= ");
 					password=obj.nextLine();
-					System.out.println("age=");
+					System.out.print("age= ");
 					age=obj.nextInt();
-					// doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry()));
+					System.out.print("isCovid : ");
+					temp = obj.next();
+					isCovid = Boolean.valueOf(temp);
+					System.out.print("isSick : ");
+					temp = obj.next();
+					isSick = Boolean.valueOf(temp);
+					System.out.print("isSmoking : ");
+					temp = obj.next();
+					isSmoking = Boolean.valueOf(temp);
+					System.out.print("isVaccinated : ");
+					temp = obj.next();
+					isVaccinated = Boolean.valueOf(temp);
+
+					doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid, isSick, isSmoking, isVaccinated));
 					break;
 				case 2:
-					System.out.println("Patient tc");
-					tc=obj.nextLine();
-					doctor.removePatient(tc);
+					System.out.print("Patient tc : ");
+					tc=obj.next();
+					if(doctor.removePatient(tc)){
+						System.out.println("Patient removed successfully...");
+					}else{
+						System.out.println("Patient with that TCKNO not exists...");
+					}
 					break;
 				case 3:
-					System.out.println("Patient tc");
-					tc=obj.nextLine();
-					doctor.getPatientData(tc);
+					System.out.print("Patient tc : ");
+					tc=obj.next();
+					temp = doctor.getPatientData(tc);
+					if(temp != null){
+						System.out.println(temp);
+					}else{
+						System.out.println("Patient with that TCKNO not exists...");
+					}
 					break;
 				case 4:
 					System.out.println("Patient tc");
-					tc=obj.nextLine();
+					tc=obj.next();
 					if(!doctor.vaccinate(tc))
 						System.out.println("BÖYLE BİR HASTA YOK!");
 					break;

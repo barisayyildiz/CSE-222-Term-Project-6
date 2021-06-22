@@ -31,19 +31,22 @@ public class Doctor extends User implements HealthEmployee
 		ministry.getPatients().add(newPatient);
 	}
 
-	public void removePatient(String tckno){		
+	public boolean removePatient(String tckno){		
 		for(Patient searchedPaitent : ministry.getPatients()) {
 			if(searchedPaitent.getTckNo().equals(tckno)) {
 				ministry.getPatients().remove(searchedPaitent);
+				return true;
 			}
-		}	
+		}
+		return false;
 	}
 
 	public String getPatientData(String tckno){
 		for(Patient searchedPaitent : ministry.getPatients()) {
 			if(searchedPaitent.getTckNo().equals(tckno)) {
-				 return String.format("%s %s, %s, %d",searchedPaitent.getFirstName(),searchedPaitent.getLastName(),
-						 								searchedPaitent.getTckNo(),searchedPaitent.getAge());
+				return searchedPaitent.toString();
+				//  return String.format("%s %s, %s, %d",searchedPaitent.getFirstName(),searchedPaitent.getLastName(),
+				// 		 								searchedPaitent.getTckNo(),searchedPaitent.getAge());
 			}
 		}	
 		return null;		

@@ -17,7 +17,7 @@ public class Hospital {
 	// aşı tipleri ve sayılarını içeren 2d bir array yazılacak
 
 	private ArrayList<Vaccine> vaccines;
-	private PriorityQueue<Patient> patients;
+	private PriorityQueue<Patient> vaccinationOrder;
 
 
 	public Hospital(HeadPhysician headPhysician, Ministry ministry, String city, String id){
@@ -27,7 +27,7 @@ public class Hospital {
 		this.numOfTests = 1000;
 		this.headPhysician = headPhysician;
 		this.city = city;
-		this.patients = new PriorityQueue<Patient>();
+		this.vaccinationOrder = new PriorityQueue<Patient>();
 		
 		// aşılar eklendi
 		this.vaccines = new ArrayList<Vaccine>();
@@ -64,6 +64,10 @@ public class Hospital {
 
 	public void setHeadPhysician(HeadPhysician hPhysician){
 		this.headPhysician = hPhysician;
+	}
+
+	public PriorityQueue<Patient> getVaccinationOrder(){
+		return this.vaccinationOrder;
 	}
 
 	@Override

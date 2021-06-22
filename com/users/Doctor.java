@@ -17,13 +17,9 @@ public class Doctor extends User implements HealthEmployee
 	}
 
 	@Override
-	public boolean vaccinate(String tckno){
-		for(Patient searchedPaitent : ministry.getPatients()) {
-			if(searchedPaitent.getTckNo().equals(tckno)) {
-				searchedPaitent.setIsVaccinated(true);
-				return true;
-			}
-		}	
+	public boolean vaccinate(){
+		if(this.hospital.getVaccinationOrder().poll() != null)
+			return true;
 		return false;
 	}
 

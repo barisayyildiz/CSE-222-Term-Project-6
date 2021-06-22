@@ -267,10 +267,11 @@ public class Main
 					System.out.println(headphysician.getHospitalData());
 					break;
 				case 3:
-					System.out.print("Patient tc : ");
-					tc=obj.next();
-					if(!headphysician.vaccinate(tc))
-						System.out.println("BÖYLE BİR HASTA YOK!");
+					if(headphysician.vaccinate()){
+						System.out.println("Patient in the head of the queue got vaccinated");
+					}else{
+						System.out.println("No patient in the queue");
+					}
 					break;
 				case 4:
 					System.out.println("PLEASE SELECT VACCINE TYPE\nSINOVAC,\nBIOENTECH\nASTRAZENECA\nSPUTNIK\nKAYSERI");
@@ -371,10 +372,11 @@ public class Main
 					}
 					break;
 				case 4:
-					System.out.println("Patient tc");
-					tc=obj.next();
-					if(!doctor.vaccinate(tc))
-						System.out.println("BÖYLE BİR HASTA YOK!");
+					if(doctor.vaccinate()){
+						System.out.println("Patient in the head of the queue got vaccinated");
+					}else{
+						System.out.println("No patient in the queue");
+					}
 					break;
 				case 0:
 					System.out.println("EXIT...");
@@ -409,9 +411,11 @@ public class Main
 					nurse.setCovidInfo(tc,isCovid);
 					break;
 				case 2:
-					System.out.println("Patient tc");
-					tc=obj.nextLine();
-					nurse.vaccinate(tc);
+					if(nurse.vaccinate()){
+						System.out.println("Patient in the head of the queue got vaccinated");
+					}else{
+						System.out.println("No patient in the queue");
+					}
 					break;
 				case 0:
 					System.out.println("EXIT...");

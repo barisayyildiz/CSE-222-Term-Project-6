@@ -10,7 +10,7 @@ public class HeadPhysician extends Doctor{
 
 	@Override
 	public boolean vaccinate(){
-		if(ministry.getVaccinationOrder().poll() != null)
+		if(this.hospital.getVaccinationOrder().poll() != null)
 			return true;
 
 		return false;

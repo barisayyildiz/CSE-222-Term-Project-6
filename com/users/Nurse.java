@@ -29,20 +29,9 @@ public class Nurse extends User implements HealthEmployee
 	}
 
 	@Override
-	public boolean vaccinate(String tckno){
-		for(Patient searchedPaitent : ministry.getPatients()) {
-			if(searchedPaitent.getTckNo().equals(tckno)) {
-				ArrayList<Vaccine> vac = hospitalId.getVaccines();
-				for(int i = 0; i < vac.size(); i++ ) {
-					if( vac.get(i).getNumber() > 0 ) {
-						searchedPaitent.setVaccinated(true);
-						vac.get(i).setNumber( vac.get(i).getNumber() - 1 );
-						return true;
-					}
-				}
-				
-			}
-		}	
+	public boolean vaccinate(){
+		if(this.hospital.getVaccinationOrder().poll() != null)
+			return true;
 		return false;
 	}
 

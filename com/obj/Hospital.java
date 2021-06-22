@@ -65,12 +65,17 @@ public class Hospital {
 
 	@Override
 	public String toString(){
-		String str = "";
+		String str = "", vaccineInfo = "";
+
+		for(Vaccine vaccine : this.getVaccines())
+			vaccineInfo += vaccine.getType() + "-> " + vaccine.getNumber() + "\n";
 
 		str += "Head Physician : " + this.headPhysician.toString() + "\n";
 		str += "Number of beds : " + this.numOfBeds + "\n";
 		str += "Number of tests : " + this.numOfTests + "\n";
-		str += "City : " + this.city;
+		str += "City : " + this.city + "\n";
+		str += "Vaccine info : \n";
+		str += vaccineInfo;
 
 		return str;
 	}

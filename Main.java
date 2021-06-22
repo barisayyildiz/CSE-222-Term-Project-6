@@ -60,13 +60,13 @@ public class Main
 					nurse = (Nurse)user;
 					nursePage(nurse);
 					break;
-				}else if(user instanceof Doctor){
-					doctor = (Doctor)user;
-					doctorPage(doctor);
-					break;
 				}else if(user instanceof HeadPhysician){
 					headPhysician = (HeadPhysician)user;
 					headPhysicanPage(headPhysician);
+					break;
+				}else if(user instanceof Doctor){
+					doctor = (Doctor)user;
+					doctorPage(doctor);
 					break;
 				}else{
 					System.out.println("user not found...");
@@ -238,29 +238,37 @@ public class Main
 	}
 
 	public static void headPhysicanPage(HeadPhysician headphysician){
-		System.out.println("Welcome to HeadPhysican Page");
-		System.out.println("1 - Get patient information");
-		System.out.println("2 - Get hospital data");
-		System.out.println("3 - Input that patient is vaccinated");
-		System.out.println("4 - Demand vaccines form Minister");
-		System.out.println("0 - Exit");
-		String tc=null;
+		String tc=null, temp;
 		Scanner obj=new Scanner(System.in);
-		int choos= obj.nextInt();
+		int choos;
 		boolean exit=true;
 		while(exit) {
+
+			System.out.println("Welcome to HeadPhysican Page");
+			System.out.println("1 - Get patient information");
+			System.out.println("2 - Get hospital data");
+			System.out.println("3 - Input that patient is vaccinated");
+			System.out.println("4 - Demand vaccines form Minister");
+			System.out.println("0 - Exit");
+
+			choos = obj.nextInt();
 			switch (choos) {
 				case 1:
 					System.out.println("Patient tc");
-					tc=obj.nextLine();
-					headphysician.getPatientData(tc);
+					tc=obj.next();
+					temp = headphysician.getPatientData(tc);
+					if(temp != null){
+						System.out.println(temp);
+					}else{
+						System.out.println("Patient with that TCKNO not exists...");
+					}
 					break;
 				case 2:
-					headphysician.getHospitalData();
+					System.out.println(headphysician.getHospitalData());
 					break;
 				case 3:
-					System.out.println("Patient tc");
-					tc=obj.nextLine();
+					System.out.print("Patient tc : ");
+					tc=obj.next();
 					if(!headphysician.vaccinate(tc))
 						System.out.println("BÖYLE BİR HASTA YOK!");
 					break;
@@ -268,8 +276,8 @@ public class Main
 					System.out.println("PLEASE SELECT VACCINE TYPE\nSINOVAC,\nBIOENTECH\nASTRAZENECA\nSPUTNIK\nKAYSERI");
 					String type;
 					while(true){
-						type=obj.nextLine();
-						if (!(type.equals("SINOVAC") || type.equals("BIOENTECH") || type.equals("SPUTNIK") || type.equals("ASTRAZENECA")|| type.equals("KAYSERI")))
+						type=obj.next();
+						if (!type.equals("SINOVAC") && !type.equals("BIOENTECH") && !type.equals("SPUTNIK") && !type.equals("ASTRAZENECA") && !type.equals("KAYSERI"))
 							System.out.println("tekrar dene");
 						else
 							break;
@@ -278,7 +286,6 @@ public class Main
 					tip=VaccineType.valueOf(type);
 
 					System.out.println("PLEASE enter  VACCINE number");
-					obj.nextLine();
 					int a=obj.nextInt();
 					headphysician.demandVaccine(tip,a);
 					break;

@@ -61,11 +61,13 @@ public class HeadPhysician extends Doctor{
 
 	public String getHospitalData(){
 
-			String vaccineInfo = "";
+		return this.hospital.toString();
 
-			for(Vaccine vaccine : hospital.getVaccines())
-					vaccineInfo += vaccine.getType() + "-> " + vaccine.getNumber() + "\n";
+			// String vaccineInfo = "";
 
-			return "Number of beds: " + hospital.numOfBeds() + "\n" + "Number of tests: " + hospital.numOfTests() + "\n" + "Vaccines:\n" + vaccineInfo;
+			// for(Vaccine vaccine : hospital.getVaccines())
+			// 		vaccineInfo += vaccine.getType() + "-> " + vaccine.getNumber() + "\n";
+
+			// return "Number of beds: " + hospital.numOfBeds() + "\n" + "Number of tests: " + hospital.numOfTests() + "\n" + "Vaccines:\n" + vaccineInfo;
 	}
 }

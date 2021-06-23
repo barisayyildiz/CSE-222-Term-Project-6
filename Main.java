@@ -5,16 +5,12 @@ import com.data_structures.graphs.*;
 import com.data_structures.trees.*;
 import java.util.Scanner;
 
-
-public class Main
-{
-	public static void main(String args[]){
-
+public class Main {
+	public static void main(String args[]) {
 		menu();
-		
 	}
 
-	public static void menu(){
+	public static void menu() {
 
 		Ministry ministry = new Ministry(new Minister("john", "doe", "", "", 55));
 
@@ -28,89 +24,89 @@ public class Main
 		Doctor doctor;
 		HeadPhysician headPhysician;
 
-
 		System.out.println("Choose user type : ");
-		System.out.println("1. Health Employee");
-		System.out.println("2. Patient");
-		
-		while(true){
+		System.out.println("1 - Health Employee");
+		System.out.println("2 - Patient");
+		System.out.println("0 - Exit");
+
+		while (true) {
 			type = scanner.next();
-			if(!type.equals("1") && !type.equals("2")){
+			if (!type.equals("1") && !type.equals("2") && !type.equals("0")) {
 				System.out.println("Try again...");
 				continue;
 			}
-			break;			
+			break;
 		}
 
-		if(type.compareTo("1") == 0){
+		if (type.compareTo("1") == 0) {
 			scanner.nextLine();
-			while(true){
+			while (true) {
 				System.out.print("\nTCKNO : ");
 				tckno = scanner.nextLine();
 				System.out.print("Password : ");
 				password = scanner.nextLine();
-	
+
 				User user = ministry.loginHealthEmployee(tckno, password);
-				
-				if(user instanceof Minister){
-					minister = (Minister)user;
+
+				if (user instanceof Minister) {
+					minister = (Minister) user;
 					ministerPage(minister);
 					break;
-				}else if(user instanceof Nurse){
-					nurse = (Nurse)user;
+				} else if (user instanceof Nurse) {
+					nurse = (Nurse) user;
 					nursePage(nurse);
 					break;
-				}else if(user instanceof HeadPhysician){
-					headPhysician = (HeadPhysician)user;
+				} else if (user instanceof HeadPhysician) {
+					headPhysician = (HeadPhysician) user;
 					headPhysicanPage(headPhysician);
 					break;
-				}else if(user instanceof Doctor){
-					doctor = (Doctor)user;
+				} else if (user instanceof Doctor) {
+					doctor = (Doctor) user;
 					doctorPage(doctor);
 					break;
-				}else{
+				} else {
 					System.out.println("user not found...");
 					continue;
 				}
 
-				
 			}
-		}else if(type.compareTo("2") == 0){
+		} else if (type.compareTo("2") == 0) {
 			scanner.nextLine();
-			while(true){
+			while (true) {
 				System.out.print("\nTCKNO : ");
 				tckno = scanner.nextLine();
 				System.out.print("Password : ");
 				password = scanner.nextLine();
-	
+
 				User user = ministry.loginPatient(tckno, password);
-				if(user instanceof Patient){
-					Patient patient = (Patient)user;
+				if (user instanceof Patient) {
+					Patient patient = (Patient) user;
 					System.out.println("You are a patient");
 					patientPage(patient);
 					break;
-				}else{
+				} else {
 					System.out.println("Patient not found");
 					continue;
 				}
-				
-				
+
 			}
+		} else if (type.compareTo("0") == 0) {
+			System.out.println("Exit..");
+			System.exit(0);
 		}
 
 		scanner.close();
 
 	}
 
-	
-	public static void ministerPage(Minister minister){
-		
-		Scanner obj=new Scanner(System.in);
+	public static void ministerPage(Minister minister) {
+
+		Scanner obj = new Scanner(System.in);
 		int choos;
-		String firstName,lastName, password,tc, hospId;
+		String firstName, lastName, password, tc, hospId;
 		int age;
-		boolean exit=true;
-		while(exit) {
+		boolean exit = true;
+		while (exit) {
 			System.out.println("Welcome to Minister Page");
 			System.out.println("1 - Get hospital information");
 			System.out.println("2 - Update announce daily statistics");
@@ -124,125 +120,122 @@ public class Main
 			System.out.println("10 - Supply test to hospital");
 			System.out.println("11 - Show last notification");
 			System.out.println("0 - Exit");
-			choos= obj.nextInt();
-			
+			choos = obj.nextInt();
+
 			switch (choos) {
-				case 1:
-					System.out.println(minister.getMinistry().getHospitals());
-					System.out.println("Hospital ID");
-					System.out.println(minister.getHospitalInformation(obj.next()));
-					break;
-				case 2:
-					minister.getDailyStatistics();
-					break;
-				case 3:
-					/*yapılacak*/
-					break;
-				case 4:
-					String type;
-					obj.nextLine();
-					while(true){
-						System.out.println("PLEASE SELECT VACCINE TYPE\nSINOVAC,\nBIOENTECH\nASTRAZENECA\nSPUTNIK\nKAYSERI");
-						type=obj.nextLine();
-						if (!type.equals("SINOVAC") && !type.equals("BIOENTECH") && !type.equals("SPUTNIK") && !type.equals("ASTRAZENECA") && !type.equals("KAYSERI")){
-							System.out.println("tekrar dene");
-							continue;
-						}
-						break;
+			case 1:
+				System.out.println(minister.getMinistry().getHospitals());
+				System.out.print("Hospital ID : ");
+				System.out.println(minister.getHospitalInformation(obj.next()));
+				break;
+			case 2:
+				minister.getDailyStatistics();
+				break;
+			case 3:
+				System.out.println("Enter City Name : ");
+				String cityName = obj.next();
+				minister.addHospitals(cityName);
+				break;
+			case 4:
+				String type;
+				while (true) {
+					System.out
+							.println("PLEASE SELECT VACCINE TYPE\nSINOVAC,\nBIOENTECH\nASTRAZENECA\nSPUTNIK\nKAYSERI");
+					type = obj.next();
+					if (!type.equals("SINOVAC") && !type.equals("BIOENTECH") && !type.equals("SPUTNIK")
+							&& !type.equals("ASTRAZENECA") && !type.equals("KAYSERI")) {
+						System.out.println("tekrar dene");
+						continue;
 					}
-					VaccineType tip;
-					tip=VaccineType.valueOf(type);
-					System.out.print("Amount : ");
-					int vaccnum=obj.nextInt();
-					System.out.print("Enter hospital id : ");
-					String hosptid=obj.next();
-					minister.supplyVaccine(hosptid,tip,vaccnum);
 					break;
-				case 5:
-				obj.nextLine();
-					System.out.print("firstName=");
-					firstName=obj.nextLine();
-					System.out.print("lastName=");
-					lastName=obj.nextLine();
-					System.out.print("tckno=");
-					tc=obj.nextLine();
-					System.out.print("password=");
-					password=obj.nextLine();
-					System.out.print("age=");
-					age=obj.nextInt();
-					
-					System.out.print("hospital id : ");
-					hospId = obj.nextLine();
-					minister.addDoctor(firstName,lastName,tc,password,age,hospId,1);
-					break;
-				case 6:
-					obj.nextLine();
-					System.out.print("tckno= ");
-					tc=obj.nextLine();
-					minister.removeDoctor(tc);
-					break;
-				case 7:
-					obj.nextLine();
-					System.out.println(minister.getMinistry().getHospitals());
-					System.out.print("Hospital id : ");
-					String num=obj.next();
-					minister.removeHospital(num);
-					break;
-				case 8:
-				obj.nextLine();
-					System.out.print("firstName=");
-					firstName=obj.nextLine();
-					System.out.print("lastName=");
-					lastName=obj.nextLine();
-					System.out.print("tckno=");
-					tc=obj.nextLine();
-					System.out.print("password=");
-					password=obj.nextLine();
-					System.out.print("age=");
-					age=obj.nextInt();
-					System.out.print("hospital id : ");
-					hospId = obj.nextLine();
-					minister.addNurse(firstName,lastName,tc,password,age,hospId,2);
+				}
+				VaccineType tip;
+				tip = VaccineType.valueOf(type);
+				System.out.print("Amount : ");
+				int vaccnum = obj.nextInt();
+				System.out.print("Enter hospital id : ");
+				String hosptid = obj.next();
+				minister.supplyVaccine(hosptid, tip, vaccnum);
+				break;
+			case 5:
+				System.out.print("FirstName : ");
+				firstName = obj.next();
+				System.out.print("LastName : ");
+				lastName = obj.next();
+				System.out.print("TCKNO : ");
+				tc = obj.next();
+				System.out.print("Password : ");
+				password = obj.next();
+				System.out.print("Age : ");
+				age = obj.nextInt();
+				System.out.print("Hospital ID : ");
+				hospId = obj.next();
+				minister.addDoctor(firstName, lastName, tc, password, age, hospId, 1);
+				break;
+			case 6:
+				System.out.print("TCKNO : ");
+				tc = obj.next();
+				minister.removeDoctor(tc);
+				break;
+			case 7:
+				System.out.println(minister.getMinistry().getHospitals());
+				System.out.print("Hospital ID : ");
+				String num = obj.next();
+				minister.removeHospital(num);
+				break;
+			case 8:
+				System.out.print("FirstName : ");
+				firstName = obj.next();
+				System.out.print("LastName : ");
+				lastName = obj.next();
+				System.out.print("TCKNO : ");
+				tc = obj.next();
+				System.out.print("Password : ");
+				password = obj.next();
+				System.out.print("Age : ");
+				age = obj.nextInt();
+				System.out.print("Hospital ID : ");
+				hospId = obj.next();
+				minister.addNurse(firstName, lastName, tc, password, age, hospId, 2);
 
-					break;
-				case 9:
-					obj.nextLine();
-					System.out.print("tckno=");
-					tc=obj.nextLine();
-					minister.removeNurse(tc);
-					break;
-				case 10:
-					System.out.println(minister.getMinistry().getHospitals());
-					System.out.println("HASTANE SEÇ");
-					String num2=obj.next();
-					System.out.println("AŞI SAYISI");
-					int num3=obj.nextInt();
-					minister.supplyTest(num2,num3);
-					break;
-				case 11:
-					System.out.println(minister.getLastMail());
-					break;
-				case 0:
-					System.out.println("EXIT...");
-					exit=false;
-					break;
+				break;
+			case 9:
+				System.out.print("TCKNO : ");
+				tc = obj.next();
+				minister.removeNurse(tc);
+				break;
+			case 10:
+				System.out.println(minister.getMinistry().getHospitals());
+				System.out.print("Choose Hospital : ");
+				String num2 = obj.next();
+				System.out.print("Number of Vaccines : ");
+				int num3 = obj.nextInt();
+				minister.supplyTest(num2, num3);
+				break;
+			case 11:
+				System.out.println(minister.getLastMail());
+				break;
+			case 0:
+				System.out.println("EXIT...");
+				// exit = false;
+				return;
+			// break;
 
-				default:
-					System.out.println("ERROR");
+			default:
+				System.out.println("ERROR");
 			}
-
 
 		}
 
 		obj.close();
 	}
 
-	public static void headPhysicanPage(HeadPhysician headphysician){
-		String tc=null, temp;
-		Scanner obj=new Scanner(System.in);
+	public static void headPhysicanPage(HeadPhysician headphysician) {
+		String tc = null, temp;
+		Scanner obj = new Scanner(System.in);
 		int choos;
-		boolean exit=true;
-		while(exit) {
+		boolean exit = true;
+		while (exit) {
 
 			System.out.println("Welcome to HeadPhysican Page");
 			System.out.println("1 - Get patient information");
@@ -253,64 +246,66 @@ public class Main
 
 			choos = obj.nextInt();
 			switch (choos) {
-				case 1:
-					System.out.println("Patient tc");
-					tc=obj.next();
-					temp = headphysician.getPatientData(tc);
-					if(temp != null){
-						System.out.println(temp);
-					}else{
-						System.out.println("Patient with that TCKNO not exists...");
-					}
-					break;
-				case 2:
-					System.out.println(headphysician.getHospitalData());
-					break;
-				case 3:
-					System.out.print("Patient tc : ");
-					tc=obj.next();
-					if(!headphysician.vaccinate(tc))
-						System.out.println("BÖYLE BİR HASTA YOK!");
-					break;
-				case 4:
-					System.out.println("PLEASE SELECT VACCINE TYPE\nSINOVAC,\nBIOENTECH\nASTRAZENECA\nSPUTNIK\nKAYSERI");
-					String type;
-					while(true){
-						type=obj.next();
-						if (!type.equals("SINOVAC") && !type.equals("BIOENTECH") && !type.equals("SPUTNIK") && !type.equals("ASTRAZENECA") && !type.equals("KAYSERI"))
-							System.out.println("tekrar dene");
-						else
-							break;
-					}
-					VaccineType tip;
-					tip=VaccineType.valueOf(type);
+			case 1:
+				System.out.print("Patient TCKNO : ");
+				tc = obj.next();
+				temp = headphysician.getPatientData(tc);
+				if (temp != null) {
+					System.out.println(temp);
+				} else {
+					System.out.println("Patient with that TCKNO not exists...");
+				}
+				break;
+			case 2:
+				System.out.println(headphysician.getHospitalData());
+				break;
+			case 3:
+				System.out.print("Patient TCKNO : ");
+				tc = obj.next();
+				if (!headphysician.vaccinate(tc))
+					System.out.println("Patient with that TCKNO not exists...");
+				break;
+			case 4:
+				System.out.println(
+						"Please select vaccine type \n * - SINOVAC,\n * - BIOENTECH\n * - ASTRAZENECA\n * - SPUTNIK\n * - KAYSERI");
+				String type;
+				while (true) {
+					type = obj.next();
+					if (!type.equals("SINOVAC") && !type.equals("BIOENTECH") && !type.equals("SPUTNIK")
+							&& !type.equals("ASTRAZENECA") && !type.equals("KAYSERI"))
+						System.out.println("Wrong Vaccine Name Please Try Again ");
+					else
+						break;
+				}
+				VaccineType tip;
+				tip = VaccineType.valueOf(type);
 
-					System.out.println("PLEASE enter  VACCINE number");
-					int a=obj.nextInt();
-					headphysician.demandVaccine(tip,a);
-					break;
-				case 0:
-					System.out.println("EXIT...");
-					exit=false;
-					break;
+				System.out.print("Please Enter  Vaccine number : ");
+				int a = obj.nextInt();
+				headphysician.demandVaccine(tip, a);
+				break;
+			case 0:
+				System.out.println("EXIT...");
+				exit = false;
+				break;
 
-				default:
-					System.out.println("ERROR");
+			default:
+				System.out.println("ERROR");
 			}
 		}
 
 		obj.close();
 
-
 	}
-	public static void doctorPage(Doctor doctor){
-		
-		String tc=null, temp;
+
+	public static void doctorPage(Doctor doctor) {
+
+		String tc = null, temp;
 		boolean isCovid, isSick, isSmoking, isVaccinated;
-		Scanner obj=new Scanner(System.in);
-		int choos; 
-		boolean exit=true;
-		while(exit) {
+		Scanner obj = new Scanner(System.in);
+		int choos;
+		boolean exit = true;
+		while (exit) {
 
 			System.out.println("Welcome to Doctor Page");
 			System.out.println("1 - Add patient");
@@ -321,67 +316,67 @@ public class Main
 			choos = obj.nextInt();
 
 			switch (choos) {
-				case 1:
-					obj.nextLine();
-					String firstName,lastName, password;
-					int age;
-					System.out.print("firstName= ");
-					firstName=obj.nextLine();
-					System.out.print("lastName= ");
-					lastName=obj.nextLine();
-					System.out.print("tckno= ");
-					tc=obj.nextLine();
-					System.out.print("password= ");
-					password=obj.nextLine();
-					System.out.print("age= ");
-					age=obj.nextInt();
-					System.out.print("isCovid : ");
-					temp = obj.next();
-					isCovid = Boolean.valueOf(temp);
-					System.out.print("isSick : ");
-					temp = obj.next();
-					isSick = Boolean.valueOf(temp);
-					System.out.print("isSmoking : ");
-					temp = obj.next();
-					isSmoking = Boolean.valueOf(temp);
-					System.out.print("isVaccinated : ");
-					temp = obj.next();
-					isVaccinated = Boolean.valueOf(temp);
+			case 1:
+				String firstName, lastName, password;
+				int age;
+				System.out.print("FirstName : ");
+				firstName = obj.next();
+				System.out.print("LastName : ");
+				lastName = obj.next();
+				System.out.print("TCKNO : ");
+				tc = obj.next();
+				System.out.print("Password : ");
+				password = obj.next();
+				System.out.print("Age : ");
+				age = obj.nextInt();
+				System.out.print("IsCovid : ");
+				temp = obj.next();
+				isCovid = Boolean.valueOf(temp);
+				System.out.print("IsSick : ");
+				temp = obj.next();
+				isSick = Boolean.valueOf(temp);
+				System.out.print("IsSmoking : ");
+				temp = obj.next();
+				isSmoking = Boolean.valueOf(temp);
+				System.out.print("IsVaccinated : ");
+				temp = obj.next();
+				isVaccinated = Boolean.valueOf(temp);
 
-					doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid, isSick, isSmoking, isVaccinated));
-					break;
-				case 2:
-					System.out.print("Patient tc : ");
-					tc=obj.next();
-					if(doctor.removePatient(tc)){
-						System.out.println("Patient removed successfully...");
-					}else{
-						System.out.println("Patient with that TCKNO not exists...");
-					}
-					break;
-				case 3:
-					System.out.print("Patient tc : ");
-					tc=obj.next();
-					temp = doctor.getPatientData(tc);
-					if(temp != null){
-						System.out.println(temp);
-					}else{
-						System.out.println("Patient with that TCKNO not exists...");
-					}
-					break;
-				case 4:
-					System.out.println("Patient tc");
-					tc=obj.next();
-					if(!doctor.vaccinate(tc))
-						System.out.println("BÖYLE BİR HASTA YOK!");
-					break;
-				case 0:
-					System.out.println("EXIT...");
-					exit=false;
-					break;
+				doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid,
+						isSick, isSmoking, isVaccinated));
+				break;
+			case 2:
+				System.out.print("Patient TCKNO : ");
+				tc = obj.next();
+				if (doctor.removePatient(tc)) {
+					System.out.println("Patient Removed Successfully...");
+				} else {
+					System.out.println("Patient with that TCKNO Not Exists...");
+				}
+				break;
+			case 3:
+				System.out.print("Patient TCKNO : ");
+				tc = obj.next();
+				temp = doctor.getPatientData(tc);
+				if (temp != null) {
+					System.out.println(temp);
+				} else {
+					System.out.println("Patient with that TCKNO Not Exists...");
+				}
+				break;
+			case 4:
+				System.out.print("Patient TCKNO : ");
+				tc = obj.next();
+				if (!doctor.vaccinate(tc))
+					System.out.println("Patient with that TCKNO Not Exists...");
+				break;
+			case 0:
+				System.out.println("EXIT...");
+				exit = false;
+				break;
 
-				default:
-					System.out.println("ERROR");
+			default:
+				System.out.println("ERROR");
 			}
 		}
 
@@ -389,62 +384,60 @@ public class Main
 
 	}
 
-	public static void nursePage(Nurse nurse){
+	public static void nursePage(Nurse nurse) {
 		System.out.println("Welcome to Nurse Page");
 		System.out.println("1 - Mark the test information");
 		System.out.println("2 - Input that patient is vaccinated");
 		System.out.println("0 - Exit");
-		Scanner obj=new Scanner(System.in);
-		String tc=null;
-		int choos= obj.nextInt();
-		boolean exit=true;
-		while(exit) {
+		Scanner obj = new Scanner(System.in);
+		String tc = null;
+		int choos = obj.nextInt();
+		boolean exit = true;
+		while (exit) {
 			switch (choos) {
-				case 1:
-					System.out.println("Patient tc");
-					tc=obj.nextLine();
-					System.out.println("Patient isCovid");
-					Boolean isCovid=obj.nextBoolean();
-					nurse.setCovidInfo(tc,isCovid);
-					break;
-				case 2:
-					System.out.println("Patient tc");
-					tc=obj.nextLine();
-					nurse.vaccinate(tc);
-					break;
-				case 0:
-					System.out.println("EXIT...");
-					exit=false;
-					break;
-				default:
-					System.out.println("ERROR");
+			case 1:
+				System.out.print("Patient TCKNO : ");
+				tc = obj.next();
+				nurse.setCovidInfo(tc);
+				break;
+			case 2:
+				System.out.print("Patient TCKNO : ");
+				tc = obj.next();
+				nurse.vaccinate();
+				break;
+			case 0:
+				System.out.println("EXIT...");
+				exit = false;
+				break;
+			default:
+				System.out.println("ERROR");
 			}
 		}
 		obj.close();
 	}
 
-	public static void patientPage(Patient patient){
+	public static void patientPage(Patient patient) {
 		System.out.println("Welcome to Patient Page");
 		System.out.println("1 - Demand covid test");
 		System.out.println("2 - Get personal information");
 		System.out.println("0 - EXIT");
-		Scanner obj=new Scanner(System.in);
-		int choos= obj.nextInt();
-		boolean exit=true;
-		while(exit) {
+		Scanner obj = new Scanner(System.in);
+		int choos = obj.nextInt();
+		boolean exit = true;
+		while (exit) {
 			switch (choos) {
-				case 1:
-					patient.demandCovidTest();
-					break;
-				case 2:
-					patient.displayData();
-					break;
-				case 0:
-					System.out.println("EXIT...");
-					exit=false;
-					break;
-				default:
-					System.out.println("ERROR");
+			case 1:
+				patient.demandCovidTest();
+				break;
+			case 2:
+				patient.displayData();
+				break;
+			case 0:
+				System.out.println("EXIT...");
+				exit = false;
+				break;
+			default:
+				System.out.println("ERROR");
 			}
 		}
 		obj.close();

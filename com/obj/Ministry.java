@@ -1,9 +1,11 @@
 package com.obj;
+
 import java.util.*;
 
 // File Handling
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 // import com.data_structures.trees.AVLTree;
 import com.data_structures.trees.*;
@@ -22,7 +24,7 @@ public class Ministry {
 
 	// Constructors
 
-	public Ministry(Minister minister){
+	public Ministry(Minister minister) {
 		this.minister = minister;
 		this.minister.setMinistry(this);
 
@@ -42,7 +44,9 @@ public class Ministry {
 				String arr[] = temp.split(",");
 
 				// first_name, last_name, tckno, password, age, ministry
-				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this, Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]), Boolean.valueOf(arr[8]) ) );
+				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this,
+						Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]),
+						Boolean.valueOf(arr[8])));
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -50,11 +54,11 @@ public class Ministry {
 		}
 
 		// Reading hospitals.txt
-		try{
+		try {
 			Scanner scanner = new Scanner(new File("./database/hospitals.txt"));
 			scanner.nextLine(); // read first line
 
-			while(scanner.hasNextLine()){
+			while (scanner.hasNextLine()) {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
 
@@ -77,25 +81,27 @@ public class Ministry {
 				String arr[] = temp.split(",");
 
 				// tckno,first_name,last_name,password,age,job
-				switch(arr[5])
-				{
-					case "0":
-						// creates new head physician
-						
-						// System.out.println("key : " + arr[6]);
-						// System.out.println("hospital : " + this.hospitals.get("smywmdmn"));
-						HeadPhysician hPhysician = new HeadPhysician(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this);
-						this.hospitals.get(arr[6]).setHeadPhysician(hPhysician);
-						this.healthEmployees.add(hPhysician);
-						break;
-					case "1":
+				switch (arr[5]) {
+				case "0":
+					// creates new head physician
+
+					// System.out.println("key : " + arr[6]);
+					// System.out.println("hospital : " + this.hospitals.get("smywmdmn"));
+					HeadPhysician hPhysician = new HeadPhysician(arr[1], arr[2], arr[0], arr[3],
+							Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this);
+					this.hospitals.get(arr[6]).setHeadPhysician(hPhysician);
+					this.healthEmployees.add(hPhysician);
+					break;
+				case "1":
 					// creates new doctor
-						this.healthEmployees.add(new Doctor(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this));
-						break;
-					case "2":
+					this.healthEmployees.add(new Doctor(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]),
+							this.hospitals.get(arr[6]), this));
+					break;
+				case "2":
 					// creates new nurse
-						this.healthEmployees.add(new Nurse(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this));
-						break;
+					this.healthEmployees.add(new Nurse(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]),
+							this.hospitals.get(arr[6]), this));
+					break;
 				}
 			}
 			scanner.close();
@@ -106,92 +112,127 @@ public class Ministry {
 		mergeSortHealthEmployees(healthEmployees, 0, healthEmployees.size() - 1);
 	}
 
+	public void writeDBHealthEmployee(String tckno, String firstName, String lastName, String pass, int age,
+			int jobType, String hospitalId) {
+		try {
+			FileWriter fw = new FileWriter("./database/healthemployees.txt", true);
+			fw.write("\n" + tckno + "," + firstName + "," + lastName + "," + pass + "," + age + "," + jobType + ","
+					+ hospitalId);
+			fw.close();
+		} catch (Exception e) {
+			System.out.println("Error : Can not write file...");
+		}
+	}
+
+	public void writeDBHospital(String hospitalId, String city) {
+		try {
+			FileWriter fw = new FileWriter("./database/hospitals.txt", true);
+			fw.write("\n" + hospitalId + "," + city);
+			fw.close();
+		} catch (Exception e) {
+			System.out.println("Error : Can not write file...");
+		}
+	}
+
 	// Functions
-	public boolean addHospital(String city){
+	public boolean addHospital(String city) {
 		Doctor doctor = null;
 		int maxIndex = -1;
-		for(int i=0; i<this.healthEmployees.size(); i++){
-			if(this.healthEmployees.get(i) instanceof Doctor){
+		for (int i = 0; i < this.healthEmployees.size(); i++) {
+			if (this.healthEmployees.get(i) instanceof Doctor) {
 				maxIndex = i;
-				doctor = (Doctor)this.healthEmployees.get(i);
+				doctor = (Doctor) this.healthEmployees.get(i);
 				break;
 			}
 		}
-		if(maxIndex != -1){
-			this.healthEmployees.set(maxIndex, new HeadPhysician(doctor.getFirstName(), doctor.getLastName(), doctor.getTckNo(), doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this));
+		if (maxIndex != -1) {
+			this.healthEmployees.set(maxIndex, new HeadPhysician(doctor.getFirstName(), doctor.getLastName(),
+					doctor.getTckNo(), doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this));
+
+			Hospital newHospital = new Hospital(
+					new HeadPhysician(doctor.getFirstName(), doctor.getLastName(), doctor.getTckNo(),
+							doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this),
+					this, city, generateKey(5));
+			hospitals.put(newHospital.getID(), newHospital);
+			writeDBHospital(newHospital.getID(), city);
 			return true;
 		}
 		return false;
 	}
 
-	public void removeHospital(String id){
+	public void removeHospital(String id) {
 		this.hospitals.remove(id);
 	}
 
-	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){
-		for(int i = 0; i < healthEmployees.size(); i++){
+	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age,
+			String hospitalId, int type) {
+		for (int i = 0; i < healthEmployees.size(); i++) {
 			User currentEmployee = healthEmployees.get(i);
 			String existingTckno = "";
 
 			existingTckno = currentEmployee.getTckNo();
 
-			if(tckno.equals(existingTckno) == true){
+			if (tckno.equals(existingTckno) == true) {
 				return false;
 			}
 		}
 
 		Hospital hospital = this.hospitals.get(hospitalId);
-		if(hospital == null)	return false;
+		if (hospital == null)
+			return false;
 
-		if(type == 1)
+		if (type == 1) {
 			healthEmployees.add(new Doctor(firstName, lastName, tckno, password, age, hospital, this));
-		else if(type == 2)
-			healthEmployees.add(new Nurse(firstName, lastName, tckno, password, age, hospital, this));
-
-		return true;
-		instertionSortHealthEmployees(healthEmployees);
-}
-
-public boolean removeHealthEmployee(String tckno){
-	for(int i = 0; i < healthEmployees.size(); i++){
-		User currentEmployee = healthEmployees.get(i);
-		String existingTckno = currentEmployee.getTckNo();
-
-		if(tckno.equals(existingTckno) == true){
-			healthEmployees.remove(i);
-			return true;
+			writeDBHealthEmployee(tckno, firstName, lastName, password, age, 1, hospitalId);
 		}
+		if (type == 2) {
+			healthEmployees.add(new Nurse(firstName, lastName, tckno, password, age, hospital, this));
+			writeDBHealthEmployee(tckno, firstName, lastName, password, age, 0, hospitalId);
+		}
+		instertionSortHealthEmployees(healthEmployees);
+		return true;
 	}
-	return false;
-}
 
-public void getDailyStatistics(){
-	BinaryTree.Node<Patient> node = patients.getNode();
+	public boolean removeHealthEmployee(String tckno) {
+		for (int i = 0; i < healthEmployees.size(); i++) {
+			User currentEmployee = healthEmployees.get(i);
+			String existingTckno = currentEmployee.getTckNo();
 
-	int[] arr = new int[2];
+			if (tckno.equals(existingTckno) == true) {
+				healthEmployees.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
 
-	if(stringDailyStatistics(node, arr) != null) {
+	public void getDailyStatistics() {
+		BinaryTree.Node<Patient> node = patients.getNode();
+
+		int[] arr = new int[2];
+
+		if (stringDailyStatistics(node, arr) != null) {
 			System.out.println("Covid Patients:      " + arr[0]);
 			System.out.println("Vaccinated Patients: " + arr[1]);
+		}
 	}
-}
 
-private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
-	if(node == null)
+	private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr) {
+		if (node == null)
 			return null;
 
-	if(node.getData().get_isCovid()) {
+		if (node.getData().get_isCovid()) {
 			arr[0]++;
-	}
-	if(node.getData().get_isVaccinated()) {
+		}
+		if (node.getData().get_isVaccinated()) {
 			arr[1]++;
+		}
+
+		stringDailyStatistics(node.getLeft(), arr);
+		stringDailyStatistics(node.getRight(), arr);
+
+		return arr;
 	}
-
-	stringDailyStatistics(node.getLeft(), arr);
-	stringDailyStatistics(node.getRight(), arr);
-
-	return arr;
-}
 
 	public void addVaccine(int vacNumber, VaccineType vacType) {
 		for (int i = 0; i < vaccines.size(); i++) {
@@ -203,89 +244,89 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		vaccines.add(new Vaccine(vacNumber, vacType));
 	}
 
-	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated){
-		
-		for(Patient patient : patients){
-			if(tckno.equals(patient.getTckNo()) == true){
+	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid,
+			boolean isSick, boolean isSmoking, boolean isVaccinated) {
+
+		for (Patient patient : patients) {
+			if (tckno.equals(patient.getTckNo()) == true) {
 				return null;
 			}
 		}
 
-		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking, isVaccinated);
+		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking,
+				isVaccinated);
 		patients.add(newPatient);
 
 		return newPatient;
 	}
 
-	public void removePatient(String tckno){
-		for(Patient patient : patients){
-			if(patient.getTckNo().equals(tckno) == true){
+	public void removePatient(String tckno) {
+		for (Patient patient : patients) {
+			if (patient.getTckNo().equals(tckno) == true) {
 				patients.remove(patient);
 				return;
 			}
 		}
 	}
-	public void vaccinationOrderAdd(Patient patient){
+
+	public void vaccinationOrderAdd(Patient patient) {
 		vaccinationOrder.add(patient);
 	}
 
-	public Minister getMinister(){
+	public Minister getMinister() {
 		return this.minister;
 	}
 
-	public HashMap<String, Hospital> getHospitals(){
+	public HashMap<String, Hospital> getHospitals() {
 		return this.hospitals;
 	}
 
-	public ArrayList<User> getHealthEmployees(){
+	public ArrayList<User> getHealthEmployees() {
 		return this.healthEmployees;
 	}
 
-	public ArrayList<Vaccine> getVaccines(){
+	public ArrayList<Vaccine> getVaccines() {
 		return this.vaccines;
 	}
 
-	public PriorityQueue<Patient> getVaccinationOrder(){
+	public PriorityQueue<Patient> getVaccinationOrder() {
 		return this.vaccinationOrder;
 	}
 
-	public AVLTree<Patient> getPatients(){
+	public AVLTree<Patient> getPatients() {
 		return this.patients;
 	}
 
 	// burası geliştirilecek, farklı data tipleri için
-	public static void getData(int hospitalId){
+	public static void getData(int hospitalId) {
 		return;
 	}
 
 	// Used after every insertion since the employee array list is already sorted.
 	private void instertionSortHealthEmployees(ArrayList<User> list) {
-		for(int i = 1; i < list.size(); i++) {
+		for (int i = 1; i < list.size(); i++) {
 			User currentEmployee = list.get(i);
 			int finalIndex = i;
 
 			int ageCurrent = 0;
-			if(currentEmployee instanceof Doctor) {
+			if (currentEmployee instanceof Doctor) {
 				ageCurrent = ((Doctor) currentEmployee).getAge();
-			}
-			else if(currentEmployee instanceof Nurse) {
+			} else if (currentEmployee instanceof Nurse) {
 				ageCurrent = ((Nurse) currentEmployee).getAge();
 			}
 
-			for(int j = i - 1; j >= 0; j--) {
+			for (int j = i - 1; j >= 0; j--) {
 				int ageOther = 0;
-				if(currentEmployee instanceof Doctor) {
+				if (currentEmployee instanceof Doctor) {
 					ageOther = ((Doctor) list.get(j)).getAge();
-				}
-				else if(currentEmployee instanceof Nurse) {
+				} else if (currentEmployee instanceof Nurse) {
 					ageOther = ((Nurse) list.get(j)).getAge();
 				}
 
-				if(ageOther < ageCurrent) {
+				if (ageOther < ageCurrent) {
 					list.set(j + 1, list.get(j));
 					finalIndex = j;
-				}
-				else {
+				} else {
 					list.set(finalIndex, currentEmployee);
 					break;
 				}
@@ -295,7 +336,7 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 
 	// Used one time when the employees are read from the file
 	private void mergeSortHealthEmployees(ArrayList<User> list, int leftIndex, int rightIndex) {
-		if(leftIndex >= rightIndex) {
+		if (leftIndex >= rightIndex) {
 			return;
 		}
 
@@ -305,8 +346,7 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		merge(list, leftIndex, midIndex, rightIndex);
 	}
 
-	private void merge(ArrayList<User> list, int leftIndex, int midIndex, int rightIndex)
-	{
+	private void merge(ArrayList<User> list, int leftIndex, int midIndex, int rightIndex) {
 		// Left and right array sizes
 		int leftSize = midIndex - leftIndex + 1;
 		int rightSize = rightIndex - midIndex;
@@ -333,17 +373,15 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 				int rightAge = 0;
 
 				// Determine the left employee's age and the right employee's age
-				if(leftList.get(leftListIndex) instanceof Doctor) {
+				if (leftList.get(leftListIndex) instanceof Doctor) {
 					leftAge = ((Doctor) leftList.get(leftListIndex)).getAge();
-				}
-				else if(leftList.get(leftListIndex) instanceof Nurse) {
+				} else if (leftList.get(leftListIndex) instanceof Nurse) {
 					leftAge = ((Nurse) leftList.get(leftListIndex)).getAge();
 				}
 
-				if(rightList.get(rightListIndex) instanceof Doctor) {
+				if (rightList.get(rightListIndex) instanceof Doctor) {
 					rightAge = ((Doctor) rightList.get(rightListIndex)).getAge();
-				}
-				else if(rightList.get(rightListIndex) instanceof Nurse) {
+				} else if (rightList.get(rightListIndex) instanceof Nurse) {
 					rightAge = ((Nurse) rightList.get(rightListIndex)).getAge();
 				}
 
@@ -351,18 +389,15 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 				if (leftAge > rightAge) {
 					list.set(i, leftList.get(leftListIndex));
 					leftListIndex++;
-				}
-				else {
+				} else {
 					list.set(i, rightList.get(rightListIndex));
 					rightListIndex++;
 				}
-			}
-			else if (leftListIndex < leftList.size()) {
+			} else if (leftListIndex < leftList.size()) {
 				// If all elements have been copied from rightArray, copy rest of leftArray
 				list.set(i, leftList.get(leftListIndex));
 				leftListIndex++;
-			}
-			else if (rightListIndex < rightList.size()) {
+			} else if (rightListIndex < rightList.size()) {
 				// If all elements have been copied from leftArray, copy rest of rightArray
 				list.set(i, rightList.get(rightListIndex));
 				rightListIndex++;
@@ -370,37 +405,40 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		}
 	}
 
-	public User loginHealthEmployee(String tckno, String password){
+	public User loginHealthEmployee(String tckno, String password) {
 
-		if(this.minister.getTckNo().equals(tckno) && this.minister.getPassword().equals(password))	return this.minister;
+		if (this.minister.getTckNo().equals(tckno) && this.minister.getPassword().equals(password))
+			return this.minister;
 
 		Iterator<User> iter = this.healthEmployees.iterator();
-		while(iter.hasNext()){
+		while (iter.hasNext()) {
 			User hEmployee = iter.next();
-			if(hEmployee.getTckNo().equals(tckno) && hEmployee.getPassword().equals(password))	return hEmployee;
+			if (hEmployee.getTckNo().equals(tckno) && hEmployee.getPassword().equals(password))
+				return hEmployee;
 		}
 		return null;
 	}
 
-	public User loginPatient(String tckno, String password){
+	public User loginPatient(String tckno, String password) {
 		Iterator<Patient> iter = this.patients.iterator();
 		Patient patient;
-		while(iter.hasNext()){
+		while (iter.hasNext()) {
 			patient = iter.next();
-			if(patient.getPassword().equals(password) && patient.getTckNo().equals(tckno))	return patient;
+			if (patient.getPassword().equals(password) && patient.getTckNo().equals(tckno))
+				return patient;
 		}
 		return null;
 	}
 
-	public static String generateKey(int num){
+	public static String generateKey(int num) {
 		Random random = new Random();
 
 		String str = "abcdefghijklmnoprstuvyzABCDEFGIJKLMNOPRSTUVYZ0123456789xqXq";
 		String generated = "";
 
-		for(int i=0; i<num; i++)	generated += random.nextInt(str.length());
+		for (int i = 0; i < num; i++)
+			generated += random.nextInt(str.length());
 		return generated;
 	}
-
 
 }

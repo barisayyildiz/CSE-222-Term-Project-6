@@ -17,15 +17,14 @@ public class Hospital {
 
 	private ArrayList<Vaccine> vaccines;
 
-
-	public Hospital(HeadPhysician headPhysician, Ministry ministry, String city, String id){
+	public Hospital(HeadPhysician headPhysician, Ministry ministry, String city, String id) {
 		this.id = id;
 		this.ministry = ministry;
 		this.numOfBeds = 100;
 		this.numOfTests = 1000;
 		this.headPhysician = headPhysician;
 		this.city = city;
-		
+
 		// aşılar eklendi
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccines.add(new Vaccine(100, VaccineType.ASTRAZENECA));
@@ -36,38 +35,50 @@ public class Hospital {
 
 	}
 
-	public int numOfBeds(){
+	public int numOfBeds() {
 		return this.numOfBeds;
 	}
 
-	public int numOfTests(){
+	public int numOfTests() {
 		return this.numOfTests;
 	}
 
-	public void addTests(int num){
+	public void addTests(int num) {
 		this.numOfTests += num;
 	}
 
-	public ArrayList<Vaccine> getVaccines(){
+	public ArrayList<Vaccine> getVaccines() {
 		return this.vaccines;
 	}
-	
-	public void setNumOfTests(int numOfTests){
+
+	public void setNumOfTests(int numOfTests) {
 		this.numOfTests = numOfTests;
 	}
-	public String getID(){
+
+	public String getID() {
 		return id;
 	}
 
-	public void setHeadPhysician(HeadPhysician hPhysician){
+	public void setHeadPhysician(HeadPhysician hPhysician) {
 		this.headPhysician = hPhysician;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	@Override
-	public String toString(){
+	public String toString() {
 		String str = "", vaccineInfo = "";
 
-		for(Vaccine vaccine : this.getVaccines())
+		for (Vaccine vaccine : this.getVaccines())
 			vaccineInfo += vaccine.getType() + "-> " + vaccine.getNumber() + "\n";
 
 		str += "Head Physician : " + this.headPhysician.toString() + "\n";
@@ -79,7 +90,5 @@ public class Hospital {
 
 		return str;
 	}
-	
+
 }
-
-

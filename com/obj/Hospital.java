@@ -2,6 +2,7 @@ package com.obj;
 
 import com.users.*;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Hospital {
 
@@ -16,6 +17,7 @@ public class Hospital {
 	// aşı tipleri ve sayılarını içeren 2d bir array yazılacak
 
 	private ArrayList<Vaccine> vaccines;
+	private PriorityQueue<Patient> vaccinationOrder;
 
 	public Hospital(HeadPhysician headPhysician, Ministry ministry, String city, String id) {
 		this.id = id;
@@ -24,7 +26,8 @@ public class Hospital {
 		this.numOfTests = 1000;
 		this.headPhysician = headPhysician;
 		this.city = city;
-
+		this.vaccinationOrder = new PriorityQueue<Patient>();
+		
 		// aşılar eklendi
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccines.add(new Vaccine(100, VaccineType.ASTRAZENECA));
@@ -63,8 +66,8 @@ public class Hospital {
 		this.headPhysician = hPhysician;
 	}
 
-	public String getCity() {
-		return city;
+	public PriorityQueue<Patient> getVaccinationOrder(){
+		return this.vaccinationOrder;
 	}
 
 	/**

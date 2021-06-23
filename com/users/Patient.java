@@ -1,5 +1,6 @@
 package com.users;
 
+import com.obj.Hospital;
 import com.obj.Ministry;
 
 import java.util.Random;
@@ -12,14 +13,18 @@ public class Patient extends User implements Comparable<Patient> {
 	private boolean isSick;
 	private int score;
 	private boolean state; // 0 -> evde, 1 -> hastanede (covid + ise)
+	private String city;
+	private Hospital hospital;
 
-	public Patient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated){
+	public Patient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated, String city, Hospital hospital){
 		super(firstName,lastName,tckno,password,age,ministry);
 		score=getAge();
 		this.isCovid = isCovid;
 		this.isSick = isSick;
 		this.isSmoking = isSmoking;
 		this.isVaccinated = isVaccinated;
+		this.city = city;
+		this.hospital = hospital;
 	}
 
 	public void getInQueue(){
@@ -75,6 +80,9 @@ public class Patient extends User implements Comparable<Patient> {
 	}
 	public boolean get_state(){
 		return state;
+	}
+	public String getCity(){
+		return city;
 	}
 
 	public void setSmoking(boolean isSmoking ){

@@ -192,6 +192,13 @@ public class Ministry {
 		if (maxIndex != -1) {
 			this.healthEmployees.set(maxIndex, new HeadPhysician(doctor.getFirstName(), doctor.getLastName(),
 					doctor.getTckNo(), doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this));
+
+			Hospital newHospital = new Hospital(
+					new HeadPhysician(doctor.getFirstName(), doctor.getLastName(), doctor.getTckNo(),
+							doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this),
+					this, city, generateKey(5));
+			hospitals.put(newHospital.getID(), newHospital);
+			writeDBHospital(newHospital.getID(), city);
 			return true;
 		}
 		return false;
@@ -282,7 +289,7 @@ public class Ministry {
 	}
 
 	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid,
-			boolean isSick, boolean isSmoking, boolean isVaccinated, String city) {
+			boolean isSick, boolean isSmoking, boolean isVaccinated) {
 
 		for (Patient patient : patients) {
 			if (tckno.equals(patient.getTckNo()) == true) {
@@ -291,7 +298,7 @@ public class Ministry {
 		}
 
 		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking,
-				isVaccinated, city, null);
+				isVaccinated);
 		patients.add(newPatient);
 
 		return newPatient;

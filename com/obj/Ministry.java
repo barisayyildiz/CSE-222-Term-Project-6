@@ -61,7 +61,7 @@ public class Ministry {
 			e.printStackTrace();
 		}
 
-		DijkstrasAlgorithm.dijkstrasAlgorithm(cityDistances, 0, intArr, weights);
+
 
 
 		// Reading hospitals.txt
@@ -107,6 +107,8 @@ public class Ministry {
 						index = i;
 					}
 				}
+
+				System.out.println(arr[9] + " < -- > " + hospitalCityIndexes.get(index).getCity());
 
 				// first_name, last_name, tckno, password, age, ministry
 				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this,

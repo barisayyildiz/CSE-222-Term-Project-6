@@ -220,7 +220,7 @@ public class Main {
 				break;
 			case 0:
 				System.out.println("EXIT...");
-				// exit = false;
+				exit = false;
 				return;
 			// break;
 
@@ -230,7 +230,7 @@ public class Main {
 
 		}
 
-		obj.close();
+		// obj.close();
 	}
 
 	public static void headPhysicanPage(HeadPhysician headphysician) {
@@ -243,7 +243,7 @@ public class Main {
 			System.out.println("Welcome to HeadPhysican Page");
 			System.out.println("1 - Get patient information");
 			System.out.println("2 - Get hospital data");
-			System.out.println("3 - Input that patient is vaccinated");
+			System.out.println("3 - Vaccinate a patinet");
 			System.out.println("4 - Demand vaccines form Minister");
 			System.out.println("0 - Exit");
 
@@ -263,10 +263,8 @@ public class Main {
 				System.out.println(headphysician.getHospitalData());
 				break;
 			case 3:
-				System.out.print("Patient TCKNO : ");
-				tc = obj.next();
 				if (!headphysician.vaccinate())
-					System.out.println("Patient with that TCKNO not exists...");
+					System.out.println("No patient in the vaccination order...");
 				break;
 			case 4:
 				System.out.println(
@@ -297,7 +295,7 @@ public class Main {
 			}
 		}
 
-		obj.close();
+		// obj.close();
 
 	}
 
@@ -314,7 +312,7 @@ public class Main {
 			System.out.println("1 - Add patient");
 			System.out.println("2 - Remove patient");
 			System.out.println("3 - Get patient Data");
-			System.out.println("4 - Input that patient is vaccinated");
+			System.out.println("4 - Vaccinate a patinet");
 			System.out.println("0 - Exit");
 			choos = obj.nextInt();
 
@@ -368,10 +366,8 @@ public class Main {
 				}
 				break;
 			case 4:
-				System.out.print("Patient TCKNO : ");
-				tc = obj.next();
 				if (!doctor.vaccinate())
-					System.out.println("Patient with that TCKNO Not Exists...");
+					System.out.println("No patient in the vaccination order...");
 				break;
 			case 0:
 				System.out.println("EXIT...");
@@ -383,20 +379,25 @@ public class Main {
 			}
 		}
 
-		obj.close();
+		// obj.close();
 
 	}
 
 	public static void nursePage(Nurse nurse) {
-		System.out.println("Welcome to Nurse Page");
-		System.out.println("1 - Mark the test information");
-		System.out.println("2 - Input that patient is vaccinated");
-		System.out.println("0 - Exit");
+		
 		Scanner obj = new Scanner(System.in);
 		String tc = null;
-		int choos = obj.nextInt();
+		int choos;
 		boolean exit = true;
 		while (exit) {
+
+			System.out.println("Welcome to Nurse Page");
+			System.out.println("1 - Mark the test information");
+			System.out.println("2 - Vaccinate a patinet");
+			System.out.println("0 - Exit");
+
+			choos = obj.nextInt();
+
 			switch (choos) {
 			case 1:
 				System.out.print("Patient TCKNO : ");
@@ -404,9 +405,8 @@ public class Main {
 				nurse.setCovidInfo(tc);
 				break;
 			case 2:
-				System.out.print("Patient TCKNO : ");
-				tc = obj.next();
-				nurse.vaccinate();
+				if (!nurse.vaccinate())
+					System.out.println("No patient in the vaccination order...");
 				break;
 			case 0:
 				System.out.println("EXIT...");
@@ -416,7 +416,7 @@ public class Main {
 				System.out.println("ERROR");
 			}
 		}
-		obj.close();
+		// obj.close();
 	}
 
 	public static void patientPage(Patient patient) {
@@ -428,6 +428,7 @@ public class Main {
 			System.out.println("Welcome to Patient Page");
 			System.out.println("1 - Demand covid test");
 			System.out.println("2 - Get personal information");
+			System.out.println("3 - Get in vaccination queue");
 			System.out.println("0 - EXIT");
 
 			choos = obj.nextInt();
@@ -439,6 +440,9 @@ public class Main {
 			case 2:
 				System.out.println(patient.displayData());
 				break;
+			case 3:
+				patient.getInQueue();
+				break;
 			case 0:
 				System.out.println("EXIT...");
 				exit = false;
@@ -447,7 +451,7 @@ public class Main {
 				System.out.println("ERROR");
 			}
 		}
-		obj.close();
+		// obj.close();
 	}
 
 }

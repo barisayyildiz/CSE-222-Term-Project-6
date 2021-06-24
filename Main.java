@@ -211,7 +211,7 @@ public class Main {
 				System.out.println(minister.getMinistry().getHospitals());
 				System.out.print("Choose Hospital : ");
 				String num2 = obj.next();
-				System.out.print("Number of Vaccines : ");
+				System.out.print("Number of tests : ");
 				int num3 = obj.nextInt();
 				minister.supplyTest(num2, num3);
 				break;

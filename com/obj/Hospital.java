@@ -91,7 +91,7 @@ public class Hospital {
 		for (Vaccine vaccine : this.getVaccines())
 			vaccineInfo += vaccine.getType() + "-> " + vaccine.getNumber() + "\n";
 
-		str += "Head Physician : " + this.headPhysician.toString() + "\n";
+		str += "Head Physician : " + this.headPhysician.getFirstName() + " " + this.headPhysician.getLastName() + "\n";
 		str += "Number of beds : " + this.numOfBeds + "\n";
 		str += "Number of tests : " + this.numOfTests + "\n";
 		str += "City : " + this.city + "\n";

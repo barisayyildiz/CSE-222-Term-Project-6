@@ -29,7 +29,7 @@ public class Ministry {
 
 	// Constructors
 
-	public Ministry(Minister minister){
+	public Ministry(Minister minister) {
 		this.minister = minister;
 		this.minister.setMinistry(this);
 
@@ -45,18 +45,19 @@ public class Ministry {
 		// System.out.println(cityId.valueOf("KOCAELİ").ordinal());
 
 		// Reading distances.txt
-		try{
+		try {
 			Scanner scanner = new Scanner(new File("./database/distances.txt"));
-			scanner.nextLine();			
+			scanner.nextLine();
 
-			while(scanner.hasNextLine()){
+			while (scanner.hasNextLine()) {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
 
-				cityDistances.insert(new Edge( cityId.valueOf(arr[0]).ordinal(), cityId.valueOf(arr[1]).ordinal(), Double.valueOf(arr[2])));
+				cityDistances.insert(new Edge(cityId.valueOf(arr[0]).ordinal(), cityId.valueOf(arr[1]).ordinal(),
+						Double.valueOf(arr[2])));
 			}
 
-		}catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -71,11 +72,11 @@ public class Ministry {
 
 
 		// Reading hospitals.txt
-		try{
+		try {
 			Scanner scanner = new Scanner(new File("./database/hospitals.txt"));
 			scanner.nextLine(); // read first line
 
-			while(scanner.hasNextLine()){
+			while (scanner.hasNextLine()) {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
 
@@ -90,7 +91,7 @@ public class Ministry {
 
 		// hastane şehir id lerini kaydet
 		HashMap<Integer, Hospital> hospitalCityIndexes = new HashMap<Integer, Hospital>();
-		for(Hospital h : this.hospitals.values()){
+		for (Hospital h : this.hospitals.values()) {
 			int tempIndex = cityId.valueOf(h.getCity()).ordinal();
 			hospitalCityIndexes.put(tempIndex, h);
 		}
@@ -103,25 +104,27 @@ public class Ministry {
 			while (scanner.hasNextLine()) {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
-				
-				DijkstrasAlgorithm.dijkstrasAlgorithm(this.cityDistances, cityId.valueOf(arr[9]).ordinal(), intArr, weights);
+
+				DijkstrasAlgorithm.dijkstrasAlgorithm(this.cityDistances, cityId.valueOf(arr[9]).ordinal(), intArr,
+						weights);
 				double min = Double.MAX_VALUE;
 				int index = -1;
-				for(int i=0; i<weights.length; i++){
-					if(weights[i] < min && hospitalCityIndexes.get(i) != null){
+				for (int i = 0; i < weights.length; i++) {
+					if (weights[i] < min && hospitalCityIndexes.get(i) != null) {
 						min = weights[i];
 						index = i;
 					}
 				}
 
 				// first_name, last_name, tckno, password, age, ministry
-				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this, Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]), Boolean.valueOf(arr[8]), arr[9], hospitalCityIndexes.get(index)));
+				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this,
+						Boolean.valueOf(arr[5]), Boolean.valueOf(arr[6]), Boolean.valueOf(arr[7]),
+						Boolean.valueOf(arr[8]), arr[9], hospitalCityIndexes.get(index)));
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 
 		// Reading healthemployees.txt
 		try {
@@ -133,22 +136,24 @@ public class Ministry {
 				String arr[] = temp.split(",");
 
 				// tckno,first_name,last_name,password,age,job
-				switch(arr[5])
-				{
-					case "0":
-						// creates new head physician
-						HeadPhysician hPhysician = new HeadPhysician(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this);
-						this.hospitals.get(arr[6]).setHeadPhysician(hPhysician);
-						this.healthEmployees.add(hPhysician);
-						break;
-					case "1":
+				switch (arr[5]) {
+				case "0":
+					// creates new head physician
+					HeadPhysician hPhysician = new HeadPhysician(arr[1], arr[2], arr[0], arr[3],
+							Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this);
+					this.hospitals.get(arr[6]).setHeadPhysician(hPhysician);
+					this.healthEmployees.add(hPhysician);
+					break;
+				case "1":
 					// creates new doctor
-						this.healthEmployees.add(new Doctor(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this));
-						break;
-					case "2":
+					this.healthEmployees.add(new Doctor(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]),
+							this.hospitals.get(arr[6]), this));
+					break;
+				case "2":
 					// creates new nurse
-						this.healthEmployees.add(new Nurse(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this.hospitals.get(arr[6]), this));
-						break;
+					this.healthEmployees.add(new Nurse(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]),
+							this.hospitals.get(arr[6]), this));
+					break;
 				}
 			}
 			scanner.close();

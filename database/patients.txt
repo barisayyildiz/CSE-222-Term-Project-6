@@ -98,4 +98,4 @@ tckno,first_name,last_name,password,age,is_covid,is_sick,is_smoking,is_vaccinate
 62304957060,Lanie,Coveley,yeWQeJ,65,false,true,false,true,BALIKESİR
 10362437770,Jenn,Foggo,NTSc9KB92,14,false,false,true,true,KAYSERİ
 95453063444,Courtney,Buxton,noBI4rQ,59,false,true,false,true,TUNCELİ
-26507544357,Percival,Kings,vzsFE93R,79,true,false,false,tru,BATMAN
+26507544357,Percival,Kings,vzsFE93R,79,true,false,false,true,BATMAN

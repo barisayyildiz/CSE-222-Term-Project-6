@@ -24,75 +24,78 @@ public class Main {
 		Doctor doctor;
 		HeadPhysician headPhysician;
 
-		System.out.println("Choose user type : ");
-		System.out.println("1 - Health Employee");
-		System.out.println("2 - Patient");
-		System.out.println("0 - Exit");
+		
 
 		while (true) {
+
+			System.out.println("Choose user type : ");
+			System.out.println("1 - Health Employee");
+			System.out.println("2 - Patient");
+			System.out.println("0 - Exit");
+
 			type = scanner.next();
 			if (!type.equals("1") && !type.equals("2") && !type.equals("0")) {
 				System.out.println("Try again...");
 				continue;
 			}
-			break;
-		}
 
-		if (type.compareTo("1") == 0) {
-			scanner.nextLine();
-			while (true) {
-				System.out.print("\nTCKNO : ");
-				tckno = scanner.nextLine();
-				System.out.print("Password : ");
-				password = scanner.nextLine();
-
-				User user = ministry.loginHealthEmployee(tckno, password);
-
-				if (user instanceof Minister) {
-					minister = (Minister) user;
-					ministerPage(minister);
-					break;
-				} else if (user instanceof Nurse) {
-					nurse = (Nurse) user;
-					nursePage(nurse);
-					break;
-				} else if (user instanceof HeadPhysician) {
-					headPhysician = (HeadPhysician) user;
-					headPhysicanPage(headPhysician);
-					break;
-				} else if (user instanceof Doctor) {
-					doctor = (Doctor) user;
-					doctorPage(doctor);
-					break;
-				} else {
-					System.out.println("user not found...");
-					continue;
+			if (type.compareTo("1") == 0) {
+				scanner.nextLine();
+				while (true) {
+					System.out.print("\nTCKNO : ");
+					tckno = scanner.nextLine();
+					System.out.print("Password : ");
+					password = scanner.nextLine();
+	
+					User user = ministry.loginHealthEmployee(tckno, password);
+	
+					if (user instanceof Minister) {
+						minister = (Minister) user;
+						ministerPage(minister);
+						break;
+					} else if (user instanceof Nurse) {
+						nurse = (Nurse) user;
+						nursePage(nurse);
+						break;
+					} else if (user instanceof HeadPhysician) {
+						headPhysician = (HeadPhysician) user;
+						headPhysicanPage(headPhysician);
+						break;
+					} else if (user instanceof Doctor) {
+						doctor = (Doctor) user;
+						doctorPage(doctor);
+						break;
+					} else {
+						System.out.println("user not found...");
+						break;
+					}
+	
 				}
-
-			}
-		} else if (type.compareTo("2") == 0) {
-			scanner.nextLine();
-			while (true) {
-				System.out.print("\nTCKNO : ");
-				tckno = scanner.nextLine();
-				System.out.print("Password : ");
-				password = scanner.nextLine();
-
-				User user = ministry.loginPatient(tckno, password);
-				if (user instanceof Patient) {
-					Patient patient = (Patient) user;
-					System.out.println("You are a patient");
-					patientPage(patient);
-					break;
-				} else {
-					System.out.println("Patient not found");
-					continue;
+			} else if (type.compareTo("2") == 0) {
+				scanner.nextLine();
+				while (true) {
+					System.out.print("\nTCKNO : ");
+					tckno = scanner.nextLine();
+					System.out.print("Password : ");
+					password = scanner.nextLine();
+	
+					User user = ministry.loginPatient(tckno, password);
+					if (user instanceof Patient) {
+						Patient patient = (Patient) user;
+						System.out.println("You are a patient");
+						patientPage(patient);
+						break;
+					} else {
+						System.out.println("Patient not found");
+						break;
+					}
+	
 				}
-
+			} else if (type.compareTo("0") == 0) {
+				System.out.println("Exit..");
+				break;
 			}
-		} else if (type.compareTo("0") == 0) {
-			System.out.println("Exit..");
-			System.exit(0);
+
 		}
 
 		scanner.close();

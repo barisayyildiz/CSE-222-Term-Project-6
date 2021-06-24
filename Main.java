@@ -29,12 +29,13 @@ public class Main {
 		while (true) {
 
 			System.out.println("Choose user type : ");
-			System.out.println("1 - Health Employee");
-			System.out.println("2 - Patient");
+			System.out.println("1 - Login As Health Employee");
+			System.out.println("2 - Login As Patient");
+			System.out.println("3 - Sign Up As Patient");
 			System.out.println("0 - Exit");
 
 			type = scanner.next();
-			if (!type.equals("1") && !type.equals("2") && !type.equals("0")) {
+			if (!type.equals("1") && !type.equals("2") && !type.equals("3") && !type.equals("0")) {
 				System.out.println("Try again...");
 				continue;
 			}
@@ -91,6 +92,10 @@ public class Main {
 					}
 	
 				}
+			} else if(type.compareTo("3") == 0){
+
+				patinetSignUp(ministry);
+
 			} else if (type.compareTo("0") == 0) {
 				System.out.println("Exit..");
 				break;
@@ -312,6 +317,7 @@ public class Main {
 		int choos;
 		boolean exit = true;
 		Patient patient;
+		String city;
 		while (exit) {
 
 			System.out.println("Welcome to Doctor Page");
@@ -348,9 +354,11 @@ public class Main {
 				System.out.print("IsVaccinated : ");
 				temp = obj.next();
 				isVaccinated = Boolean.valueOf(temp);
+				System.out.print("City : ");
+				city = obj.next();
 
-				doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid,
-						isSick, isSmoking, isVaccinated, doctor.getHospital().getCity(), doctor.getHospital()));
+				doctor.getMinistry().addPatient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid, isSick, isSmoking, isVaccinated, city);
+
 				break;
 			case 2:
 				System.out.print("Patient TCKNO : ");
@@ -467,6 +475,43 @@ public class Main {
 			}
 		}
 		// obj.close();
+	}
+
+
+	public static void patinetSignUp(Ministry ministry){
+
+		Scanner obj = new Scanner(System.in);
+
+		String firstName, lastName, password;
+		int age;
+		System.out.print("FirstName : ");
+		firstName = obj.next();
+		System.out.print("LastName : ");
+		lastName = obj.next();
+		System.out.print("TCKNO : ");
+		String tc = obj.next();
+		System.out.print("Password : ");
+		password = obj.next();
+		System.out.print("Age : ");
+		age = obj.nextInt();
+		System.out.print("IsCovid : ");
+		String temp = obj.next();
+		boolean isCovid = Boolean.valueOf(temp);
+		System.out.print("IsSick : ");
+		temp = obj.next();
+		boolean isSick = Boolean.valueOf(temp);
+		System.out.print("IsSmoking : ");
+		temp = obj.next();
+		boolean isSmoking = Boolean.valueOf(temp);
+		System.out.print("IsVaccinated : ");
+		temp = obj.next();
+		boolean isVaccinated = Boolean.valueOf(temp);
+		System.out.print("City : ");
+		String city = obj.next();
+
+		ministry.addPatient(firstName, lastName, tc, password, age, ministry, isCovid, isSick, isSmoking, isVaccinated, city);
+
+
 	}
 
 }

@@ -147,6 +147,19 @@ public class Ministry {
 		mergeSortHealthEmployees(healthEmployees, 0, healthEmployees.size() - 1);
 	}
 
+	public void writeDBpatient(Patient newPatient) {
+		try {
+			FileWriter fw = new FileWriter("./database/patients.txt", true);
+			fw.write("\n" + newPatient.getTckNo() + "," + newPatient.getFirstName() + "," + newPatient.getLastName()
+					+ "," + newPatient.getPassword() + "," + newPatient.getAge() + "," + newPatient.get_isCovid() + ","
+					+ newPatient.get_isSick() + "," + newPatient.get_isSmoking() + "," + newPatient.get_isVaccinated()
+					+ "," + newPatient.getCity());
+			fw.close();
+		} catch (Exception e) {
+			System.out.println("Error : Can not write file...");
+		}
+	}
+
 	public void writeDBHealthEmployee(String tckno, String firstName, String lastName, String pass, int age,
 			int jobType, String hospitalId) {
 		try {
@@ -247,6 +260,31 @@ public class Ministry {
 	public void removeHospital(String id) {
 		this.hospitals.remove(id);
 		rebuildDBHospital();
+	}
+
+	public void addPatient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated, String city){
+
+		// hastane şehir id lerini kaydet
+		HashMap<Integer, Hospital> hospitalCityIndexes = new HashMap<Integer, Hospital>();
+		for (Hospital h : this.hospitals.values()) {
+			int tempIndex = cityId.valueOf(h.getCity()).ordinal();
+			hospitalCityIndexes.put(tempIndex, h);
+		}
+
+		DijkstrasAlgorithm.dijkstrasAlgorithm(this.cityDistances, cityId.valueOf(city).ordinal(), intArr, weights);
+		double min = Double.MAX_VALUE;
+		int index = -1;
+		for (int i = 0; i < weights.length; i++) {
+			if (weights[i] < min && hospitalCityIndexes.get(i) != null) {
+				min = weights[i];
+				index = i;
+			}
+		}
+
+		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking, isVaccinated, city, hospitalCityIndexes.get(index));
+		this.patients.add(newPatient);
+		this.writeDBpatient(newPatient);
+
 	}
 
 	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age,

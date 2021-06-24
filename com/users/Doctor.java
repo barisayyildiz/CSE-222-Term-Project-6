@@ -31,7 +31,7 @@ public class Doctor extends User implements HealthEmployee {
 
 	public void writeDBpatient(Patient newPatient) {
 		try {
-			FileWriter fw = new FileWriter("./database/patient.txt", true);
+			FileWriter fw = new FileWriter("./database/patients.txt", true);
 			fw.write("\n" + newPatient.getTckNo() + "," + newPatient.getFirstName() + "," + newPatient.getLastName()
 					+ "," + newPatient.getPassword() + "," + newPatient.getAge() + "," + newPatient.get_isCovid() + ","
 					+ newPatient.get_isSick() + "," + newPatient.get_isSmoking() + "," + newPatient.get_isVaccinated()

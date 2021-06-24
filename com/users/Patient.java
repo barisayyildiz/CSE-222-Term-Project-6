@@ -38,32 +38,31 @@ public class Patient extends User implements Comparable<Patient> {
 		ministry.vaccinationOrderAdd(this);
 	}
 
-	public void displayData(){
-		toString();
+	public String displayData(){
+		return this.toString();
 	}
 
 	@Override // get personal information
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
-		sb.append("****PERSONAL INFORMATION****");
-		sb.append("Name= "+getFirstName());
-		sb.append("Surname= "+getLastName());
-		sb.append("TCKNO= "+getTckNo());
-		sb.append("SOMOKE= "+get_isSmoking());
-		sb.append("VACCINATE= "+get_isVaccinated());
-		sb.append("SICK= "+get_isSick());
-		sb.append("COVID= "+get_isCovid());
+		sb.append("****PERSONAL INFORMATION****" + "\n");
+		sb.append("Name= "+getFirstName() + "\n");
+		sb.append("Surname= "+getLastName() + "\n");
+		sb.append("TCKNO= "+getTckNo() + "\n");
+		sb.append("SMOKE= "+get_isSmoking() + "\n");
+		sb.append("VACCINATE= "+get_isVaccinated() + "\n");
+		sb.append("SICK= "+get_isSick() + "\n");
+		sb.append("COVID= "+get_isCovid() + "\n");
 		return sb.toString();
 	}
 
 	public void demandCovidTest(){
-		System.out.println("covid test requested..\n");
 		Random r=new Random();
 		int a=r.nextInt(10);
 		if(a%2==0)
-			System.out.println("result= positive");
+			System.out.println("covid test result -> positive");
 		else
-			System.out.println("result= negative");
+			System.out.println("covid test result -> negative");
 	}
 
 	public boolean get_isSmoking(){

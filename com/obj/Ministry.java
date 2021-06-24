@@ -22,7 +22,7 @@ public class Ministry {
 	private ArrayList<User> healthEmployees;
 	private ArrayList<Vaccine> vaccines;
 	private PriorityQueue<Patient> vaccinationOrder;
-	private AVLTree<Patient> patients;
+	private LinkedList<Patient> patients;
 	private MatrixGraph cityDistances;
 	private double[] weights;
 	private int[] intArr;
@@ -37,7 +37,7 @@ public class Ministry {
 		this.healthEmployees = new ArrayList<User>();
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccinationOrder = new PriorityQueue<Patient>();
-		this.patients = new AVLTree<Patient>();
+		this.patients = new LinkedList<Patient>();
 		this.cityDistances = new MatrixGraph(81, false);
 		this.weights = new double[81];
 		this.intArr = new int[81];
@@ -62,13 +62,6 @@ public class Ministry {
 		}
 
 		DijkstrasAlgorithm.dijkstrasAlgorithm(cityDistances, 0, intArr, weights);
-
-		for(double d : weights){
-			System.out.println(d);
-		}
-
-		System.out.println(weights.length);
-
 
 
 		// Reading hospitals.txt
@@ -105,8 +98,7 @@ public class Ministry {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
 
-				DijkstrasAlgorithm.dijkstrasAlgorithm(this.cityDistances, cityId.valueOf(arr[9]).ordinal(), intArr,
-						weights);
+				DijkstrasAlgorithm.dijkstrasAlgorithm(this.cityDistances, cityId.valueOf(arr[9]).ordinal(), intArr, weights);
 				double min = Double.MAX_VALUE;
 				int index = -1;
 				for (int i = 0; i < weights.length; i++) {
@@ -176,15 +168,25 @@ public class Ministry {
 		}
 	}
 
-	public void writeDBHospital(String hospitalId, String city) {
+	public void writeDBHospital(Hospital hospital) {
 		try {
 			FileWriter fw = new FileWriter("./database/hospitals.txt", true);
-			fw.write("\n" + hospitalId + "," + city);
+			fw.write("\n" + hospital.getID() + "," + hospital.getCity());
 			fw.close();
 		} catch (Exception e) {
 			System.out.println("Error : Can not write file...");
 		}
 	}
+
+	// public void writeDBHospital(String hospitalId, String city) {
+	// 	try {
+	// 		FileWriter fw = new FileWriter("./database/hospitals.txt", true);
+	// 		fw.write("\n" + hospitalId + "," + city);
+	// 		fw.close();
+	// 	} catch (Exception e) {
+	// 		System.out.println("Error : Can not write file...");
+	// 	}
+	// }
 
 	public void rebuildDBHealthEmployee() {
 		int i = 0;
@@ -250,12 +252,12 @@ public class Ministry {
 		if (maxIndex != -1) {
 			this.healthEmployees.set(maxIndex, new HeadPhysician(doctor.getFirstName(), doctor.getLastName(),
 					doctor.getTckNo(), doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this));
-			Hospital newHospital = new Hospital(
-					new HeadPhysician(doctor.getFirstName(), doctor.getLastName(), doctor.getTckNo(),
-							doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this),
-					this, city, generateKey(5));
+			Hospital newHospital = new Hospital( (HeadPhysician)this.healthEmployees.get(maxIndex), this, city, generateKey(8));
+			System.out.println(generateKey(8));
+			System.out.println(newHospital.getID());
 			hospitals.put(newHospital.getID(), newHospital);
-			writeDBHospital(newHospital.getID(), city);
+			// writeDBHospital(newHospital.getID(), city);
+			writeDBHospital(newHospital);
 			return true;
 		}
 		return false;
@@ -337,14 +339,14 @@ public class Ministry {
 		return arr;
 	}
 
-	public void addVaccine(int vacNumber, VaccineType vacType) {
+	public void supplyVaccine(String hospitalId, VaccineType type, int num) {
+		ArrayList<Vaccine> vaccines = this.getHospitals().get(hospitalId).getVaccines();
 		for (int i = 0; i < vaccines.size(); i++) {
-			if (vaccines.get(i).getType() == vacType) {
-				return;
+			if (vaccines.get(i).getType() == type) {
+				vaccines.get(i).setNumber(vaccines.get(i).getNumber() + num);
+				break;
 			}
 		}
-
-		vaccines.add(new Vaccine(vacNumber, vacType));
 	}
 
 	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid,
@@ -396,7 +398,7 @@ public class Ministry {
 		return this.vaccinationOrder;
 	}
 
-	public AVLTree<Patient> getPatients() {
+	public LinkedList<Patient> getPatients() {
 		return this.patients;
 	}
 
@@ -515,6 +517,7 @@ public class Ministry {
 	public User loginPatient(String tckno, String password) {
 		Iterator<Patient> iter = this.patients.iterator();
 		Patient patient;
+		System.out.println("Size : " + this.patients.size());
 		while (iter.hasNext()) {
 			patient = iter.next();
 			if (patient.getPassword().equals(password) && patient.getTckNo().equals(tckno))

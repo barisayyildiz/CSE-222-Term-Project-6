@@ -417,20 +417,24 @@ public class Main {
 	}
 
 	public static void patientPage(Patient patient) {
-		System.out.println("Welcome to Patient Page");
-		System.out.println("1 - Demand covid test");
-		System.out.println("2 - Get personal information");
-		System.out.println("0 - EXIT");
+		
 		Scanner obj = new Scanner(System.in);
-		int choos = obj.nextInt();
+		int choos;
 		boolean exit = true;
 		while (exit) {
+			System.out.println("Welcome to Patient Page");
+			System.out.println("1 - Demand covid test");
+			System.out.println("2 - Get personal information");
+			System.out.println("0 - EXIT");
+
+			choos = obj.nextInt();
+
 			switch (choos) {
 			case 1:
 				patient.demandCovidTest();
 				break;
 			case 2:
-				patient.displayData();
+				System.out.println(patient.displayData());
 				break;
 			case 0:
 				System.out.println("EXIT...");

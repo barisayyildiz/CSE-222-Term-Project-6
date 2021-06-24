@@ -32,13 +32,7 @@ public class Minister extends User {
 	}
 
 	public void supplyVaccine(String hospitalId, VaccineType type, int num) {
-		ArrayList<Vaccine> vaccines = this.ministry.getHospitals().get(hospitalId).getVaccines();
-		for (int i = 0; i < vaccines.size(); i++) {
-			if (vaccines.get(i).getType() == type) {
-				vaccines.get(i).setNumber(vaccines.get(i).getNumber() + num);
-				break;
-			}
-		}
+		this.ministry.supplyVaccine(hospitalId, type, num);
 	}
 
 	public void supplyTest(String hospitalId, int num) {

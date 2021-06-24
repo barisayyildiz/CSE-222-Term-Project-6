@@ -21,7 +21,6 @@ public class Ministry {
 	private HashMap<String, Hospital> hospitals;
 	private ArrayList<User> healthEmployees;
 	private ArrayList<Vaccine> vaccines;
-	private PriorityQueue<Patient> vaccinationOrder;
 	private LinkedList<Patient> patients;
 	private MatrixGraph cityDistances;
 	private double[] weights;
@@ -36,13 +35,10 @@ public class Ministry {
 		this.hospitals = new HashMap<String, Hospital>();
 		this.healthEmployees = new ArrayList<User>();
 		this.vaccines = new ArrayList<Vaccine>();
-		this.vaccinationOrder = new PriorityQueue<Patient>();
 		this.patients = new LinkedList<Patient>();
 		this.cityDistances = new MatrixGraph(81, false);
 		this.weights = new double[81];
 		this.intArr = new int[81];
-
-		// System.out.println(cityId.valueOf("KOCAELİ").ordinal());
 
 		// Reading distances.txt
 		try {
@@ -61,9 +57,6 @@ public class Ministry {
 			e.printStackTrace();
 		}
 
-
-
-
 		// Reading hospitals.txt
 		try {
 			Scanner scanner = new Scanner(new File("./database/hospitals.txt"));
@@ -73,8 +66,6 @@ public class Ministry {
 				String temp = scanner.nextLine();
 				String arr[] = temp.split(",");
 
-				// String key = generateKey(8);
-				// System.out.println("key -- > " + arr[0]);
 				this.hospitals.put(arr[0], new Hospital(null, this, arr[1], arr[0]));
 			}
 			scanner.close();
@@ -107,8 +98,6 @@ public class Ministry {
 						index = i;
 					}
 				}
-
-				System.out.println(arr[9] + " < -- > " + hospitalCityIndexes.get(index).getCity());
 
 				// first_name, last_name, tckno, password, age, ministry
 				this.patients.add(new Patient(arr[1], arr[2], arr[0], arr[3], Integer.parseInt(arr[4]), this,
@@ -179,16 +168,6 @@ public class Ministry {
 			System.out.println("Error : Can not write file...");
 		}
 	}
-
-	// public void writeDBHospital(String hospitalId, String city) {
-	// 	try {
-	// 		FileWriter fw = new FileWriter("./database/hospitals.txt", true);
-	// 		fw.write("\n" + hospitalId + "," + city);
-	// 		fw.close();
-	// 	} catch (Exception e) {
-	// 		System.out.println("Error : Can not write file...");
-	// 	}
-	// }
 
 	public void rebuildDBHealthEmployee() {
 		int i = 0;
@@ -377,7 +356,7 @@ public class Ministry {
 	}
 
 	public void vaccinationOrderAdd(Patient patient) {
-		vaccinationOrder.add(patient);
+		patient.getHospital().getVaccinationOrder().add(patient);
 	}
 
 	public Minister getMinister() {
@@ -394,10 +373,6 @@ public class Ministry {
 
 	public ArrayList<Vaccine> getVaccines() {
 		return this.vaccines;
-	}
-
-	public PriorityQueue<Patient> getVaccinationOrder() {
-		return this.vaccinationOrder;
 	}
 
 	public LinkedList<Patient> getPatients() {
@@ -519,7 +494,6 @@ public class Ministry {
 	public User loginPatient(String tckno, String password) {
 		Iterator<Patient> iter = this.patients.iterator();
 		Patient patient;
-		System.out.println("Size : " + this.patients.size());
 		while (iter.hasNext()) {
 			patient = iter.next();
 			if (patient.getPassword().equals(password) && patient.getTckNo().equals(tckno))

@@ -238,6 +238,7 @@ public class Main {
 		Scanner obj = new Scanner(System.in);
 		int choos;
 		boolean exit = true;
+		Patient patient;
 		while (exit) {
 
 			System.out.println("Welcome to HeadPhysican Page");
@@ -263,8 +264,12 @@ public class Main {
 				System.out.println(headphysician.getHospitalData());
 				break;
 			case 3:
-				if (!headphysician.vaccinate())
+				patient = headphysician.vaccinate();
+				if(patient != null){
+					System.out.println("Patient with the TCKNO : " + patient.getTckNo() + " has vaccinated");
+				}else{
 					System.out.println("No patient in the vaccination order...");
+				}					
 				break;
 			case 4:
 				System.out.println(
@@ -306,6 +311,7 @@ public class Main {
 		Scanner obj = new Scanner(System.in);
 		int choos;
 		boolean exit = true;
+		Patient patient;
 		while (exit) {
 
 			System.out.println("Welcome to Doctor Page");
@@ -366,8 +372,12 @@ public class Main {
 				}
 				break;
 			case 4:
-				if (!doctor.vaccinate())
+				patient = doctor.vaccinate();
+				if(patient != null){
+					System.out.println("Patient with the TCKNO : " + patient.getTckNo() + " has vaccinated");
+				}else{
 					System.out.println("No patient in the vaccination order...");
+				}	
 				break;
 			case 0:
 				System.out.println("EXIT...");
@@ -389,6 +399,7 @@ public class Main {
 		String tc = null;
 		int choos;
 		boolean exit = true;
+		Patient patient;
 		while (exit) {
 
 			System.out.println("Welcome to Nurse Page");
@@ -405,8 +416,12 @@ public class Main {
 				nurse.setCovidInfo(tc);
 				break;
 			case 2:
-				if (!nurse.vaccinate())
+				patient = nurse.vaccinate();
+				if(patient != null){
+					System.out.println("Patient with the TCKNO : " + patient.getTckNo() + " has vaccinated");
+				}else{
 					System.out.println("No patient in the vaccination order...");
+				}	
 				break;
 			case 0:
 				System.out.println("EXIT...");

@@ -100,6 +100,10 @@ public class Patient extends User implements Comparable<Patient> {
 		this.state=state;
 	}
 
+	public Hospital getHospital(){
+		return this.hospital;
+	}
+
 	@Override
 	public int compareTo(Patient o) {
 		if(score>o.score)

@@ -10,13 +10,12 @@ public class HeadPhysician extends Doctor {
 	}
 
 	@Override
-	public boolean vaccinate() {
+	public Patient vaccinate() {
 		if (this.hospital.getVaccinationOrder().peek() != null) {
 			this.hospital.getVaccinationOrder().peek().setIsVaccinated(true);
-			this.hospital.getVaccinationOrder().poll();
-			return true;
+			return this.hospital.getVaccinationOrder().poll();
 		}
-		return false;
+		return null;
 	}
 
 	int supplyVaccine(VaccineType type, int num) {

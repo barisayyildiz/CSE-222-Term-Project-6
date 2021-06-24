@@ -20,13 +20,12 @@ public class Doctor extends User implements HealthEmployee {
 	}
 
 	@Override
-	public boolean vaccinate() {
+	public Patient vaccinate() {
 		if (this.hospital.getVaccinationOrder().peek() != null) {
 			this.hospital.getVaccinationOrder().peek().setIsVaccinated(true);
-			this.hospital.getVaccinationOrder().poll();
-			return true;
+			return this.hospital.getVaccinationOrder().poll();
 		}
-		return false;
+		return null;
 	}
 
 	public void writeDBpatient(Patient newPatient) {

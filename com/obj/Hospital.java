@@ -58,6 +58,10 @@ public class Hospital {
 		this.numOfTests = numOfTests;
 	}
 
+	public int getNumOfTests(){
+		return this.numOfTests;
+	}
+
 	public String getID() {
 		return id;
 	}

@@ -1,6 +1,7 @@
 package com.users;
 
 import com.obj.*;
+import java.util.ArrayList;
 
 public class HeadPhysician extends Doctor {
 
@@ -13,6 +14,14 @@ public class HeadPhysician extends Doctor {
 	public Patient vaccinate() {
 		if (this.hospital.getVaccinationOrder().peek() != null) {
 			this.hospital.getVaccinationOrder().peek().setIsVaccinated(true);
+			// adjust vaccine number
+			ArrayList<Vaccine> vaccines = this.hospital.getVaccines();
+			for(int i=0; i<vaccines.size(); i++){
+				if(vaccines.get(i).getNumber() != 0){
+					vaccines.get(i).setNumber(vaccines.get(i).getNumber() - 1);
+					break;
+				}
+			}
 			return this.hospital.getVaccinationOrder().poll();
 		}
 		return null;

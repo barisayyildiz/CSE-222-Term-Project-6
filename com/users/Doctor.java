@@ -20,8 +20,8 @@ public class Doctor extends User implements HealthEmployee {
 	}
 
 	@Override
-	public boolean vaccinate(){
-		if(this.hospital.getVaccinationOrder().peek() != null){
+	public boolean vaccinate() {
+		if (this.hospital.getVaccinationOrder().peek() != null) {
 			this.hospital.getVaccinationOrder().peek().setIsVaccinated(true);
 			this.hospital.getVaccinationOrder().poll();
 			return true;
@@ -79,4 +79,11 @@ public class Doctor extends User implements HealthEmployee {
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		String str = "";
+		str += this.getTckNo() + "," + this.getFirstName() + "," + this.getLastName() + "," + this.getPassword() + ","
+				+ this.getAge() + "," + "1," + this.getHospital().getID();
+		return str;
+	}
 }

@@ -10,8 +10,8 @@ public class HeadPhysician extends Doctor {
 	}
 
 	@Override
-	public boolean vaccinate(){
-		if(this.hospital.getVaccinationOrder().peek() != null){
+	public boolean vaccinate() {
+		if (this.hospital.getVaccinationOrder().peek() != null) {
 			this.hospital.getVaccinationOrder().peek().setIsVaccinated(true);
 			this.hospital.getVaccinationOrder().poll();
 			return true;
@@ -19,36 +19,36 @@ public class HeadPhysician extends Doctor {
 		return false;
 	}
 
-	int supplyVaccine(VaccineType type, int num){
+	int supplyVaccine(VaccineType type, int num) {
 
-			for(Vaccine vaccine : hospital.getVaccines()){
-					if(vaccine.getType().equals(type)){
-							vaccine.setNumber(vaccine.getNumber() + num);
-							return num;
-					}
+		for (Vaccine vaccine : hospital.getVaccines()) {
+			if (vaccine.getType().equals(type)) {
+				vaccine.setNumber(vaccine.getNumber() + num);
+				return num;
 			}
+		}
 
-			hospital.getVaccines().add(new Vaccine(num,type));
+		hospital.getVaccines().add(new Vaccine(num, type));
 
-			return num;
+		return num;
 	}
 
-	void supplyTest(){
+	void supplyTest() {
 
-			hospital.setNumOfTests(hospital.numOfTests() + 100);
+		hospital.setNumOfTests(hospital.numOfTests() + 100);
 	}
 
-	public void demandVaccine(VaccineType type, int num){
+	public void demandVaccine(VaccineType type, int num) {
 
 		String str = String.valueOf(num) + " of " + String.valueOf(type) + " needed\n";
 		this.ministry.getMinister().addNotification(str);
 	}
 
-	public void sendNotification(String str){
+	public void sendNotification(String str) {
 		this.ministry.getMinister().addNotification(str);
 	}
 
-	public String getHospitalData(){
+	public String getHospitalData() {
 
 		return this.hospital.toString();
 
@@ -61,12 +61,18 @@ public class HeadPhysician extends Doctor {
 		// + hospital.numOfTests() + "\n" + "Vaccines:\n" + vaccineInfo;
 	}
 
+	/*
+	 * @Override public String toString() { String str = "";
+	 * 
+	 * str += this.getFirstName() + " " + this.getLastName();
+	 * 
+	 * return str; }
+	 */
 	@Override
 	public String toString() {
 		String str = "";
-
-		str += this.getFirstName() + " " + this.getLastName();
-
+		str += this.getTckNo() + "," + this.getFirstName() + "," + this.getLastName() + "," + this.getPassword() + ","
+				+ this.getAge() + "," + "0," + this.getHospital().getID();
 		return str;
 	}
 }

@@ -181,36 +181,95 @@ public class Ministry {
 		}
 	}
 
+	public void rebuildDBHealthEmployee() {
+		int i = 0;
+		try {
+			FileWriter fw = new FileWriter("./database/healthemployees.txt");
+			fw.write("tckno,first_name,last_name,password,age,job,hospital_id");
+			while (i < healthEmployees.size()) {
+				fw.write("\n" + healthEmployees.get(i).toString());
+				i++;
+			}
+			fw.close();
+		} catch (Exception e) {
+			System.out.println("Error : Can not write file...");
+
+		}
+	}
+
+	public void rebuildDBHospital() {
+		try {
+			FileWriter fw = new FileWriter("./database/hospitals.txt");
+			fw.write("id,city");
+			Iterator iter = hospitals.keySet().iterator();
+			while (iter.hasNext()) {
+				Hospital temp = hospitals.get(iter.next());
+				fw.write("\n" + temp.getID() + "," + temp.getCity());
+			}
+			fw.close();
+		} catch (Exception e) {
+			System.out.println("Error : Can not write file...");
+		}
+
+	}
+
+	public void rebuildDBPatient() {
+		try {
+			FileWriter fw = new FileWriter("./database/patients.txt");
+			fw.write("tckno,first_name,last_name,password,age,is_covid,is_sick,is_smoking,is_vaccinated,city");
+			Iterator<Patient> iter = patients.iterator();
+			while (iter.hasNext()) {
+				Patient patienTemp = iter.next();
+				fw.write("\n" + patienTemp.getTckNo() + "," + patienTemp.getFirstName() + "," + patienTemp.getLastName()
+						+ "," + patienTemp.getPassword() + "," + patienTemp.getAge() + "," + patienTemp.get_isCovid()
+						+ "," + patienTemp.get_isSick() + "," + patienTemp.get_isSmoking() + ","
+						+ patienTemp.get_isVaccinated() + "," + patienTemp.getCity());
+			}
+			fw.close();
+		} catch (Exception e) {
+			System.out.println("Error : Can not write file...");
+		}
+	}
+
 	// Functions
-	public boolean addHospital(String city){
+	public boolean addHospital(String city) {
 		Doctor doctor = null;
 		int maxIndex = -1;
-		for(int i=0; i<this.healthEmployees.size(); i++){
-			if(this.healthEmployees.get(i) instanceof Doctor){
+		for (int i = 0; i < this.healthEmployees.size(); i++) {
+			if (this.healthEmployees.get(i) instanceof Doctor) {
 				maxIndex = i;
-				doctor = (Doctor)this.healthEmployees.get(i);
+				doctor = (Doctor) this.healthEmployees.get(i);
 				break;
 			}
 		}
-		if(maxIndex != -1){
-			this.healthEmployees.set(maxIndex, new HeadPhysician(doctor.getFirstName(), doctor.getLastName(), doctor.getTckNo(), doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this));
+		if (maxIndex != -1) {
+			this.healthEmployees.set(maxIndex, new HeadPhysician(doctor.getFirstName(), doctor.getLastName(),
+					doctor.getTckNo(), doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this));
+			Hospital newHospital = new Hospital(
+					new HeadPhysician(doctor.getFirstName(), doctor.getLastName(), doctor.getTckNo(),
+							doctor.getPassword(), doctor.getAge(), doctor.getHospital(), this),
+					this, city, generateKey(5));
+			hospitals.put(newHospital.getID(), newHospital);
+			writeDBHospital(newHospital.getID(), city);
 			return true;
 		}
 		return false;
 	}
 
-	public void removeHospital(String id){
+	public void removeHospital(String id) {
 		this.hospitals.remove(id);
+		rebuildDBHospital();
 	}
 
-	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age, String hospitalId, int type){
-		for(int i = 0; i < healthEmployees.size(); i++){
+	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age,
+			String hospitalId, int type) {
+		for (int i = 0; i < healthEmployees.size(); i++) {
 			User currentEmployee = healthEmployees.get(i);
 			String existingTckno = "";
 
 			existingTckno = currentEmployee.getTckNo();
 
-			if(tckno.equals(existingTckno) == true){
+			if (tckno.equals(existingTckno) == true) {
 				return false;
 			}
 		}
@@ -231,38 +290,39 @@ public class Ministry {
 		return true;
 	}
 
-public boolean removeHealthEmployee(String tckno){
-	for(int i = 0; i < healthEmployees.size(); i++){
-		User currentEmployee = healthEmployees.get(i);
-		String existingTckno = currentEmployee.getTckNo();
+	public boolean removeHealthEmployee(String tckno) {
+		for (int i = 0; i < healthEmployees.size(); i++) {
+			User currentEmployee = healthEmployees.get(i);
+			String existingTckno = currentEmployee.getTckNo();
 
-		if(tckno.equals(existingTckno) == true){
-			healthEmployees.remove(i);
-			return true;
+			if (tckno.equals(existingTckno) == true) {
+				healthEmployees.remove(i);
+				rebuildDBHealthEmployee();
+				return true;
+			}
 		}
+		return false;
 	}
-	return false;
-}
 
-public void getDailyStatistics(){
-	BinaryTree.Node<Patient> node = patients.getNode();
+	public void getDailyStatistics() {
+		BinaryTree.Node<Patient> node = patients.getNode();
 
-	int[] arr = new int[2];
+		int[] arr = new int[2];
 
-	if(stringDailyStatistics(node, arr) != null) {
+		if (stringDailyStatistics(node, arr) != null) {
 			System.out.println("Covid Patients:      " + arr[0]);
 			System.out.println("Vaccinated Patients: " + arr[1]);
+		}
 	}
-}
 
-private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
-	if(node == null)
+	private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr) {
+		if (node == null)
 			return null;
 
-	if(node.getData().get_isCovid()) {
+		if (node.getData().get_isCovid()) {
 			arr[0]++;
-	}
-	if(node.getData().get_isVaccinated()) {
+		}
+		if (node.getData().get_isVaccinated()) {
 			arr[1]++;
 		}
 
@@ -282,23 +342,25 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 		vaccines.add(new Vaccine(vacNumber, vacType));
 	}
 
-	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated, String city){
-		
-		for(Patient patient : patients){
-			if(tckno.equals(patient.getTckNo()) == true){
+	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid,
+			boolean isSick, boolean isSmoking, boolean isVaccinated, String city) {
+
+		for (Patient patient : patients) {
+			if (tckno.equals(patient.getTckNo()) == true) {
 				return null;
 			}
 		}
 
-		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking, isVaccinated, city, null);
+		Patient newPatient = new Patient(firstName, lastName, tckno, password, age, this, isCovid, isSick, isSmoking,
+				isVaccinated, city, null);
 		patients.add(newPatient);
 
 		return newPatient;
 	}
 
-	public void removePatient(String tckno){
-		for(Patient patient : patients){
-			if(patient.getTckNo().equals(tckno) == true){
+	public void removePatient(String tckno) {
+		for (Patient patient : patients) {
+			if (patient.getTckNo().equals(tckno) == true) {
 				patients.remove(patient);
 				return;
 			}
@@ -344,20 +406,10 @@ private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr){
 			User currentEmployee = list.get(i);
 			int finalIndex = i;
 
-			int ageCurrent = 0;
-			if (currentEmployee instanceof Doctor) {
-				ageCurrent = ((Doctor) currentEmployee).getAge();
-			} else if (currentEmployee instanceof Nurse) {
-				ageCurrent = ((Nurse) currentEmployee).getAge();
-			}
+			int ageCurrent = currentEmployee.getAge();
 
 			for (int j = i - 1; j >= 0; j--) {
-				int ageOther = 0;
-				if (currentEmployee instanceof Doctor) {
-					ageOther = ((Doctor) list.get(j)).getAge();
-				} else if (currentEmployee instanceof Nurse) {
-					ageOther = ((Nurse) list.get(j)).getAge();
-				}
+				int ageOther = list.get(j).getAge();
 
 				if (ageOther < ageCurrent) {
 					list.set(j + 1, list.get(j));

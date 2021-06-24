@@ -27,7 +27,7 @@ public class Hospital {
 		this.headPhysician = headPhysician;
 		this.city = city;
 		this.vaccinationOrder = new PriorityQueue<Patient>();
-		
+
 		// aşılar eklendi
 		this.vaccines = new ArrayList<Vaccine>();
 		this.vaccines.add(new Vaccine(100, VaccineType.ASTRAZENECA));
@@ -66,7 +66,7 @@ public class Hospital {
 		this.headPhysician = hPhysician;
 	}
 
-	public PriorityQueue<Patient> getVaccinationOrder(){
+	public PriorityQueue<Patient> getVaccinationOrder() {
 		return this.vaccinationOrder;
 	}
 
@@ -75,6 +75,13 @@ public class Hospital {
 	 */
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
 	}
 
 	@Override

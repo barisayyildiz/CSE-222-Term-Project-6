@@ -10,12 +10,11 @@ tckno,first_name,last_name,password,age,job,hospital_id
 71289531351,Shannah,Hargitt,5LATIp9,41,0,rakvhqlb
 21777649019,Earl,Marriner,HJ8Z2WiTKG3,6,2,kwrimeui
 16480539567,Ardys,Voller,Q7jbPGZhrJa,44,1,kwrimeui
-73340661712,Aida,Caberas,NisxwxH,49,2rakvhqlb
 79979666358,Averell,Davidowich,ROEwWZsRV,41,2,rakvhqlb
 75777790591,Jim,Havik,jxry9V50E,46,2,rakvhqlb
 56006072151,Paulie,Brattan,bTEyfbBMDd,88,1,rakvhqlb
 94454856493,Benyamin,Aubri,ZfGB1MNu30,51,0,qxofnors
-61329378865,Rip,Lyptratt,mFD3vyN,38,0,cnyqrxla,qxofnors
+61329378865,Rip,Lyptratt,mFD3vyN,38,0,cnyqrxla
 99676074669,Evelyn,Finder,caX871Ew6u,72,2,qxofnors
 89305826347,Darb,Bill,lTGCY0CRIk,12,2,qxofnors
 18265407284,Dasha,Cropper,iAklC73,19,1,qxofnors

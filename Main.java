@@ -262,7 +262,7 @@ public class Main {
 			case 3:
 				System.out.print("Patient TCKNO : ");
 				tc = obj.next();
-				if (!headphysician.vaccinate(tc))
+				if (!headphysician.vaccinate())
 					System.out.println("Patient with that TCKNO not exists...");
 				break;
 			case 4:
@@ -343,7 +343,7 @@ public class Main {
 				isVaccinated = Boolean.valueOf(temp);
 
 				doctor.addPatient(new Patient(firstName, lastName, tc, password, age, doctor.getMinistry(), isCovid,
-						isSick, isSmoking, isVaccinated));
+						isSick, isSmoking, isVaccinated, doctor.getHospital().getCity(), doctor.getHospital()));
 				break;
 			case 2:
 				System.out.print("Patient TCKNO : ");
@@ -367,7 +367,7 @@ public class Main {
 			case 4:
 				System.out.print("Patient TCKNO : ");
 				tc = obj.next();
-				if (!doctor.vaccinate(tc))
+				if (!doctor.vaccinate())
 					System.out.println("Patient with that TCKNO Not Exists...");
 				break;
 			case 0:

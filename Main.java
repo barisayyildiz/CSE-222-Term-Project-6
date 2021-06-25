@@ -288,8 +288,8 @@ public class Main {
 			System.out.println("Welcome to HeadPhysican Page");
 			System.out.println("1 - Get patient information");
 			System.out.println("2 - Get hospital data");
-			System.out.println("3 - Vaccinate a patinet");
-			System.out.println("4 - Demand vaccines form Minister");
+			System.out.println("3 - Vaccinate a patient");
+			System.out.println("4 - Demand vaccines from Minister");
 			System.out.println("0 - Exit");
 
 			choos = obj.nextInt();
@@ -476,6 +476,7 @@ public class Main {
 				System.out.print("Patient TCKNO : ");
 				tc = obj.next();
 				nurse.setCovidInfo(tc);
+				System.out.println("Patient with that TCKNO has tested");
 				break;
 			case 2:
 				patient = nurse.vaccinate();

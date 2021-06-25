@@ -82,7 +82,7 @@ public class HeadPhysician extends Doctor {
 	 */
 	public void demandVaccine(VaccineType type, int num) {
 
-		String str = String.valueOf(num) + " of " + String.valueOf(type) + " needed\n";
+		String str = String.valueOf(num) + " of " + String.valueOf(type) + " needed" + ", to the hospital : " + this.hospital.getID() + "\n";
 		this.ministry.getMinister().addNotification(str);
 	}
 

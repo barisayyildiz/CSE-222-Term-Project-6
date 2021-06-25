@@ -57,8 +57,8 @@ public class Minister extends User {
 	 * deletes the desired hospital
 	 * @param hospitalId the id of the hospital to be deleted
 	 */
-	public void removeHospital(String hospitalId) {
-		this.ministry.removeHospital(hospitalId);
+	public boolean removeHospital(String hospitalId) {
+		return this.ministry.removeHospital(hospitalId);
 	}
 	/**
 	 * supplies the vaccine

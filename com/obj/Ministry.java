@@ -293,9 +293,13 @@ public class Ministry {
 	 * Removes hospital
 	 * @param id the id of the hospital to be deleted.
 	 */
-	public void removeHospital(String id) {
-		this.hospitals.remove(id);
-		rebuildDBHospital();
+	public boolean removeHospital(String id) {
+		Hospital h = this.hospitals.remove(id);
+		if(h != null){
+			rebuildDBHospital();
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * Adds patient

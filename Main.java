@@ -214,7 +214,12 @@ public class Main {
 				System.out.println(minister.getMinistry().getHospitals());
 				System.out.print("Hospital ID : ");
 				String num = obj.next();
-				minister.removeHospital(num);
+				if(minister.removeHospital(num)){
+					System.out.println("Hospital has removed...");
+				}else{
+					System.out.println("No such hospital exists...");
+				}
+				
 				break;
 			case 8:
 				System.out.print("FirstName : ");

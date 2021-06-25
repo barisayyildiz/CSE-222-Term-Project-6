@@ -27,7 +27,11 @@ public class Ministry {
 	private int[] intArr;
 
 	// Constructors
-
+	/**
+	 * Here we initialize all the data structures we use
+	 * We read and store the necessary information in the database
+	 * distances between cities, hospital information, patients, etc.
+	 */
 	public Ministry(Minister minister) {
 		this.minister = minister;
 		this.minister.setMinistry(this);
@@ -146,7 +150,10 @@ public class Ministry {
 
 		mergeSortHealthEmployees(healthEmployees, 0, healthEmployees.size() - 1);
 	}
-
+	
+	/**
+	 * @param newPatient we add the new patient to the database
+	 */
 	public void writeDBpatient(Patient newPatient) {
 		try {
 			FileWriter fw = new FileWriter("./database/patients.txt", true);
@@ -159,7 +166,15 @@ public class Ministry {
 			System.out.println("Error : Can not write file...");
 		}
 	}
-
+	/**
+	 * @param tckno TC no of Health Employee
+	 * @param firstName First name of Health Employee
+	 * @param lastName Last Name of Health Employee
+	 * @param pass password of Health Employee
+	 * @param age Age of Health Employee
+	 * @param jobType  position of Health Employee
+	 * @param hospitalId is the id of the hospital where works.
+	 */
 	public void writeDBHealthEmployee(String tckno, String firstName, String lastName, String pass, int age,
 			int jobType, String hospitalId) {
 		try {
@@ -171,7 +186,9 @@ public class Ministry {
 			System.out.println("Error : Can not write file...");
 		}
 	}
-
+	/**
+	 * @param hospital new hospital added to the system
+	 */
 	public void writeDBHospital(Hospital hospital) {
 		try {
 			FileWriter fw = new FileWriter("./database/hospitals.txt", true);
@@ -181,7 +198,9 @@ public class Ministry {
 			System.out.println("Error : Can not write file...");
 		}
 	}
-
+	/**
+	 * We restructure the Health Employee database
+	 */
 	public void rebuildDBHealthEmployee() {
 		int i = 0;
 		try {
@@ -197,7 +216,9 @@ public class Ministry {
 
 		}
 	}
-
+	/**
+	 * We restructure the Hospital database
+	 */
 	public void rebuildDBHospital() {
 		try {
 			FileWriter fw = new FileWriter("./database/hospitals.txt");
@@ -213,7 +234,9 @@ public class Ministry {
 		}
 
 	}
-
+	/**
+	 * We restructure the patient database
+	 */
 	public void rebuildDBPatient() {
 		try {
 			FileWriter fw = new FileWriter("./database/patients.txt");
@@ -231,7 +254,10 @@ public class Ministry {
 			System.out.println("Error : Can not write file...");
 		}
 	}
-
+	/**
+	 * City information and a unique id are defined for the newly added hospital.
+	 * @ðaram city where the new central hospital is located
+	 */
 	// Functions
 	public boolean addHospital(String city) {
 		Doctor doctor = null;
@@ -256,12 +282,25 @@ public class Ministry {
 		}
 		return false;
 	}
-
+	/**
+	 * @param id the id of the hospital to be deleted.
+	 */
 	public void removeHospital(String id) {
 		this.hospitals.remove(id);
 		rebuildDBHospital();
 	}
-
+	/**
+	 * @param firstName Frist Name of new patient 
+	 * @param lastName 	Last Name of new patient 
+	 * @param tckno TC number of new patient
+	 * @param password password of new patient 
+	 * @param age	age of new patient 
+	 * @param isCovid Is the patient covid or not?
+	 * @param isSick Is the patient or not?
+	 * @param isSmoking Does the patient smoke?
+	 * @param isVaccinated Has the patient been vaccinated?
+	 * @param city In which city is the patient?
+	 */
 	public void addPatient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated, String city){
 
 		// check if the user is already registered
@@ -292,7 +331,13 @@ public class Ministry {
 		this.writeDBpatient(newPatient);
 
 	}
-
+	/**
+	 * @param firstName Frist Name of new Health Employee
+	 * @param lastName Last Name of new Health Employee
+	 * @param tckno TC number of new health employee
+	 * @param password password of new health employee
+	 * @param age age of new health employee
+	 */
 	public boolean addHealthEmployee(String firstName, String lastName, String tckno, String password, int age,
 			String hospitalId, int type) {
 		for (int i = 0; i < healthEmployees.size(); i++) {
@@ -321,7 +366,9 @@ public class Ministry {
 		instertionSortHealthEmployees(healthEmployees);
 		return true;
 	}
-
+	/**
+	 * @param tckno TC number of health employee
+	 */
 	public boolean removeHealthEmployee(String tckno) {
 		for (int i = 0; i < healthEmployees.size(); i++) {
 			User currentEmployee = healthEmployees.get(i);
@@ -335,7 +382,9 @@ public class Ministry {
 		}
 		return false;
 	}
-
+	/**
+	 * bulletin
+	 */
 	public void getDailyStatistics() {
 		BinaryTree.Node<Patient> node = patients.getNode();
 
@@ -346,7 +395,12 @@ public class Ministry {
 			System.out.println("Vaccinated Patients: " + arr[1]);
 		}
 	}
-
+	/**
+	 * @return for daily statistics
+	 * @param node tree that stores daily statistics
+	 * @param arr 
+	 * 
+	 */
 	private int[] stringDailyStatistics(BinaryTree.Node<Patient> node, int[] arr) {
 		if (node == null)
 			return null;
@@ -363,7 +417,11 @@ public class Ministry {
 
 		return arr;
 	}
-
+	/**
+	 * @param hospitalId hospital to be supplied
+	 * @param type Vaccine Type
+	 * @param num number of Vaccine
+	 */
 	public void supplyVaccine(String hospitalId, VaccineType type, int num) {
 		ArrayList<Vaccine> vaccines = this.getHospitals().get(hospitalId).getVaccines();
 		for (int i = 0; i < vaccines.size(); i++) {
@@ -373,7 +431,18 @@ public class Ministry {
 			}
 		}
 	}
-
+	/**
+	  * @param firstName Frist Name of new patient 
+	 * @param lastName 	Last Name of new patient 
+	 * @param tckno TC number of new patient
+	 * @param password password of new patient 
+	 * @param age	age of new patient 
+	 * @param isCovid Is the patient covid or not?
+	 * @param isSick Is the patient or not?
+	 * @param isSmoking Does the patient smoke?
+	 * @param isVaccinated Has the patient been vaccinated?
+	 * @param city In which city is the patient?
+	 */
 	public Patient register(String firstName, String lastName, String tckno, String password, int age, boolean isCovid,
 			boolean isSick, boolean isSmoking, boolean isVaccinated, String city) {
 
@@ -389,7 +458,9 @@ public class Ministry {
 
 		return newPatient;
 	}
-
+	/**
+	 * @param tckno ID number of the patient to be deleted
+	 */
 	public void removePatient(String tckno) {
 		for (Patient patient : patients) {
 			if (patient.getTckNo().equals(tckno) == true) {
@@ -398,27 +469,39 @@ public class Ministry {
 			}
 		}
 	}
-
+	/**
+	 * @param patient the patient is added to the vaccination queue
+	 */
 	public void vaccinationOrderAdd(Patient patient) {
 		patient.getHospital().getVaccinationOrder().add(patient);
 	}
-
+	/**
+	 * @return access Minister
+	 */
 	public Minister getMinister() {
 		return this.minister;
 	}
-
+	/**
+	 * @return access Hospital 
+	 */
 	public HashMap<String, Hospital> getHospitals() {
 		return this.hospitals;
 	}
-
+	/**
+	 * @return access  Health Employees
+	 */
 	public ArrayList<User> getHealthEmployees() {
 		return this.healthEmployees;
 	}
-
+	/**
+	 * @return access Vaccines
+	 */
 	public ArrayList<Vaccine> getVaccines() {
 		return this.vaccines;
 	}
-
+	/**
+	 * @return access Patient 
+	 */
 	public LinkedList<Patient> getPatients() {
 		return this.patients;
 	}
@@ -427,8 +510,10 @@ public class Ministry {
 	public static void getData(int hospitalId) {
 		return;
 	}
-
-	// Used after every insertion since the employee array list is already sorted.
+	/**
+	 *  Used after every insertion since the employee array list is already sorted.
+	 */
+	
 	private void instertionSortHealthEmployees(ArrayList<User> list) {
 		for (int i = 1; i < list.size(); i++) {
 			User currentEmployee = list.get(i);
@@ -449,8 +534,9 @@ public class Ministry {
 			}
 		}
 	}
-
-	// Used one time when the employees are read from the file
+	/**
+	 * Used one time when the employees are read from the file
+	 */
 	private void mergeSortHealthEmployees(ArrayList<User> list, int leftIndex, int rightIndex) {
 		if (leftIndex >= rightIndex) {
 			return;
@@ -461,7 +547,9 @@ public class Ministry {
 		mergeSortHealthEmployees(list, midIndex + 1, rightIndex);
 		merge(list, leftIndex, midIndex, rightIndex);
 	}
-
+	/**
+	 * For merge sort
+	 */
 	private void merge(ArrayList<User> list, int leftIndex, int midIndex, int rightIndex) {
 		// Left and right array sizes
 		int leftSize = midIndex - leftIndex + 1;
@@ -520,7 +608,10 @@ public class Ministry {
 			}
 		}
 	}
-
+	/**
+	 * @param tckno for control TC number
+	 * @param password For control password
+	 */
 	public User loginHealthEmployee(String tckno, String password) {
 
 		if (this.minister.getTckNo().equals(tckno) && this.minister.getPassword().equals(password))
@@ -534,7 +625,11 @@ public class Ministry {
 		}
 		return null;
 	}
-
+	/**
+	 *@param tckno for control TC number
+	 *@param password For control password
+	 *@return patient	
+	 */
 	public User loginPatient(String tckno, String password) {
 		Iterator<Patient> iter = this.patients.iterator();
 		Patient patient;
@@ -545,7 +640,9 @@ public class Ministry {
 		}
 		return null;
 	}
-
+	/**
+	 * @param generate key number
+	 */
 	public static String generateKey(int num) {
 		Random random = new Random();
 

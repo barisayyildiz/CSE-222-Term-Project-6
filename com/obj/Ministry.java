@@ -303,6 +303,12 @@ public class Ministry {
 	 */
 	public void addPatient(String firstName, String lastName, String tckno, String password, int age, Ministry ministry, boolean isCovid, boolean isSick, boolean isSmoking, boolean isVaccinated, String city){
 
+		// check if the user is already registered
+		Iterator<Patient> iter = this.patients.iterator();
+		while(iter.hasNext()){
+			if(iter.next().getTckNo().equals(tckno))	return;
+		}
+
 		// hastane şehir id lerini kaydet
 		HashMap<Integer, Hospital> hospitalCityIndexes = new HashMap<Integer, Hospital>();
 		for (Hospital h : this.hospitals.values()) {

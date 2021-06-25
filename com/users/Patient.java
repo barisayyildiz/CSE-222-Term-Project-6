@@ -69,13 +69,13 @@ public class Patient extends User implements Comparable<Patient> {
 		return isSmoking;
 	}
 	public boolean get_isVaccinated(){
-		return isSmoking;
+		return isVaccinated;
 	}
 	public boolean get_isCovid(){
-		return isSmoking;
+		return isCovid;
 	}
 	public boolean get_isSick(){
-		return isSmoking;
+		return isSick;
 	}
 	public boolean get_state(){
 		return state;

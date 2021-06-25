@@ -126,6 +126,7 @@ public class Hospital {
 		str += "Number of beds : " + this.numOfBeds + "\n";
 		str += "Number of tests : " + this.numOfTests + "\n";
 		str += "City : " + this.city + "\n";
+		str += "Number of patients in the vaccination queue : " + this.vaccinationOrder.size() + "\n";
 		str += "Vaccine info : \n";
 		str += vaccineInfo;
 

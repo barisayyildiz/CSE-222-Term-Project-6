@@ -82,7 +82,7 @@ public class Doctor extends User implements HealthEmployee {
 		for (Patient searchedPaitent : ministry.getPatients()) {
 			if (searchedPaitent.getTckNo().equals(tckno)) {
 				ministry.getPatients().remove(searchedPaitent);
-
+				this.ministry.rebuildDBPatient();
 				return true;
 			}
 		}

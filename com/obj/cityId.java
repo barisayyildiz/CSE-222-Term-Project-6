@@ -1,4 +1,4 @@
-package com;
+package com.obj;
 
 /**
  * Enum types for cities

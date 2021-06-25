@@ -5,10 +5,17 @@ import com.obj.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Holds the information for the Nurse.
+ * Implements functions from HealthEmployee and extends from User classes
+ * @author Group 6
+ */
 public class Nurse extends User implements HealthEmployee {
 	private Hospital hospital;
 	
 	/**
+	 * Constructor with parameters. Initializes all the fields for the class
+	 * Calls for the parent class's constructor for give parameters
 	 * @param firstName Name of nurse
 	 * @param lastName Last name of nurse
 	 * @param tckno	tkno of nurse
@@ -23,14 +30,16 @@ public class Nurse extends User implements HealthEmployee {
 	}
 	
 	/**
-	 * @return randomly determined by the test result
+	 * randomly determined by the test result
+	 * @return test result true or false
 	 */
 	private boolean test() {
 		Random rand = new Random();
 		return rand.nextBoolean();
 	}
 	/**
-	 * @return patient  
+	 * finds and removes the patient who needs to be vaccinated
+	 * @return  Vaccinated patient  
 	 */
 	@Override
 	public Patient vaccinate() {
@@ -49,7 +58,8 @@ public class Nurse extends User implements HealthEmployee {
 		return null;
 	}
 	/**
-	 * @param TC no of nurse
+	 * information about whether the patient has covid
+	 * @param TC no of patient
 	 */
 	public void setCovidInfo(String tckno) {
 		for (Patient searchedPaitent : ministry.getPatients()) {
@@ -60,11 +70,17 @@ public class Nurse extends User implements HealthEmployee {
 		}
 		return;
 	}
-
+	/**
+	 * Access for hospital
+	 * @return Hospital
+	 */
 	public Hospital getHospital(){
 		return this.hospital;
 	}
-  
+	/**
+	 * For nurse's information
+	 * @return Nurse information
+	 */
 	@Override
 	public String toString() {
 		String str = "";

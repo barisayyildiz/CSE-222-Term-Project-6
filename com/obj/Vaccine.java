@@ -1,5 +1,9 @@
 package com.obj;
 
+/**
+ * Holds the information for the Vaccine.
+ * @author Group 6
+ */
 public class Vaccine {
 	private int number;
 	private VaccineType type;
@@ -27,12 +31,14 @@ public class Vaccine {
 		this.type = type;
 	}
 	/**
+	 * Getter number of vaccinate 
 	 * @return Vaccine Number
 	 */
 	public int getNumber(){
 		return this.number;
 	}
 	/**
+	 * Getter vaccinate type
 	 * return Vaccine Type
 	 */
 	public VaccineType getType(){

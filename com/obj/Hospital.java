@@ -4,6 +4,10 @@ import com.users.*;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+/**
+ * Holds the information for the Hospital.
+ * @author Group 6
+ */
 public class Hospital {
 
 	// hashcode
@@ -20,7 +24,8 @@ public class Hospital {
 	private PriorityQueue<Patient> vaccinationOrder;
 
 	/**
-	 * parameters required for the hospital are initialized
+	 * Constructor with parameters. Initializes all the fields for the class
+	 * Calls for the parent class's constructor for give parameters
 	 * @param headPhysician Initialize HeadPhysician
 	 * @param ministry Initialize ministry
 	 * @param city city where the hospital is located
@@ -81,18 +86,21 @@ public class Hospital {
 		this.numOfTests = numOfTests;
 	}
 	/**
+	 * Getter number of tests
 	 * @return Number of Tests
 	 */
 	public int getNumOfTests(){
 		return this.numOfTests;
 	}
 	/**
+	 * Getter Id
 	 * @return Hopital id
 	 */
 	public String getID() {
 		return id;
 	}
 	/**
+	 * Set new Head Physician
 	 * @param hPhysician new  HeadPhysician
 	 */
 	public void setHeadPhysician(HeadPhysician hPhysician) {
@@ -106,6 +114,7 @@ public class Hospital {
 	}
 
 	/**
+	 * Set new city
 	 * @param city the city to set
 	 */
 	public void setCity(String city) {
@@ -113,6 +122,7 @@ public class Hospital {
 	}
 
 	/**
+	 * Getter city
 	 * @return the city
 	 */
 	public String getCity() {

@@ -12,6 +12,10 @@ import com.data_structures.trees.*;
 import com.data_structures.graphs.*;
 import com.users.*;
 
+/**
+ * Holds the information for the Ministry.
+ * @author Group 6
+ */
 public class Ministry {
 	// Data Fields
 

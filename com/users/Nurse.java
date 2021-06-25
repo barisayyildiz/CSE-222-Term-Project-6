@@ -45,6 +45,10 @@ public class Nurse extends User implements HealthEmployee {
 		return;
 	}
 
+	public Hospital getHospital(){
+		return this.hospital;
+	}
+
 	@Override
 	public String toString() {
 		String str = "";

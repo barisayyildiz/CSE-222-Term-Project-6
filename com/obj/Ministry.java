@@ -30,6 +30,7 @@ public class Ministry {
 	 * Here we initialize all the data structures we use
 	 * We read and store the necessary information in the database
 	 * distances between cities, hospital information, patients, etc.
+	 * @param minister to initialized
 	 */
 	public Ministry(Minister minister) {
 		this.minister = minister;
@@ -151,7 +152,8 @@ public class Ministry {
 	}
 	
 	/**
-	 * @param newPatient we add the new patient to the database
+	 * we add the new patient to the database
+	 * @param newPatient new patient requested to be added to the database
 	 */
 	public void writeDBpatient(Patient newPatient) {
 		try {
@@ -166,6 +168,7 @@ public class Ministry {
 		}
 	}
 	/**
+	 * writes the health employee to the database.
 	 * @param tckno TC no of Health Employee
 	 * @param firstName First name of Health Employee
 	 * @param lastName Last Name of Health Employee
@@ -186,6 +189,7 @@ public class Ministry {
 		}
 	}
 	/**
+	 * writes the hospital to the database.
 	 * @param hospital new hospital added to the system
 	 */
 	public void writeDBHospital(Hospital hospital) {
@@ -282,6 +286,7 @@ public class Ministry {
 		return false;
 	}
 	/**
+	 * Removes hospital
 	 * @param id the id of the hospital to be deleted.
 	 */
 	public void removeHospital(String id) {
@@ -289,6 +294,7 @@ public class Ministry {
 		rebuildDBHospital();
 	}
 	/**
+	 * Adds patient
 	 * @param firstName Frist Name of new patient 
 	 * @param lastName 	Last Name of new patient 
 	 * @param tckno TC number of new patient
@@ -331,6 +337,7 @@ public class Ministry {
 
 	}
 	/**
+	 * adds health employee
 	 * @param firstName Frist Name of new Health Employee
 	 * @param lastName Last Name of new Health Employee
 	 * @param tckno TC number of new health employee
@@ -366,6 +373,7 @@ public class Ministry {
 		return true;
 	}
 	/**
+	 * removes health employee
 	 * @param tckno TC number of health employee
 	 */
 	public boolean removeHealthEmployee(String tckno) {
@@ -395,6 +403,7 @@ public class Ministry {
 		}
 	}
 	/**
+	 * prints daily statistics by traversing the tree
 	 * @return for daily statistics
 	 * @param node tree that stores daily statistics
 	 * @param arr 
@@ -417,6 +426,7 @@ public class Ministry {
 		return arr;
 	}
 	/**
+	 * Supplys vaccine for hospital
 	 * @param hospitalId hospital to be supplied
 	 * @param type Vaccine Type
 	 * @param num number of Vaccine
@@ -431,6 +441,7 @@ public class Ministry {
 		}
 	}
 	/**
+	 * Patient register
 	  * @param firstName Frist Name of new patient 
 	 * @param lastName 	Last Name of new patient 
 	 * @param tckno TC number of new patient
@@ -458,6 +469,7 @@ public class Ministry {
 		return newPatient;
 	}
 	/**
+	 * removes patient
 	 * @param tckno ID number of the patient to be deleted
 	 */
 	public void removePatient(String tckno) {
@@ -469,36 +481,42 @@ public class Ministry {
 		}
 	}
 	/**
-	 * @param patient the patient is added to the vaccination queue
+	 * patient the patient is added to the vaccination queue
+	 * @param new patient
 	 */
 	public void vaccinationOrderAdd(Patient patient) {
 		patient.getHospital().getVaccinationOrder().add(patient);
 	}
-	/**
+	/**,
+	 * access Minister
 	 * @return access Minister
 	 */
 	public Minister getMinister() {
 		return this.minister;
 	}
 	/**
+	 * access Hospital 
 	 * @return access Hospital 
 	 */
 	public HashMap<String, Hospital> getHospitals() {
 		return this.hospitals;
 	}
 	/**
+	 * access  Health Employees
 	 * @return access  Health Employees
 	 */
 	public ArrayList<User> getHealthEmployees() {
 		return this.healthEmployees;
 	}
 	/**
+	 * access Vaccines
 	 * @return access Vaccines
 	 */
 	public ArrayList<Vaccine> getVaccines() {
 		return this.vaccines;
 	}
 	/**
+	 * access Patient 
 	 * @return access Patient 
 	 */
 	public AVLTree<Patient> getPatients() {
@@ -511,6 +529,7 @@ public class Ministry {
 	}
 	/**
 	 *  Used after every insertion since the employee array list is already sorted.
+	 *  @param list user list
 	 */
 	
 	private void instertionSortHealthEmployees(ArrayList<User> list) {
@@ -625,6 +644,7 @@ public class Ministry {
 		return null;
 	}
 	/**
+	 * For user login
 	 *@param tckno for control TC number
 	 *@param password For control password
 	 *@return patient	
@@ -640,6 +660,7 @@ public class Ministry {
 		return null;
 	}
 	/**
+	 * generates unique key
 	 * @param generate key number
 	 */
 	public static String generateKey(int num) {

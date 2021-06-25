@@ -20,6 +20,7 @@ public class Hospital {
 	private PriorityQueue<Patient> vaccinationOrder;
 
 	/**
+	 * parameters required for the hospital are initialized
 	 * @param headPhysician Initialize HeadPhysician
 	 * @param ministry Initialize ministry
 	 * @param city city where the hospital is located
@@ -44,12 +45,14 @@ public class Hospital {
 
 	}
 	/**
+	 * number of beds
 	 * @return number of beds
 	 */
 	public int numOfBeds() {
 		return this.numOfBeds;
 	}
 	/**
+	 * number of tests
 	 * @return number of tests
 	 */
 	public int numOfTests() {
@@ -57,19 +60,22 @@ public class Hospital {
 	}
 
 	/**
-	 * @return Adding new test
+	 * Adding new test
+	 * @param number of tests
 	 */
 	public void addTests(int num) {
 		this.numOfTests += num;
 	}
 	/**
+	 * list of vaccines
 	 * @return vaccine list
 	 */
 	public ArrayList<Vaccine> getVaccines() {
 		return this.vaccines;
 	}
 	/**
-	 * @param Set number of tests
+	 * Setting number of tests
+	 * @param number of tests
 	 */
 	public void setNumOfTests(int numOfTests) {
 		this.numOfTests = numOfTests;
@@ -113,6 +119,7 @@ public class Hospital {
 		return city;
 	}
 	/**
+	 * to view all the information on the hospital
 	 * @return all information about the hospital
 	 */
 	@Override

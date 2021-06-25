@@ -11,7 +11,7 @@ import java.util.NavigableSet;
 
 /** Self-balancing binary search tree using the algorithm defined
  *  by Adelson-Velskii and Landis.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
  */
 
 public class AVLTree < E extends Comparable < E >> extends BinarySearchTreeWithRotate < E > implements NavigableSet<E> {

@@ -3,7 +3,7 @@ package com.data_structures.trees;
 import java.io.*;
 
 /** A class to represent a binary search tree.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
  */
 
 public class BinarySearchTree < E

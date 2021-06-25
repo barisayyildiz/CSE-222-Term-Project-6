@@ -4,7 +4,7 @@ package com.data_structures.trees;
  *  operations. Rotation will change the balance of a search
  *  tree while preserving the search tree property.
  *  Used as a common base class for self-balancing trees.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
 */
 
 public class BinarySearchTreeWithRotate < E

@@ -2,7 +2,7 @@ package com.data_structures.graphs;
 
 /** An Edge represents a relationship between two
  *  vertices.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
 */
 
 public class Edge {

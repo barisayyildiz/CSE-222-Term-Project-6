@@ -6,7 +6,7 @@ import java.io.*;
 *   of vertices and a set of edges. Vertices are
 *   represented by integers from 0 to n - 1. Edges
 *   are ordered pairs of vertices.
-*   @author Koffman and Wolfgang
+*   @author Group 6
 */
 
 public abstract class AbstractGraph

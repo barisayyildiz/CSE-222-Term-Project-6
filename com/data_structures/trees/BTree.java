@@ -9,7 +9,7 @@ package com.data_structures.trees;
  * i.e., the length of the path  from the root to a leaf is
  * constant.
  * @param <E> The element type
- * @author Koffman and Wolfgang
+ * @author Group 6
  */
 public class BTree<E extends Comparable<E>>
 {

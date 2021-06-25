@@ -8,7 +8,7 @@ import java.util.*;
 *   to find the "shortest" path from the start vertex to the
 *   end. It is assumed that the start vertex is 0, and the
 *   end vertex is numV-1.
-*   @author Koffman and Wolfgang
+*   @author Group 6
 */
 
 public class Maze {

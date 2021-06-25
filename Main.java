@@ -5,11 +5,25 @@ import com.data_structures.graphs.*;
 import com.data_structures.trees.*;
 import java.util.Scanner;
 
+/**
+ * Main driver class for the user interface
+ * It holds the functions that are responsible for UI.
+ * @author Group 6
+ */
 public class Main {
+	/**
+	 * Main function
+	 * Calls menu function which enables the system we built.
+	 * @param args hold the information for command line arguments
+	 */
 	public static void main(String args[]) {
 		menu();
 	}
 
+	/**
+	 * Menu function that enables UI. Function waits an input as
+	 * an user type for to proceed designated page.
+	 */
 	public static void menu() {
 
 		Ministry ministry = new Ministry(new Minister("john", "doe", "", "", 55));
@@ -107,6 +121,13 @@ public class Main {
 
 	}
 
+	/**
+	 * Minister page defined as an admin page.
+	 * Pretty much controling the system by itself. Utilities are:
+	 * Getting hospital and daily statistic information
+	 * Adding/removing resources and personel
+	 * @param minister 
+	 */
 	public static void ministerPage(Minister minister) {
 
 		Scanner obj = new Scanner(System.in);
@@ -238,6 +259,11 @@ public class Main {
 		// obj.close();
 	}
 
+	/**
+	 * UI for head physician.
+	 * Head of the hospital. It can organize resources, demand statistics and vaccinate patiens 
+	 * @param headphysician parameter to accomplish task by this object
+	 */
 	public static void headPhysicanPage(HeadPhysician headphysician) {
 		String tc = null, temp;
 		Scanner obj = new Scanner(System.in);
@@ -309,6 +335,12 @@ public class Main {
 
 	}
 
+	/**
+	 * UI for head doctor.
+	 * Employee of the hospital that represents a doctor.
+	 * It can add/remove patienrs or vaccinate patients by using this UI implementation.
+	 * @param doctor parameter to accomplish task by this object 
+	 */
 	public static void doctorPage(Doctor doctor) {
 
 		String tc = null, temp;
@@ -401,6 +433,12 @@ public class Main {
 
 	}
 
+	/**
+	 * UI for nurse.
+	 * Employee of the hospital that represents a nurse.
+	 * It can test patients and vaccinate them. Also can save a custom test result by itself.
+	 * @param nurse parameter to accomplish task by this object 
+	 */
 	public static void nursePage(Nurse nurse) {
 		
 		Scanner obj = new Scanner(System.in);
@@ -442,6 +480,12 @@ public class Main {
 		// obj.close();
 	}
 
+	/**
+	 * UI for head patient.
+	 * Object that represents a patient.
+	 * It can demand a covid test, get personel information and get in a vaccination queue.
+	 * @param patient parameter to accomplish task by this object 
+	 */
 	public static void patientPage(Patient patient) {
 		
 		Scanner obj = new Scanner(System.in);
@@ -477,7 +521,10 @@ public class Main {
 		// obj.close();
 	}
 
-
+	/**
+	 * Gets all the information for patient constructor and adds the patient
+	 * @param ministry parameter of the admin
+	 */
 	public static void patinetSignUp(Ministry ministry){
 
 		Scanner obj = new Scanner(System.in);

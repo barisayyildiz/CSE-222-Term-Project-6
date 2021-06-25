@@ -4,7 +4,7 @@ import java.io.*;
 
 /** This program outputs the topological sort of a directed graph
 *   that contains no cycles.
-*   @author Koffman and Wolfgang
+*   @author Group 6
 */
 
 public class TopologicalSort {

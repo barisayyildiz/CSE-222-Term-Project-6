@@ -3,7 +3,7 @@ package com.data_structures.graphs;
 import java.util.Comparator;
 
 /** A class for comparing 2 edges.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
  */
 
 public class CompareEdges

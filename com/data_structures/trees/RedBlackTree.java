@@ -4,7 +4,7 @@ package com.data_structures.trees;
  *  Implements a Red-Black binary search tree
  *  Red-Black trees were invented by Bayer with refinments
  *  (the color convention) introduced by Guibas and Sedgewick.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
 */
 
 

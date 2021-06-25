@@ -10,7 +10,7 @@ import java.util.*;
 *   from the root to a leaf is constant.  This data structure
 *   is a special case of the B-tree, and is the basis for the
 *   Red-Black tree.
-*   @author Koffman and Wolfgang
+*   @author Group 6
 */
 
 public class TwoThreeFourTree < E

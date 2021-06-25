@@ -3,7 +3,7 @@ package com.data_structures.trees;
 import java.io.*;
 
 /** Class for a binary tree that stores type E objects.
-*   @author Koffman and Wolfgang
+*   @author Group 6
 * */
 
 public class BinaryTree < E >

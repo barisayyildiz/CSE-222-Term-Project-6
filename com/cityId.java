@@ -1,5 +1,9 @@
 package com;
 
+/**
+ * Enum types for cities
+ * @author Group 6
+ */
 public enum cityId {
 	ADANA,
 	ADIYAMAN,

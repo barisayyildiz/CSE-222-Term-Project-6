@@ -3,7 +3,7 @@ package com.data_structures.graphs;
 import java.util.*;
 
 /** A class for calling Dijkstra's algorithm.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
  */
 
 public class DijkstrasAlgorithm {

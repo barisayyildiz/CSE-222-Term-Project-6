@@ -17,7 +17,7 @@ import java.util.SortedSet;
 
 /**
  * Implementation of a Skip-List data structure
- * @author Jacob / Koffman & Wolfgang
+ * @author JGroup 6
  *
  *@param <E> The type of data stored. Must be a Comparable
  */

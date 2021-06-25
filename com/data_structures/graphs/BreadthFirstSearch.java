@@ -3,7 +3,7 @@ package com.data_structures.graphs;
 import java.util.*;
 
 /** Class to implement the breadth-first search algorithm.
- *  @author Koffman and Wolfgang
+ *  @author Group 6
  * */
 
 public class BreadthFirstSearch {

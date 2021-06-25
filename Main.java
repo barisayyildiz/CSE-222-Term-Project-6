@@ -357,6 +357,7 @@ public class Main {
 			System.out.println("2 - Remove patient");
 			System.out.println("3 - Get patient Data");
 			System.out.println("4 - Vaccinate a patinet");
+			System.out.println("5 - Get hospital information");
 			System.out.println("0 - Exit");
 			choos = obj.nextInt();
 
@@ -419,6 +420,9 @@ public class Main {
 					System.out.println("No patient in the vaccination order...");
 				}	
 				break;
+			case 5:
+				System.out.println(doctor.getHospital());
+				break;
 			case 0:
 				System.out.println("EXIT...");
 				exit = false;
@@ -428,8 +432,6 @@ public class Main {
 				System.out.println("ERROR");
 			}
 		}
-
-		// obj.close();
 
 	}
 
@@ -451,6 +453,7 @@ public class Main {
 			System.out.println("Welcome to Nurse Page");
 			System.out.println("1 - Mark the test information");
 			System.out.println("2 - Vaccinate a patinet");
+			System.out.println("3 - Get hospital information");
 			System.out.println("0 - Exit");
 
 			choos = obj.nextInt();
@@ -469,6 +472,9 @@ public class Main {
 					System.out.println("No patient in the vaccination order...");
 				}	
 				break;
+			case 3:
+				System.out.println(nurse.getHospital());
+				break;
 			case 0:
 				System.out.println("EXIT...");
 				exit = false;
@@ -477,7 +483,6 @@ public class Main {
 				System.out.println("ERROR");
 			}
 		}
-		// obj.close();
 	}
 
 	/**
@@ -496,6 +501,7 @@ public class Main {
 			System.out.println("1 - Demand covid test");
 			System.out.println("2 - Get personal information");
 			System.out.println("3 - Get in vaccination queue");
+			System.out.println("4 - Get hospital information");
 			System.out.println("0 - EXIT");
 
 			choos = obj.nextInt();
@@ -509,6 +515,9 @@ public class Main {
 				break;
 			case 3:
 				patient.getInQueue();
+				break;
+			case 4:
+				System.out.println(patient.getHospital());
 				break;
 			case 0:
 				System.out.println("EXIT...");

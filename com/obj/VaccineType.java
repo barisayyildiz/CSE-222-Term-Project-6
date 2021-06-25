@@ -1,5 +1,7 @@
 package com.obj;
-
+/**
+ * Enum for Vaccine types
+ */
 public enum VaccineType {
 	SINOVAC,
 	BIOENTECH,

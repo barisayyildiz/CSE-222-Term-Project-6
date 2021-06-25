@@ -256,7 +256,7 @@ public class Ministry {
 	}
 	/**
 	 * City information and a unique id are defined for the newly added hospital.
-	 * @ðaram city where the new central hospital is located
+	 * @param city where the new central hospital is located
 	 */
 	// Functions
 	public boolean addHospital(String city) {

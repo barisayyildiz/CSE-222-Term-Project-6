@@ -2,8 +2,6 @@ package com.users;
 
 import com.obj.Ministry;
 
-import jdk.internal.agent.resources.agent;
-
 public class User {
 	protected Ministry ministry;
 

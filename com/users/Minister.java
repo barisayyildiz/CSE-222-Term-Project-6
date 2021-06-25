@@ -4,6 +4,11 @@ import com.obj.*;
 
 import java.util.*;
 
+/**
+ * Holds the information for the Minister.
+ * Extends funtions from User classes
+ * @author Group 6
+ */
 public class Minister extends User {
 
 	// bildirim alma özelliği gelecek (hoca stack veri yapısı kullanılmasını
@@ -12,6 +17,8 @@ public class Minister extends User {
 	private Stack<String> notifications; // queue de kullanabiliriz
 	
 	/**
+	 * Constructor with parameters. Initializes all the fields for the class
+	 * Calls for the parent class's constructor for give parameters
 	 * @param firstName Name of Minister
 	 * @param lastName	Last name of Minister
 	 * @param tckno	 tckno of Minister
@@ -26,6 +33,8 @@ public class Minister extends User {
 	}
 	
 	/**
+	 * Constructor with parameters. Initializes all the fields for the class
+	 * Calls for the parent class's constructor for give parameters
 	 * @param firstName  Name of Minister
 	 * @param lastName Last name of Minister
 	 * @param tckno  tckno of Minister
@@ -37,6 +46,7 @@ public class Minister extends User {
 		this.notifications = new Stack<String>();
 	}
 	/**
+	 * Adds new hospital
 	 * @param cityName city of hospital 
 	 */
 	public void addHospitals(String cityName) {
@@ -44,12 +54,14 @@ public class Minister extends User {
 		return;
 	}
 	/**
+	 * deletes the desired hospital
 	 * @param hospitalId the id of the hospital to be deleted
 	 */
 	public void removeHospital(String hospitalId) {
 		this.ministry.removeHospital(hospitalId);
 	}
 	/**
+	 * supplies the vaccine
 	 * @param hospitalId hospital to be supplied
 	 * @param type type of vaccine
 	 * @param num number of vaccine
@@ -58,6 +70,7 @@ public class Minister extends User {
 		this.ministry.supplyVaccine(hospitalId, type, num);
 	}
 	/**
+	 * supplies the tests
 	 * @param hospitalId hospitalId to be supplied
 	 * @param num number of tests
 	 */
@@ -66,6 +79,7 @@ public class Minister extends User {
 		return;
 	}
 	/**
+	 * prints hospital information
 	 * @hospitalId Hospital informations
 	 */
 	public String getHospitalInformation(String hospitalId) {
@@ -75,12 +89,14 @@ public class Minister extends User {
 		return "";
 	}
 	/** 
+	 * Prints Daily Statistics
 	 * @return Daily Statistics
 	 */
 	public void getDailyStatistics() {
 		this.ministry.getDailyStatistics();
 	}
 	/**
+	 * shows the last mail
 	 * @return Last Mail
 	 */
 	public String getLastMail() {
@@ -90,6 +106,7 @@ public class Minister extends User {
 		return "You have 0 new mail";
 	}
 	/**
+	 * Adds new doctor
 	 * @param firstName Nmae of doctor
 	 * @param lastName Last of name 
 	 * @param tckno	tckno of doctor
@@ -104,6 +121,7 @@ public class Minister extends User {
 		// return true;
 	}
 	/**
+	 * deletes the requested doctor
 	 * @param tckno tc of the doctor requested to be deleted
 	 */
 	public boolean removeDoctor(String tckno) {
@@ -112,6 +130,7 @@ public class Minister extends User {
 		// return true;
 	}
 	/**
+	 * Adds new nurse
 	 * @param firstName Name of Nurse
 	 * @param lastName last name of nurse
 	 * @param tckno tckno of nurse
@@ -129,6 +148,7 @@ public class Minister extends User {
 		// return true;
 	}
 	/**
+	 * deletes the requested nurse
 	 * @param tckno TC of the nurse to be deleted
 	 */
 	public boolean removeNurse(String tckno) {
@@ -137,12 +157,14 @@ public class Minister extends User {
 		// return true;
 	}
 	/**
+	 * Access for ministry
 	 * @return Ministry
 	 */
 	public Ministry getMinistry() {
 		return ministry;
 	}
 	/**
+	 * Adds new notification
 	 * @param str Notoficition
 	 */
 	public void addNotification(String str) {

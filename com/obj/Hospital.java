@@ -4,6 +4,10 @@ import com.users.*;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+/**
+ * Holds the information for the Hospital.
+ * @author Group 6
+ */
 public class Hospital {
 
 	// hashcode
@@ -20,6 +24,8 @@ public class Hospital {
 	private PriorityQueue<Patient> vaccinationOrder;
 
 	/**
+	 * Constructor with parameters. Initializes all the fields for the class
+	 * Calls for the parent class's constructor for give parameters
 	 * @param headPhysician Initialize HeadPhysician
 	 * @param ministry Initialize ministry
 	 * @param city city where the hospital is located
@@ -44,12 +50,14 @@ public class Hospital {
 
 	}
 	/**
+	 * number of beds
 	 * @return number of beds
 	 */
 	public int numOfBeds() {
 		return this.numOfBeds;
 	}
 	/**
+	 * number of tests
 	 * @return number of tests
 	 */
 	public int numOfTests() {
@@ -57,36 +65,42 @@ public class Hospital {
 	}
 
 	/**
-	 * @return Adding new test
+	 * Adding new test
+	 * @param number of tests
 	 */
 	public void addTests(int num) {
 		this.numOfTests += num;
 	}
 	/**
+	 * list of vaccines
 	 * @return vaccine list
 	 */
 	public ArrayList<Vaccine> getVaccines() {
 		return this.vaccines;
 	}
 	/**
-	 * @param Set number of tests
+	 * Setting number of tests
+	 * @param number of tests
 	 */
 	public void setNumOfTests(int numOfTests) {
 		this.numOfTests = numOfTests;
 	}
 	/**
+	 * Getter number of tests
 	 * @return Number of Tests
 	 */
 	public int getNumOfTests(){
 		return this.numOfTests;
 	}
 	/**
+	 * Getter Id
 	 * @return Hopital id
 	 */
 	public String getID() {
 		return id;
 	}
 	/**
+	 * Set new Head Physician
 	 * @param hPhysician new  HeadPhysician
 	 */
 	public void setHeadPhysician(HeadPhysician hPhysician) {
@@ -100,6 +114,7 @@ public class Hospital {
 	}
 
 	/**
+	 * Set new city
 	 * @param city the city to set
 	 */
 	public void setCity(String city) {
@@ -107,12 +122,14 @@ public class Hospital {
 	}
 
 	/**
+	 * Getter city
 	 * @return the city
 	 */
 	public String getCity() {
 		return city;
 	}
 	/**
+	 * to view all the information on the hospital
 	 * @return all information about the hospital
 	 */
 	@Override

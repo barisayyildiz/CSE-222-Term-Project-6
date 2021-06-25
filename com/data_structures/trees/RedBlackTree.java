@@ -573,12 +573,8 @@ public class RedBlackTree < E
 
   /**** END EXERCISE ****/
 
-
-	// HW7!!!
-	public boolean isRed(){
-		if(this.size == 0)	return false;
-		RedBlackNode<E> myNode = (RedBlackNode<E>)this.root;
-		return myNode.isRed;
-	}
+	public Node<E> getNode() {
+    return root;
+  }
 
 }

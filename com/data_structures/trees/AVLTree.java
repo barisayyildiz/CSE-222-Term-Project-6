@@ -87,7 +87,7 @@ public class AVLTree < E extends Comparable < E >> extends BinarySearchTreeWithR
       return new AVLNode < E > (item);
     }
 
-    if (item.compareTo(localRoot.data) == 0) {
+    if (item.equals(localRoot.data)) {
       // Item is already in the tree.
       increase = false;
       addReturn = false;

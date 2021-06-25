@@ -21,7 +21,7 @@ public class Ministry {
 	private HashMap<String, Hospital> hospitals;
 	private ArrayList<User> healthEmployees;
 	private ArrayList<Vaccine> vaccines;
-	private LinkedList<Patient> patients;
+	private AVLTree<Patient> patients;
 	private MatrixGraph cityDistances;
 	private double[] weights;
 	private int[] intArr;
@@ -39,7 +39,7 @@ public class Ministry {
 		this.hospitals = new HashMap<String, Hospital>();
 		this.healthEmployees = new ArrayList<User>();
 		this.vaccines = new ArrayList<Vaccine>();
-		this.patients = new LinkedList<Patient>();
+		this.patients = new AVLTree<Patient>();
 		this.cityDistances = new MatrixGraph(81, false);
 		this.weights = new double[81];
 		this.intArr = new int[81];

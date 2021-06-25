@@ -110,13 +110,16 @@ public class Doctor extends User implements HealthEmployee {
 	@Override
 	public String toString() {
 		String str = "";
-		str += "TCKNO : " + this.getTckNo() + "\n";
-		str += "First name : " + this.getFirstName() + "\n";
-		str += "Last name : " + this.getLastName() + "\n";
-		str += "Password : " + this.getPassword() + "\n";
-		str += "Age : " + this.getAge() + "\n";
-		str += "Hospital information : " + "\n";
-		str += this.hospital.toString();
+		str += this.getTckNo() + "," + this.getFirstName() + "," + this.getLastName() + "," + this.getPassword() + ","
+				+ this.getAge() + "," + "1," + this.hospital.getID();
+		// String str = "";
+		// str += "TCKNO : " + this.getTckNo() + "\n";
+		// str += "First name : " + this.getFirstName() + "\n";
+		// str += "Last name : " + this.getLastName() + "\n";
+		// str += "Password : " + this.getPassword() + "\n";
+		// str += "Age : " + this.getAge() + "\n";
+		// str += "Hospital information : " + "\n";
+		// str += this.hospital.toString();
 		return str;
 	}
 }

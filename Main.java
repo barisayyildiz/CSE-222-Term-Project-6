@@ -204,7 +204,11 @@ public class Main {
 			case 6:
 				System.out.print("TCKNO : ");
 				tc = obj.next();
-				minister.removeDoctor(tc);
+				if(minister.removeDoctor(tc)){
+					System.out.println("Doctor with TCKNO has removed...");
+				}else{
+					System.out.println("No such doctor exists...");
+				}
 				break;
 			case 7:
 				System.out.println(minister.getMinistry().getHospitals());

@@ -240,7 +240,11 @@ public class Main {
 			case 9:
 				System.out.print("TCKNO : ");
 				tc = obj.next();
-				minister.removeNurse(tc);
+				if(minister.removeNurse(tc)){
+					System.out.println("Nurse with that TCKNO has removed...");
+				}else{
+					System.out.println("No such nurse exists...");
+				}
 				break;
 			case 10:
 				System.out.println(minister.getMinistry().getHospitals());

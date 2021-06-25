@@ -375,7 +375,7 @@ public class Ministry {
 		}
 		if (type == 2) {
 			healthEmployees.add(new Nurse(firstName, lastName, tckno, password, age, hospital, this));
-			writeDBHealthEmployee(tckno, firstName, lastName, password, age, 0, hospitalId);
+			writeDBHealthEmployee(tckno, firstName, lastName, password, age, 2, hospitalId);
 		}
 		instertionSortHealthEmployees(healthEmployees);
 		return true;

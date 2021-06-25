@@ -502,7 +502,7 @@ public class Ministry {
 	/**
 	 * @return access Patient 
 	 */
-	public LinkedList<Patient> getPatients() {
+	public AVLTree<Patient> getPatients() {
 		return this.patients;
 	}
 
